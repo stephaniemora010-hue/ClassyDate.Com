@@ -29,7 +29,7 @@
             color: inherit;
         }
 
-        /* ---------- HEADER (COMPRESSED) ---------- */
+        /* ---------- HEADER ---------- */
         .cb-shell-header {
             position: fixed;
             top: 0;
@@ -100,14 +100,14 @@
             transform: translateY(-2px);
         }
 
-        /* ---------- ADMIN WRAPPER (COMPRESSED) ---------- */
+        /* ---------- ADMIN WRAPPER ---------- */
         .admin-wrapper {
             max-width: 1200px;
             margin: 0 auto;
             padding: 65px 16px 30px;
         }
 
-        /* ---------- HEADER SECTION (COMPRESSED) ---------- */
+        /* ---------- HEADER SECTION ---------- */
         .admin-header {
             display: flex;
             justify-content: space-between;
@@ -158,7 +158,7 @@
             align-items: center;
         }
 
-        /* ---------- STATS GRID (COMPRESSED) ---------- */
+        /* ---------- STATS GRID ---------- */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -197,7 +197,7 @@
             opacity: 0.3;
         }
 
-        /* ---------- TOOLBAR (COMPRESSED) ---------- */
+        /* ---------- TOOLBAR ---------- */
         .admin-toolbar {
             display: flex;
             flex-wrap: wrap;
@@ -303,7 +303,7 @@
             background: rgba(255, 45, 85, 0.2);
         }
 
-        /* ---------- TABLE (COMPRESSED) ---------- */
+        /* ---------- TABLE ---------- */
         .admin-table-wrapper {
             background: rgba(255, 255, 255, 0.02);
             border-radius: 10px;
@@ -409,7 +409,7 @@
             margin-bottom: 2px;
         }
 
-        /* ---------- MODAL (COMPRESSED) ---------- */
+        /* ---------- MODAL ---------- */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -644,67 +644,37 @@
             .cb-shell-brand .icon {
                 font-size: 20px;
             }
-
             .admin-header {
                 flex-direction: column;
                 align-items: flex-start;
             }
-
             .admin-toolbar {
                 flex-direction: column;
                 align-items: stretch;
             }
-
             .admin-toolbar-left {
                 flex-direction: column;
                 width: 100%;
             }
-
             .admin-toolbar-left input,
             .admin-toolbar-left select {
                 width: 100%;
             }
-
             .admin-toolbar-right {
                 width: 100%;
             }
-
             .admin-toolbar-right .btn-admin {
                 flex: 1;
                 justify-content: center;
             }
-
             .stats-grid {
                 grid-template-columns: 1fr 1fr;
             }
-
             .modal .form-row {
                 grid-template-columns: 1fr;
             }
-
             .admin-wrapper {
                 padding: 58px 10px 20px;
-            }
-
-            .admin-table {
-                font-size: 11px;
-            }
-            .admin-table th,
-            .admin-table td {
-                padding: 5px 8px;
-            }
-            .admin-table .member-cell img {
-                width: 24px;
-                height: 24px;
-            }
-            .admin-table .member-cell .name {
-                font-size: 12px;
-            }
-
-            .modal {
-                padding: 18px 16px 16px;
-                max-width: 100%;
-                margin: 10px;
             }
         }
 
@@ -712,47 +682,28 @@
             .stats-grid {
                 grid-template-columns: 1fr;
             }
-
             .actions-cell {
                 flex-direction: column;
                 gap: 2px;
             }
-
             .actions-cell .btn-admin {
                 width: 100%;
                 justify-content: center;
                 font-size: 10px;
                 padding: 3px 8px;
             }
-
             .modal .modal-actions {
                 flex-direction: column;
             }
-
             .admin-header h1 {
                 font-size: 18px;
-            }
-
-            .admin-table {
-                font-size: 10px;
-            }
-            .admin-table th,
-            .admin-table td {
-                padding: 4px 6px;
-            }
-
-            .badge-small {
-                font-size: 8px;
-                padding: 1px 6px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- ============================================================ -->
-    <!-- HEADER                                                       -->
-    <!-- ============================================================ -->
+    <!-- HEADER -->
     <header class="cb-shell-header" role="banner">
         <div class="cb-shell-header__inner">
             <a class="cb-shell-brand" href="index.html" aria-label="ClassyDate">
@@ -768,9 +719,7 @@
         </div>
     </header>
 
-    <!-- ============================================================ -->
-    <!-- ADMIN DASHBOARD                                              -->
-    <!-- ============================================================ -->
+    <!-- ADMIN DASHBOARD -->
     <main class="admin-wrapper">
         <!-- Header -->
         <div class="admin-header">
@@ -779,8 +728,8 @@
                 <span class="badge-admin">🔒 Admin Access</span>
             </div>
             <div class="admin-header-right">
-                <button class="btn-admin btn-admin--add" onclick="openAddModal()">➕ Add</button>
-                <button class="btn-logout" onclick="logoutAdmin()">🚪 Logout</button>
+                <button class="btn-admin btn-admin--add" id="add-member-btn">➕ Add</button>
+                <button class="btn-logout" id="logout-btn">🚪 Logout</button>
             </div>
         </div>
 
@@ -824,7 +773,7 @@
                 </select>
             </div>
             <div class="admin-toolbar-right">
-                <button class="btn-admin btn-admin--export" onclick="exportData()">📥 Export</button>
+                <button class="btn-admin btn-admin--export" id="export-btn">📥 Export</button>
             </div>
         </div>
 
@@ -855,15 +804,13 @@
         </div>
     </main>
 
-    <!-- ============================================================ -->
-    <!-- MODAL - Add/Edit Member                                     -->
-    <!-- ============================================================ -->
+    <!-- MODAL -->
     <div class="modal-overlay" id="modal-overlay">
         <div class="modal">
             <h2 id="modal-title">Add Member</h2>
             <p class="modal-subtitle" id="modal-subtitle">Fill in the details below.</p>
 
-            <form id="member-form" onsubmit="saveMember(event)">
+            <form id="member-form">
                 <input type="hidden" id="edit-id" value="">
 
                 <div class="form-group">
@@ -929,24 +876,20 @@
                 </div>
 
                 <div class="modal-actions">
-                    <button type="button" class="btn-modal-cancel" onclick="closeModal()">Cancel</button>
-                    <button type="submit" class="btn-modal-save" id="modal-save-btn">💾 Save</button>
+                    <button type="button" class="btn-modal-cancel" id="modal-cancel-btn">Cancel</button>
+                    <button type="button" class="btn-modal-save" id="modal-save-btn">💾 Save</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- ============================================================ -->
-    <!-- TOAST                                                       -->
-    <!-- ============================================================ -->
+    <!-- TOAST -->
     <div class="toast" id="toast">
         <span class="toast-icon" id="toast-icon">✅</span>
         <span id="toast-message">Saved!</span>
     </div>
 
-    <!-- ============================================================ -->
-    <!-- SUPABASE + ADMIN SCRIPTS                                    -->
-    <!-- ============================================================ -->
+    <!-- SUPABASE + ADMIN SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
     </script>
 
@@ -970,12 +913,24 @@
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         // ============================================================
+        // DOM REFERENCES
+        // ============================================================
+        const addBtn = document.getElementById('add-member-btn');
+        const logoutBtn = document.getElementById('logout-btn');
+        const exportBtn = document.getElementById('export-btn');
+        const modalOverlay = document.getElementById('modal-overlay');
+        const modalCancelBtn = document.getElementById('modal-cancel-btn');
+        const modalSaveBtn = document.getElementById('modal-save-btn');
+        const memberForm = document.getElementById('member-form');
+
+        // ============================================================
         // STATE
         // ============================================================
         let members = [];
         let filteredMembers = [];
         let currentPage = 1;
         const perPage = 5;
+        let editingId = null;
 
         // ============================================================
         // FETCH MEMBERS
@@ -990,7 +945,12 @@
                     .select('*')
                     .order('id', { ascending: false });
 
-                if (error) throw error;
+                if (error) {
+                    console.error('Supabase Error:', error);
+                    showToast('⚠️ Table not found. Please create the members table in Supabase.', 'error');
+                    spinner.classList.remove('active');
+                    return;
+                }
 
                 members = data || [];
                 filteredMembers = [...members];
@@ -999,7 +959,7 @@
                 renderPagination();
             } catch (error) {
                 console.error('Error:', error);
-                showToast('⚠️ Error loading members', 'error');
+                showToast('⚠️ Error loading members. Check console for details.', 'error');
             } finally {
                 spinner.classList.remove('active');
             }
@@ -1008,9 +968,7 @@
         // ============================================================
         // CRUD OPERATIONS
         // ============================================================
-        async function saveMember(event) {
-            event.preventDefault();
-
+        async function saveMember() {
             const formData = {
                 name: document.getElementById('form-name').value.trim(),
                 email: document.getElementById('form-email').value.trim(),
@@ -1240,21 +1198,23 @@
         }
 
         // ============================================================
-        // MODAL
+        // MODAL FUNCTIONS
         // ============================================================
         function openAddModal() {
+            editingId = null;
             document.getElementById('modal-title').textContent = 'Add Member';
             document.getElementById('modal-subtitle').textContent = 'Fill in the details below.';
             document.getElementById('modal-save-btn').textContent = '💾 Save';
             document.getElementById('member-form').reset();
             document.getElementById('edit-id').value = '';
-            document.getElementById('modal-overlay').classList.add('active');
+            modalOverlay.classList.add('active');
         }
 
         function openEditModal(id) {
             const member = members.find(m => m.id === id);
             if (!member) return;
 
+            editingId = id;
             document.getElementById('modal-title').textContent = 'Edit Member';
             document.getElementById('modal-subtitle').textContent = 'Update the details below.';
             document.getElementById('modal-save-btn').textContent = '💾 Update';
@@ -1271,16 +1231,12 @@
             document.getElementById('form-premium').value = member.premium ? 'true' : 'false';
             document.getElementById('form-interests').value = (member.interests || []).join(', ');
 
-            document.getElementById('modal-overlay').classList.add('active');
+            modalOverlay.classList.add('active');
         }
 
         function closeModal() {
-            document.getElementById('modal-overlay').classList.remove('active');
+            modalOverlay.classList.remove('active');
         }
-
-        document.getElementById('modal-overlay').addEventListener('click', function(e) {
-            if (e.target === this) closeModal();
-        });
 
         // ============================================================
         // LOGOUT
@@ -1327,15 +1283,44 @@
         }
 
         // ============================================================
-        // AUTO FILTER
+        // EVENT LISTENERS (No inline onclick)
         // ============================================================
+        addBtn.addEventListener('click', openAddModal);
+        logoutBtn.addEventListener('click', logoutAdmin);
+        exportBtn.addEventListener('click', exportData);
+        modalCancelBtn.addEventListener('click', closeModal);
+        modalSaveBtn.addEventListener('click', saveMember);
+
+        // Close modal on overlay click
+        modalOverlay.addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // Enter key support for form
+        memberForm.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                saveMember();
+            }
+        });
+
+        // Auto filter on input
         document.getElementById('search-input').addEventListener('input', applyFilters);
+
+        // ============================================================
+        // MAKE FUNCTIONS GLOBALLY AVAILABLE (for inline onclick)
+        // ============================================================
+        window.openEditModal = openEditModal;
+        window.deleteMember = deleteMember;
+        window.goToPage = goToPage;
+        window.applyFilters = applyFilters;
 
         // ============================================================
         // INIT
         // ============================================================
         fetchMembers();
         console.log('💎 Admin Dashboard loaded');
+        console.log('🔗 Connected to Supabase');
     </script>
 </body>
 </html>
