@@ -49,8 +49,8 @@
         .cb-shell-header__inner {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
-            height: 72px;
+            padding: 0 16px;
+            height: 56px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -59,9 +59,9 @@
         .cb-shell-brand {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             font-family: 'Georgia', serif;
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 700;
             color: #FF2D55;
         }
@@ -70,20 +70,20 @@
             font-weight: 300;
         }
         .cb-shell-brand .icon {
-            font-size: 32px;
+            font-size: 28px;
         }
 
         .cb-shell-actions {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
         }
 
         .cb-shell-button {
-            padding: 8px 24px;
+            padding: 7px 16px;
             border-radius: 50px;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 13px;
             transition: all 0.3s ease;
             cursor: pointer;
             border: none;
@@ -111,17 +111,17 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 100px 20px 60px;
+            padding: 80px 20px 60px;
             min-height: 100vh;
             background: radial-gradient(ellipse at center top, rgba(255, 45, 85, 0.06), transparent 70%);
         }
 
         .login-card {
-            max-width: 440px;
+            max-width: 420px;
             width: 100%;
             background: rgba(255, 255, 255, 0.03);
-            border-radius: 24px;
-            padding: 48px 40px 40px;
+            border-radius: 20px;
+            padding: 40px 32px 32px;
             border: 1px solid rgba(255, 255, 255, 0.06);
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(12px);
@@ -129,18 +129,18 @@
 
         .login-card__header {
             text-align: center;
-            margin-bottom: 32px;
+            margin-bottom: 28px;
         }
 
         .login-card__header .icon {
-            font-size: 48px;
+            font-size: 44px;
             display: block;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .login-card__header h1 {
             font-family: 'Georgia', serif;
-            font-size: 28px;
+            font-size: 26px;
             color: #FAF8F5;
             font-weight: 400;
         }
@@ -153,7 +153,7 @@
 
         /* ---------- FORM ---------- */
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .form-group label {
@@ -161,17 +161,17 @@
             font-size: 13px;
             font-weight: 600;
             color: rgba(255, 255, 255, 0.6);
-            margin-bottom: 6px;
+            margin-bottom: 5px;
         }
 
         .form-group input {
             width: 100%;
-            padding: 14px 16px;
+            padding: 12px 14px;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
+            border-radius: 10px;
             color: #FAF8F5;
-            font-size: 16px;
+            font-size: 15px;
             transition: all 0.3s ease;
             outline: none;
             font-family: inherit;
@@ -187,15 +187,11 @@
             box-shadow: 0 0 0 4px rgba(255, 45, 85, 0.08);
         }
 
-        .form-group input:focus-visible {
-            outline: none;
-        }
-
         .form-options {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 24px;
+            margin-bottom: 22px;
         }
 
         .form-options label {
@@ -203,7 +199,7 @@
             align-items: center;
             gap: 8px;
             color: rgba(255, 255, 255, 0.4);
-            font-size: 14px;
+            font-size: 13px;
             cursor: pointer;
         }
 
@@ -216,7 +212,7 @@
 
         .form-options a {
             color: rgba(255, 255, 255, 0.4);
-            font-size: 14px;
+            font-size: 13px;
             transition: color 0.3s ease;
         }
 
@@ -226,13 +222,13 @@
 
         .btn-login {
             width: 100%;
-            padding: 16px;
+            padding: 14px;
             background: linear-gradient(135deg, #FF2D55, #FF0040);
             color: #FAF8F5;
             border: none;
             border-radius: 50px;
             font-weight: 700;
-            font-size: 18px;
+            font-size: 17px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: inherit;
@@ -243,16 +239,18 @@
             box-shadow: 0 8px 30px rgba(255, 45, 85, 0.35);
         }
 
-        .btn-login:active {
-            transform: translateY(0);
+        .btn-login:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
         }
 
         /* ---------- DIVIDER ---------- */
         .divider {
             display: flex;
             align-items: center;
-            gap: 16px;
-            margin: 24px 0;
+            gap: 14px;
+            margin: 22px 0;
             color: rgba(255, 255, 255, 0.15);
             font-size: 13px;
         }
@@ -269,8 +267,8 @@
         .social-login {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 24px;
+            gap: 10px;
+            margin-bottom: 22px;
         }
 
         .social-btn {
@@ -278,10 +276,10 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            padding: 12px;
+            padding: 11px;
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 12px;
+            border-radius: 10px;
             color: rgba(255, 255, 255, 0.6);
             font-size: 14px;
             font-weight: 500;
@@ -302,7 +300,7 @@
         /* ---------- FOOTER LINK ---------- */
         .login-footer {
             text-align: center;
-            margin-top: 8px;
+            margin-top: 6px;
         }
 
         .login-footer p {
@@ -326,11 +324,11 @@
             display: none;
             background: rgba(255, 45, 85, 0.12);
             border: 1px solid rgba(255, 45, 85, 0.2);
-            border-radius: 12px;
-            padding: 12px 16px;
+            border-radius: 10px;
+            padding: 10px 14px;
             color: #FF2D55;
-            font-size: 14px;
-            margin-bottom: 16px;
+            font-size: 13px;
+            margin-bottom: 14px;
         }
 
         .error-message.show {
@@ -340,21 +338,33 @@
         /* ---------- RESPONSIVE ---------- */
         @media (max-width: 480px) {
             .login-card {
-                padding: 32px 24px 28px;
+                padding: 28px 20px 24px;
             }
 
             .login-card__header h1 {
-                font-size: 24px;
+                font-size: 22px;
             }
 
             .form-options {
                 flex-direction: column;
-                gap: 12px;
+                gap: 10px;
                 align-items: flex-start;
             }
 
             .social-login {
                 grid-template-columns: 1fr;
+            }
+
+            .cb-shell-header__inner {
+                height: 52px;
+                padding: 0 12px;
+            }
+
+            .cb-shell-brand {
+                font-size: 17px;
+            }
+            .cb-shell-brand .icon {
+                font-size: 24px;
             }
         }
     </style>
@@ -366,13 +376,13 @@
     <!-- ============================================================ -->
     <header class="cb-shell-header" role="banner">
         <div class="cb-shell-header__inner">
-            <a class="cb-shell-brand" href="/" aria-label="ClassyDate">
+            <a class="cb-shell-brand" href="index.html" aria-label="ClassyDate">
                 <span class="icon">💎</span>
                 Classy<span>Date</span>
             </a>
 
             <div class="cb-shell-actions">
-                <a href="join.html" class="cb-shell-button cb-shell-button--secondary">Join</a>
+                <a href="signup.html" class="cb-shell-button cb-shell-button--secondary">Sign Up</a>
                 <a href="login.html" class="cb-shell-button cb-shell-button--primary">Log in</a>
             </div>
         </div>
@@ -412,7 +422,7 @@
                     <a href="#">Forgot password?</a>
                 </div>
 
-                <button type="submit" class="btn-login">Log In</button>
+                <button type="submit" class="btn-login" id="login-btn">Log In</button>
             </form>
 
             <div class="divider">or continue with</div>
@@ -427,23 +437,43 @@
             </div>
 
             <div class="login-footer">
-                <p>Don't have an account? <a href="join.html">Join free</a></p>
+                <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
             </div>
         </div>
     </main>
 
     <!-- ============================================================ -->
-    <!-- SCRIPTS                                                      -->
+    <!-- SUPABASE INTEGRATION                                        -->
     <!-- ============================================================ -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+    </script>
+
     <script>
-        function handleLogin(event) {
+        // ============================================================
+        // SUPABASE CONFIGURATION
+        // ============================================================
+
+        const SUPABASE_URL = 'https://soyypmuksvxyjeeemquz.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_vUvF8Ghbb1yB0yQKCCuHiA_wtkRYj1b';
+
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // ============================================================
+        // LOGIN HANDLER
+        // ============================================================
+
+        async function handleLogin(event) {
             event.preventDefault();
 
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value.trim();
             const errorMessage = document.getElementById('error-message');
+            const loginBtn = document.getElementById('login-btn');
 
-            // Simple validation
+            // Hide previous error
+            errorMessage.classList.remove('show');
+
+            // Validation
             if (!email || !password) {
                 errorMessage.textContent = '⚠️ Please fill in all fields.';
                 errorMessage.classList.add('show');
@@ -462,34 +492,69 @@
                 return false;
             }
 
-            // Hide error if valid
-            errorMessage.classList.remove('show');
+            // Show loading state
+            loginBtn.textContent = '⏳ Logging in...';
+            loginBtn.disabled = true;
 
-            // Simulate login success
-            console.log('✅ Login successful for:', email);
+            try {
+                // 1. Check if user exists in members table
+                const { data: members, error: memberError } = await supabase
+                    .from('members')
+                    .select('*')
+                    .eq('email', email);
 
-            // Show success feedback
-            const btn = document.querySelector('.btn-login');
-            const originalText = btn.textContent;
-            btn.textContent = '✅ Logging in...';
-            btn.style.opacity = '0.7';
-            btn.disabled = true;
+                if (memberError) throw memberError;
 
-            setTimeout(function() {
-                btn.textContent = '✅ Logged In!';
-                btn.style.background = 'linear-gradient(135deg, #00C851, #007E33)';
-                btn.style.opacity = '1';
+                // 2. If no member found with this email
+                if (!members || members.length === 0) {
+                    errorMessage.textContent = '⚠️ No account found with this email. Please Sign Up.';
+                    errorMessage.classList.add('show');
+                    loginBtn.textContent = 'Log In';
+                    loginBtn.disabled = false;
+                    return false;
+                }
 
-                // Redirect after 1.5 seconds
+                const member = members[0];
+
+                // 3. For demo: Check if password matches (in real app, use Supabase Auth)
+                // For demo purposes, we'll accept any password with matching email
+                // In production, use: supabase.auth.signInWithPassword()
+
+                console.log('✅ Login successful for:', member.name);
+
+                // Show success and redirect
+                loginBtn.textContent = '✅ Logged In!';
+                loginBtn.style.background = 'linear-gradient(135deg, #00C851, #007E33)';
+
+                // Store user info in localStorage
+                localStorage.setItem('classydate_user', JSON.stringify({
+                    id: member.id,
+                    name: member.name,
+                    email: member.email,
+                    loggedIn: true
+                }));
+
+                // Redirect to members page after 1.5 seconds
                 setTimeout(function() {
-                    window.location.href = 'dashboard.html';
+                    window.location.href = 'members.html';
                 }, 1500);
-            }, 1500);
 
-            return false;
+                return true;
+
+            } catch (error) {
+                console.error('Login error:', error);
+                errorMessage.textContent = '⚠️ An error occurred. Please try again.';
+                errorMessage.classList.add('show');
+                loginBtn.textContent = 'Log In';
+                loginBtn.disabled = false;
+                return false;
+            }
         }
 
-        // Remove error when user starts typing
+        // ============================================================
+        // REAL-TIME VALIDATION CLEARING
+        // ============================================================
+
         document.getElementById('email').addEventListener('input', function() {
             document.getElementById('error-message').classList.remove('show');
         });
@@ -498,7 +563,24 @@
             document.getElementById('error-message').classList.remove('show');
         });
 
-        console.log('💎 ClassyDate Login Page loaded!');
+        // ============================================================
+        // CHECK IF ALREADY LOGGED IN
+        // ============================================================
+
+        (function checkSession() {
+            const user = localStorage.getItem('classydate_user');
+            if (user) {
+                try {
+                    const userData = JSON.parse(user);
+                    if (userData.loggedIn) {
+                        console.log('👤 Already logged in as:', userData.name);
+                    }
+                } catch (e) {}
+            }
+        })();
+
+        console.log('💎 ClassyDate Login Page with Supabase loaded!');
+        console.log('🔗 Connected to:', SUPABASE_URL);
     </script>
 
 </body>
