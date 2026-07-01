@@ -737,7 +737,7 @@
         }
 
         // ============================================================
-        // SIGNUP HANDLER (FIXED - uses correct column names)
+        // SIGNUP HANDLER
         // ============================================================
 
         async function handleSignup(event) {
@@ -822,7 +822,7 @@
                 // 2. Calculate age from DOB
                 const age = new Date().getFullYear() - parseInt(year);
 
-                // 3. Prepare member data - using correct column names
+                // 3. Prepare member data
                 const memberData = {
                     name: fullname,
                     email: email,
