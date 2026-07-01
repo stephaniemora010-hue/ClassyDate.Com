@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <title>Member Profile | ClassyDate</title>
+    <meta name="description" content="View member profile on ClassyDate">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+    <style>
+        /* ============================================================
+           CLASSYDATE - Profile Page
+           ============================================================ */
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #0D0B1A;
+            color: #FAF8F5;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ---------- HEADER ---------- */
+        .cb-shell-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(13, 11, 26, 0.92);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 45, 85, 0.08);
+        }
+
+        .cb-shell-header__inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .cb-shell-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Georgia', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #FF2D55;
+        }
+        .cb-shell-brand span {
+            color: #FAF8F5;
+            font-weight: 300;
+        }
+        .cb-shell-brand .icon {
+            font-size: 32px;
+        }
+
+        .cb-shell-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .cb-shell-button {
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+        .cb-shell-button--secondary {
+            background: rgba(255, 45, 85, 0.1);
+            color: #FF2D55;
+            border: 1px solid rgba(255, 45, 85, 0.12);
+        }
+        .cb-shell-button--secondary:hover {
+            background: rgba(255, 45, 85, 0.18);
+        }
+        .cb-shell-button--primary {
+            background: #FF2D55;
+            color: #0D0B1A;
+        }
+        .cb-shell-button--primary:hover {
+            background: #FF0040;
+            transform: translateY(-2px);
+        }
+
+        /* ---------- BACK BUTTON ---------- */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 14px;
+            margin: 100px 0 20px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #FF2D55;
+        }
+
+        /* ---------- PROFILE CONTAINER ---------- */
+        .profile-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 80px 20px 60px;
+        }
+
+        .profile-card {
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 40px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            overflow: hidden;
+            padding: 0;
+        }
+
+        /* ---------- LEFT COLUMN - PHOTO ---------- */
+        .profile-photo {
+            position: relative;
+            background: #1A1A2E;
+            min-height: 500px;
+            overflow: hidden;
+        }
+
+        .profile-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            min-height: 500px;
+        }
+
+        .profile-photo .badges-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge--verified {
+            background: rgba(0, 200, 81, 0.2);
+            color: #00C851;
+            border: 1px solid rgba(0, 200, 81, 0.2);
+        }
+
+        .badge--premium {
+            background: rgba(255, 215, 0, 0.15);
+            color: #FFD700;
+            border: 1px solid rgba(255, 215, 0, 0.15);
+        }
+
+        .badge--new {
+            background: rgba(255, 45, 85, 0.15);
+            color: #FF2D55;
+            border: 1px solid rgba(255, 45, 85, 0.15);
+        }
+
+        .profile-status {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(13, 11, 26, 0.85);
+            backdrop-filter: blur(8px);
+            padding: 8px 16px 8px 12px;
+            border-radius: 50px;
+            font-size: 13px;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .status-dot--online {
+            background: #00C851;
+            animation: pulse-dot 2s infinite;
+        }
+
+        .status-dot--offline {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes pulse-dot {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        .profile-photo .join-date {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.3);
+            background: rgba(13, 11, 26, 0.85);
+            backdrop-filter: blur(8px);
+            padding: 8px 16px;
+            border-radius: 50px;
+        }
+
+        /* ---------- RIGHT COLUMN - INFO ---------- */
+        .profile-info {
+            padding: 40px 40px 40px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .profile-name {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .profile-name h1 {
+            font-family: 'Georgia', serif;
+            font-size: 36px;
+            color: #FAF8F5;
+        }
+
+        .profile-name .age {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 24px;
+            font-weight: 300;
+        }
+
+        .profile-location {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .profile-bio {
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .profile-bio h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .profile-bio p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        /* ---------- DETAILS GRID ---------- */
+        .profile-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .detail-item {
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .detail-item .label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: rgba(255, 255, 255, 0.2);
+            font-weight: 600;
+        }
+
+        .detail-item .value {
+            font-size: 15px;
+            color: #FAF8F5;
+            margin-top: 2px;
+        }
+
+        /* ---------- INTERESTS ---------- */
+        .profile-interests h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .interests-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .interest-tag {
+            padding: 6px 16px;
+            background: rgba(255, 45, 85, 0.06);
+            border: 1px solid rgba(255, 45, 85, 0.08);
+            border-radius: 50px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* ---------- ACTION BUTTONS ---------- */
+        .profile-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .profile-actions button {
+            flex: 1;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-message-profile {
+            background: linear-gradient(135deg, #FF2D55, #FF0040);
+            color: #FAF8F5;
+        }
+
+        .btn-message-profile:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 45, 85, 0.35);
+        }
+
+        .btn-like-profile {
+            background: rgba(255, 255, 255, 0.04);
+            color: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .btn-like-profile:hover {
+            background: rgba(255, 45, 85, 0.08);
+            color: #FF2D55;
+            border-color: rgba(255, 45, 85, 0.15);
+        }
+
+        .btn-report {
+            padding: 14px 20px;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 13px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            font-family: inherit;
+        }
+
+        .btn-report:hover {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 900px) {
+            .profile-card {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-photo {
+                min-height: 300px;
+            }
+
+            .profile-photo img {
+                min-height: 300px;
+            }
+
+            .profile-info {
+                padding: 30px 24px;
+            }
+
+            .profile-name h1 {
+                font-size: 28px;
+            }
+
+            .profile-details {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-actions {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .profile-wrapper {
+                padding: 60px 12px 40px;
+            }
+
+            .profile-name {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+
+            .profile-name h1 {
+                font-size: 24px;
+            }
+
+            .profile-name .age {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================ -->
+    <!-- HEADER                                                       -->
+    <!-- ============================================================ -->
+    <header class="cb-shell-header" role="banner">
+        <div class="cb-shell-header__inner">
+            <a class="cb-shell-brand" href="index.html" aria-label="ClassyDate">
+                <span class="icon">💎</span>
+                Classy<span>Date</span>
+            </a>
+
+            <div class="cb-shell-actions">
+                <a href="signup.html" class="cb-shell-button cb-shell-button--secondary">Join</a>
+                <a href="login.html" class="cb-shell-button cb-shell-button--primary">Log in</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================ -->
+    <!-- PROFILE PAGE                                                 -->
+    <!-- ============================================================ -->
+    <main class="profile-wrapper">
+        <a href="members.html" class="back-link">← Back to Members</a>
+
+        <div class="profile-card" id="profile-card">
+            <!-- Profile Photo -->
+            <div class="profile-photo" id="profile-photo">
+                <img id="profile-img" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Member photo">
+                <div class="badges-container" id="badges-container">
+                    <span class="badge badge--verified">✓ Verified</span>
+                    <span class="badge badge--premium">⭐ Premium</span>
+                </div>
+                <div class="profile-status" id="profile-status">
+                    <span class="status-dot status-dot--online"></span>
+                    <span>Online</span>
+                </div>
+                <div class="join-date" id="join-date">Joined: January 2025</div>
+            </div>
+
+            <!-- Profile Info -->
+            <div class="profile-info">
+                <div class="profile-name">
+                    <h1 id="profile-name">Sarah Johnson</h1>
+                    <span class="age" id="profile-age">28</span>
+                </div>
+                <div class="profile-location" id="profile-location">📍 New York, USA</div>
+
+                <div class="profile-bio">
+                    <h3>About Me</h3>
+                    <p id="profile-bio">Love traveling and coffee. Looking for someone who shares my passion for adventure. Life is better when you have someone to share it with.</p>
+                </div>
+
+                <div class="profile-details">
+                    <div class="detail-item">
+                        <div class="label">Gender</div>
+                        <div class="value" id="profile-gender">Female</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="label">Member Since</div>
+                        <div class="value" id="profile-since">January 2025</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="label">Status</div>
+                        <div class="value" id="profile-status-text">Active</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="label">Member ID</div>
+                        <div class="value" id="profile-id">#CD-001</div>
+                    </div>
+                </div>
+
+                <div class="profile-interests">
+                    <h3>Interests</h3>
+                    <div class="interests-tags" id="interests-tags">
+                        <span class="interest-tag">#Travel</span>
+                        <span class="interest-tag">#Coffee</span>
+                        <span class="interest-tag">#Photography</span>
+                    </div>
+                </div>
+
+                <div class="profile-actions">
+                    <button class="btn-message-profile" onclick="sendMessage()">💬 Send Message</button>
+                    <button class="btn-like-profile" onclick="likeProfile()">❤️ Like</button>
+                </div>
+
+                <button class="btn-report" onclick="reportProfile()">🚩 Report Profile</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- ============================================================ -->
+    <!-- SCRIPTS                                                      -->
+    <!-- ============================================================ -->
+    <script>
+        // ============================================================
+        // GET MEMBER DATA FROM URL PARAMETER OR SESSION
+        // ============================================================
+
+        // Member data (simulated - would come from URL param or database)
+        const memberData = {
+            id: 1,
+            name: "Sarah Johnson",
+            age: 28,
+            gender: "Female",
+            location: "New York, USA",
+            bio: "Love traveling and coffee. Looking for someone who shares my passion for adventure. Life is better when you have someone to share it with.",
+            photo: "https://randomuser.me/api/portraits/women/44.jpg",
+            verified: true,
+            premium: true,
+            online: true,
+            new: false,
+            joined: "January 2025",
+            memberId: "#CD-001",
+            interests: ["Travel", "Coffee", "Photography", "Hiking", "Music"]
+        };
+
+        // ============================================================
+        // RENDER PROFILE
+        // ============================================================
+        function renderProfile(data) {
+            // Photo
+            document.getElementById('profile-img').src = data.photo;
+
+            // Badges
+            const badgesContainer = document.getElementById('badges-container');
+            badgesContainer.innerHTML = '';
+            if (data.verified) {
+                badgesContainer.innerHTML += `<span class="badge badge--verified">✓ Verified</span>`;
+            }
+            if (data.premium) {
+                badgesContainer.innerHTML += `<span class="badge badge--premium">⭐ Premium</span>`;
+            }
+            if (data.new) {
+                badgesContainer.innerHTML += `<span class="badge badge--new">🆕 New</span>`;
+            }
+
+            // Status
+            const statusEl = document.getElementById('profile-status');
+            const dot = statusEl.querySelector('.status-dot');
+            dot.className = `status-dot status-dot--${data.online ? 'online' : 'offline'}`;
+            statusEl.querySelector('span:last-child').textContent = data.online ? 'Online' : 'Offline';
+
+            // Join date
+            document.getElementById('join-date').textContent = `Joined: ${data.joined}`;
+
+            // Name & Age
+            document.getElementById('profile-name').textContent = data.name;
+            document.getElementById('profile-age').textContent = data.age;
+
+            // Location
+            document.getElementById('profile-location').textContent = `📍 ${data.location}`;
+
+            // Bio
+            document.getElementById('profile-bio').textContent = data.bio;
+
+            // Details
+            document.getElementById('profile-gender').textContent = data.gender;
+            document.getElementById('profile-since').textContent = data.joined;
+            document.getElementById('profile-status-text').textContent = data.online ? 'Active' : 'Inactive';
+            document.getElementById('profile-id').textContent = data.memberId;
+
+            // Interests
+            const interestsContainer = document.getElementById('interests-tags');
+            interestsContainer.innerHTML = '';
+            data.interests.forEach(interest => {
+                interestsContainer.innerHTML += `<span class="interest-tag">#${interest}</span>`;
+            });
+        }
+
+        // ============================================================
+        // ACTIONS
+        // ============================================================
+        function sendMessage() {
+            // Redirect to subscription page
+            window.location.href = 'subscription.html';
+        }
+
+        function likeProfile() {
+            const btn = document.querySelector('.btn-like-profile');
+            if (btn.textContent.includes('❤️')) {
+                btn.textContent = '💔 Liked';
+                btn.style.color = '#FF2D55';
+                btn.style.borderColor = '#FF2D55';
+                btn.style.background = 'rgba(255,45,85,0.08)';
+            } else {
+                btn.textContent = '❤️ Like';
+                btn.style.color = 'rgba(255,255,255,0.6)';
+                btn.style.borderColor = 'rgba(255,255,255,0.06)';
+                btn.style.background = 'rgba(255,255,255,0.04)';
+            }
+        }
+
+        function reportProfile() {
+            if (confirm('Are you sure you want to report this profile? This action cannot be undone.')) {
+                alert('✅ Profile reported. Our team will review it shortly.');
+            }
+        }
+
+        // ============================================================
+        // LOAD PROFILE DATA
+        // ============================================================
+
+        // Try to get member ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const memberId = urlParams.get('id');
+
+        if (memberId) {
+            // In a real app, you'd fetch the member data from the server
+            console.log(`📊 Loading profile for member ID: ${memberId}`);
+            // For demo, we keep using the sample data
+        }
+
+        renderProfile(memberData);
+
+        console.log('💎 ClassyDate Profile Page loaded!');
+        console.log(`👤 Showing profile for ${memberData.name}`);
+    </script>
+</body>
+</html>

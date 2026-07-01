@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <title>Subscribe | ClassyDate</title>
+    <meta name="description" content="Choose a subscription plan to unlock messaging and connections on ClassyDate.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+    <style>
+        /* ============================================================
+           CLASSYDATE - Subscription Page
+           ============================================================ */
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #0D0B1A;
+            color: #FAF8F5;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ---------- HEADER ---------- */
+        .cb-shell-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(13, 11, 26, 0.92);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 45, 85, 0.08);
+        }
+
+        .cb-shell-header__inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .cb-shell-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Georgia', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #FF2D55;
+        }
+        .cb-shell-brand span {
+            color: #FAF8F5;
+            font-weight: 300;
+        }
+        .cb-shell-brand .icon {
+            font-size: 32px;
+        }
+
+        .cb-shell-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .cb-shell-button {
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+        .cb-shell-button--secondary {
+            background: rgba(255, 45, 85, 0.1);
+            color: #FF2D55;
+            border: 1px solid rgba(255, 45, 85, 0.12);
+        }
+        .cb-shell-button--secondary:hover {
+            background: rgba(255, 45, 85, 0.18);
+        }
+        .cb-shell-button--primary {
+            background: #FF2D55;
+            color: #0D0B1A;
+        }
+        .cb-shell-button--primary:hover {
+            background: #FF0040;
+            transform: translateY(-2px);
+        }
+
+        /* ---------- SUBSCRIPTION CONTAINER ---------- */
+        .subscription-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 100px 20px 60px;
+            text-align: center;
+        }
+
+        .subscription-header {
+            margin-bottom: 50px;
+        }
+
+        .subscription-header .icon {
+            font-size: 56px;
+            display: block;
+            margin-bottom: 16px;
+        }
+
+        .subscription-header h1 {
+            font-family: 'Georgia', serif;
+            font-size: 40px;
+            color: #FAF8F5;
+            margin-bottom: 8px;
+        }
+
+        .subscription-header p {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 18px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* ---------- PLANS ---------- */
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 20px;
+        }
+
+        .plan-card {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+            padding: 40px 28px 32px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: all 0.3s ease;
+            position: relative;
+            text-align: left;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255, 45, 85, 0.15);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .plan-card.popular {
+            border-color: #FF2D55;
+            background: rgba(255, 45, 85, 0.04);
+        }
+
+        .plan-card.popular::before {
+            content: '⭐ Most Popular';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #FF2D55, #FF0040);
+            padding: 4px 20px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #FAF8F5;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .plan-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #FAF8F5;
+            margin-bottom: 4px;
+        }
+
+        .plan-price {
+            font-size: 36px;
+            font-weight: 700;
+            color: #FF2D55;
+            font-family: 'Georgia', serif;
+            margin: 8px 0 4px;
+        }
+
+        .plan-price span {
+            font-size: 16px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.2);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .plan-duration {
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .plan-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 24px 0;
+        }
+
+        .plan-features li {
+            padding: 8px 0;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .plan-features li:last-child {
+            border-bottom: none;
+        }
+
+        .plan-features li .check {
+            color: #00C851;
+            font-weight: 700;
+        }
+
+        .plan-features li .cross {
+            color: rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-subscribe {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .btn-subscribe--free {
+            background: rgba(255, 255, 255, 0.04);
+            color: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .btn-subscribe--free:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .btn-subscribe--premium {
+            background: linear-gradient(135deg, #FF2D55, #FF0040);
+            color: #FAF8F5;
+        }
+
+        .btn-subscribe--premium:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 45, 85, 0.35);
+        }
+
+        .btn-subscribe--vip {
+            background: linear-gradient(135deg, #FFD700, #FF6B00);
+            color: #0D0B1A;
+        }
+
+        .btn-subscribe--vip:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.3);
+        }
+
+        /* ---------- FEATURES COMPARISON ---------- */
+        .comparison-section {
+            margin-top: 60px;
+            text-align: left;
+        }
+
+        .comparison-section h2 {
+            font-family: 'Georgia', serif;
+            font-size: 28px;
+            color: #FAF8F5;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 14px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .comparison-table th {
+            background: rgba(255, 255, 255, 0.03);
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .comparison-table th:first-child,
+        .comparison-table td:first-child {
+            text-align: left;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 500;
+        }
+
+        .comparison-table td {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 14px;
+        }
+
+        .comparison-table td .check {
+            color: #00C851;
+            font-size: 18px;
+        }
+
+        .comparison-table td .cross {
+            color: rgba(255, 255, 255, 0.1);
+            font-size: 18px;
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 900px) {
+            .plans-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 20px auto 0;
+            }
+
+            .subscription-header h1 {
+                font-size: 30px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .comparison-table {
+                font-size: 12px;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 10px 12px;
+            }
+
+            .subscription-header h1 {
+                font-size: 24px;
+            }
+
+            .plan-price {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================ -->
+    <!-- HEADER                                                       -->
+    <!-- ============================================================ -->
+    <header class="cb-shell-header" role="banner">
+        <div class="cb-shell-header__inner">
+            <a class="cb-shell-brand" href="index.html" aria-label="ClassyDate">
+                <span class="icon">💎</span>
+                Classy<span>Date</span>
+            </a>
+
+            <div class="cb-shell-actions">
+                <a href="signup.html" class="cb-shell-button cb-shell-button--secondary">Join</a>
+                <a href="login.html" class="cb-shell-button cb-shell-button--primary">Log in</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================ -->
+    <!-- SUBSCRIPTION PAGE                                            -->
+    <!-- ============================================================ -->
+    <main class="subscription-wrapper">
+        <div class="subscription-header">
+            <span class="icon">💎</span>
+            <h1>Unlock Meaningful Connections</h1>
+            <p>Choose a plan to start messaging and connecting with members.</p>
+        </div>
+
+        <!-- Plans -->
+        <div class="plans-grid">
+            <!-- Free Plan -->
+            <div class="plan-card">
+                <div class="plan-name">Free</div>
+                <div class="plan-price">$0 <span>/ forever</span></div>
+                <div class="plan-duration">Basic access</div>
+                <ul class="plan-features">
+                    <li><span class="check">✓</span> Browse members</li>
+                    <li><span class="check">✓</span> View profiles</li>
+                    <li><span class="cross">✗</span> Send messages</li>
+                    <li><span class="cross">✗</span> See who liked you</li>
+                    <li><span class="cross">✗</span> Advanced filters</li>
+                </ul>
+                <button class="btn-subscribe btn-subscribe--free">Current Plan</button>
+            </div>
+
+            <!-- Premium Plan -->
+            <div class="plan-card popular">
+                <div class="plan-name">Premium</div>
+                <div class="plan-price">$19.99 <span>/ month</span></div>
+                <div class="plan-duration">Best value for serious daters</div>
+                <ul class="plan-features">
+                    <li><span class="check">✓</span> Unlimited messaging</li>
+                    <li><span class="check">✓</span> See who liked you</li>
+                    <li><span class="check">✓</span> Advanced filters</li>
+                    <li><span class="check">✓</span> Priority support</li>
+                    <li><span class="check">✓</span> Profile boost</li>
+                </ul>
+                <button class="btn-subscribe btn-subscribe--premium" onclick="subscribe('Premium')">Start Free Trial</button>
+            </div>
+
+            <!-- VIP Plan -->
+            <div class="plan-card">
+                <div class="plan-name">VIP</div>
+                <div class="plan-price">$49.99 <span>/ month</span></div>
+                <div class="plan-duration">Ultimate experience</div>
+                <ul class="plan-features">
+                    <li><span class="check">✓</span> Everything in Premium</li>
+                    <li><span class="check">✓</span> VIP badge</li>
+                    <li><span class="check">✓</span> Top profile placement</li>
+                    <li><span class="check">✓</span> Exclusive events</li>
+                    <li><span class="check">✓</span> Personal matchmaker</li>
+                </ul>
+                <button class="btn-subscribe btn-subscribe--vip" onclick="subscribe('VIP')">Go VIP</button>
+            </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="comparison-section">
+            <h2>Compare Plans</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Features</th>
+                        <th>Free</th>
+                        <th>Premium</th>
+                        <th>VIP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Browse Members</td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="check">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td>View Profiles</td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="check">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td>Send Messages</td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="check">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td>See Who Liked You</td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="check">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td>Advanced Filters</td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="check">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td>Profile Boost</td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="check">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td>VIP Badge</td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="check">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td>Personal Matchmaker</td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="check">✓</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- ============================================================ -->
+    <!-- SCRIPTS                                                      -->
+    <!-- ============================================================ -->
+    <script>
+        function subscribe(plan) {
+            alert(`💎 You've selected the ${plan} plan!\n\nYou will be redirected to payment.`);
+            // In a real app, redirect to payment page
+            // window.location.href = 'checkout.html?plan=' + plan;
+        }
+
+        console.log('💎 ClassyDate Subscription Page loaded!');
+        console.log('💳 Plans: Free, Premium, VIP');
+    </script>
+</body>
+</html>

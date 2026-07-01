@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <title>Members | ClassyDate</title>
+    <meta name="description" content="Browse ClassyDate members and find meaningful connections.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+    <style>
+        /* ============================================================
+           CLASSYDATE - Members Page
+           ============================================================ */
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #0D0B1A;
+            color: #FAF8F5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ---------- HEADER ---------- */
+        .cb-shell-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(13, 11, 26, 0.92);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 45, 85, 0.08);
+        }
+
+        .cb-shell-header__inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .cb-shell-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Georgia', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #FF2D55;
+        }
+        .cb-shell-brand span {
+            color: #FAF8F5;
+            font-weight: 300;
+        }
+        .cb-shell-brand .icon {
+            font-size: 32px;
+        }
+
+        .cb-shell-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .cb-shell-button {
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+        .cb-shell-button--secondary {
+            background: rgba(255, 45, 85, 0.1);
+            color: #FF2D55;
+            border: 1px solid rgba(255, 45, 85, 0.12);
+        }
+        .cb-shell-button--secondary:hover {
+            background: rgba(255, 45, 85, 0.18);
+        }
+        .cb-shell-button--primary {
+            background: #FF2D55;
+            color: #0D0B1A;
+        }
+        .cb-shell-button--primary:hover {
+            background: #FF0040;
+            transform: translateY(-2px);
+        }
+
+        /* ---------- MEMBERS CONTAINER ---------- */
+        .members-wrapper {
+            flex: 1;
+            padding: 100px 20px 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* ---------- HEADER SECTION ---------- */
+        .members-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .members-header h1 {
+            font-family: 'Georgia', serif;
+            font-size: 32px;
+            color: #FAF8F5;
+        }
+
+        .members-header h1 span {
+            color: #FF2D55;
+        }
+
+        .members-header .member-count {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 14px;
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 4px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 12px;
+            padding: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .view-toggle button {
+            padding: 8px 16px;
+            background: none;
+            border: none;
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .view-toggle button.active {
+            background: rgba(255, 45, 85, 0.12);
+            color: #FF2D55;
+        }
+
+        .view-toggle button:hover:not(.active) {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* ---------- FILTERS ---------- */
+        .filters-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-group label {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .filter-group select,
+        .filter-group input {
+            padding: 8px 14px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 8px;
+            color: #FAF8F5;
+            font-size: 14px;
+            font-family: inherit;
+            outline: none;
+            min-width: 120px;
+        }
+
+        .filter-group select:focus,
+        .filter-group input:focus {
+            border-color: #FF2D55;
+        }
+
+        .filter-group select option {
+            background: #1A1A2E;
+            color: #FAF8F5;
+        }
+
+        .filter-group input::placeholder {
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .filter-group input[type="range"] {
+            width: 120px;
+            padding: 0;
+            background: transparent;
+            accent-color: #FF2D55;
+            cursor: pointer;
+        }
+
+        .filter-group .range-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.3);
+            min-width: 60px;
+        }
+
+        .filter-actions {
+            display: flex;
+            gap: 8px;
+            margin-left: auto;
+        }
+
+        .filter-actions button {
+            padding: 8px 20px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .btn-apply {
+            background: #FF2D55;
+            color: #0D0B1A;
+        }
+
+        .btn-apply:hover {
+            background: #FF0040;
+            transform: translateY(-2px);
+        }
+
+        .btn-reset {
+            background: rgba(255, 255, 255, 0.04);
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .btn-reset:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        /* ---------- MEMBERS GRID ---------- */
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        /* ---------- MEMBER CARD ---------- */
+        .member-card {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .member-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255, 45, 85, 0.15);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .member-card__image {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+            background: #1A1A2E;
+        }
+
+        .member-card__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .member-card:hover .member-card__image img {
+            transform: scale(1.05);
+        }
+
+        .member-card__badges {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 4px 10px;
+            border-radius: 50px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge--verified {
+            background: rgba(0, 200, 81, 0.2);
+            color: #00C851;
+            border: 1px solid rgba(0, 200, 81, 0.2);
+        }
+
+        .badge--premium {
+            background: rgba(255, 215, 0, 0.15);
+            color: #FFD700;
+            border: 1px solid rgba(255, 215, 0, 0.15);
+        }
+
+        .badge--new {
+            background: rgba(255, 45, 85, 0.15);
+            color: #FF2D55;
+            border: 1px solid rgba(255, 45, 85, 0.15);
+        }
+
+        .member-card__status {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(13, 11, 26, 0.8);
+            backdrop-filter: blur(8px);
+            padding: 4px 12px 4px 8px;
+            border-radius: 50px;
+            font-size: 12px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .status-dot--online {
+            background: #00C851;
+            animation: pulse-dot 2s infinite;
+        }
+
+        .status-dot--offline {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .member-card__info {
+            padding: 16px 18px 18px;
+        }
+
+        .member-card__name {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .member-card__name h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #FAF8F5;
+        }
+
+        .member-card__name .age {
+            color: rgba(255, 255, 255, 0.4);
+            font-weight: 400;
+            font-size: 15px;
+        }
+
+        .member-card__location {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 14px;
+            margin-top: 2px;
+        }
+
+        .member-card__bio {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+            margin-top: 8px;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .member-card__interests {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .interest-tag {
+            padding: 2px 10px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 50px;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .member-card__actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .member-card__actions button {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .btn-view {
+            background: rgba(255, 45, 85, 0.08);
+            color: #FF2D55;
+        }
+
+        .btn-view:hover {
+            background: rgba(255, 45, 85, 0.15);
+        }
+
+        .btn-message {
+            background: #FF2D55;
+            color: #0D0B1A;
+        }
+
+        .btn-message:hover {
+            background: #FF0040;
+            transform: translateY(-2px);
+        }
+
+        /* ---------- LIST VIEW ---------- */
+        .members-grid.list-view {
+            grid-template-columns: 1fr;
+        }
+
+        .members-grid.list-view .member-card {
+            display: flex;
+            align-items: stretch;
+        }
+
+        .members-grid.list-view .member-card__image {
+            width: 180px;
+            height: auto;
+            min-height: 180px;
+            flex-shrink: 0;
+        }
+
+        .members-grid.list-view .member-card__info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .members-grid.list-view .member-card__actions {
+            border-top: none;
+            padding-top: 0;
+            margin-top: 0;
+        }
+
+        /* ---------- EMPTY STATE ---------- */
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .empty-state .icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+
+        .empty-state h3 {
+            font-size: 24px;
+            color: #FAF8F5;
+            margin-bottom: 8px;
+        }
+
+        /* ---------- PAGINATION ---------- */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 40px;
+        }
+
+        .pagination button {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .pagination button:hover {
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .pagination button.active {
+            background: rgba(255, 45, 85, 0.12);
+            color: #FF2D55;
+            border-color: rgba(255, 45, 85, 0.15);
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 768px) {
+            .members-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .filters-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-group {
+                flex-wrap: wrap;
+            }
+
+            .filter-group select,
+            .filter-group input {
+                min-width: 100%;
+            }
+
+            .filter-actions {
+                margin-left: 0;
+            }
+
+            .members-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+
+            .members-grid.list-view .member-card {
+                flex-direction: column;
+            }
+
+            .members-grid.list-view .member-card__image {
+                width: 100%;
+                height: 180px;
+            }
+
+            .view-toggle button {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .members-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================ -->
+    <!-- HEADER                                                       -->
+    <!-- ============================================================ -->
+    <header class="cb-shell-header" role="banner">
+        <div class="cb-shell-header__inner">
+            <a class="cb-shell-brand" href="/" aria-label="ClassyDate">
+                <span class="icon">💎</span>
+                Classy<span>Date</span>
+            </a>
+
+            <div class="cb-shell-actions">
+                <a href="signup.html" class="cb-shell-button cb-shell-button--secondary">Join</a>
+                <a href="login.html" class="cb-shell-button cb-shell-button--primary">Log in</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================ -->
+    <!-- MEMBERS PAGE                                                 -->
+    <!-- ============================================================ -->
+    <main class="members-wrapper">
+        <!-- Header -->
+        <div class="members-header">
+            <div>
+                <h1>Browse <span>Members</span></h1>
+                <span class="member-count">Showing <strong id="total-count">12</strong> members</span>
+            </div>
+            <div class="view-toggle">
+                <button class="active" onclick="setView('grid')" id="grid-view">▦ Grid</button>
+                <button onclick="setView('list')" id="list-view">☰ List</button>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="filters-section">
+            <div class="filter-group">
+                <label>Gender</label>
+                <select id="filter-gender">
+                    <option value="all">All</option>
+                    <option value="male">Men</option>
+                    <option value="female">Women</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Status</label>
+                <select id="filter-status">
+                    <option value="all">All</option>
+                    <option value="online">Online</option>
+                    <option value="offline">Offline</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Age</label>
+                <input type="range" id="filter-age" min="18" max="80" value="50">
+                <span class="range-labels">
+                    <span>18</span>
+                    <span id="age-display">50</span>
+                    <span>80</span>
+                </span>
+            </div>
+
+            <div class="filter-group">
+                <label>Verified</label>
+                <select id="filter-verified">
+                    <option value="all">All</option>
+                    <option value="verified">Verified Only</option>
+                </select>
+            </div>
+
+            <div class="filter-actions">
+                <button class="btn-apply" onclick="applyFilters()">Apply</button>
+                <button class="btn-reset" onclick="resetFilters()">Reset</button>
+            </div>
+        </div>
+
+        <!-- Members Grid -->
+        <div class="members-grid" id="members-grid">
+            <!-- Members will be rendered here by JavaScript -->
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination" id="pagination">
+            <button onclick="changePage('prev')">‹ Prev</button>
+            <button class="active">1</button>
+            <button onclick="changePage('next')">Next ›</button>
+        </div>
+    </main>
+
+    <!-- ============================================================ -->
+    <!-- SCRIPTS                                                      -->
+    <!-- ============================================================ -->
+    <script>
+        // ============================================================
+        // MEMBER DATA (Static for now - will come from admin/backend)
+        // ============================================================
+        const membersData = [{
+            id: 1,
+            name: "Sarah Johnson",
+            age: 28,
+            gender: "female",
+            location: "New York, USA",
+            bio: "Love traveling and coffee. Looking for someone who shares my passion for adventure.",
+            photo: "https://randomuser.me/api/portraits/women/44.jpg",
+            verified: true,
+            premium: true,
+            online: true,
+            new: false,
+            joined: "2025-01-15",
+            interests: ["Travel", "Coffee", "Photography"]
+        }, {
+            id: 2,
+            name: "Michael Chen",
+            age: 32,
+            gender: "male",
+            location: "San Francisco, USA",
+            bio: "Tech enthusiast, foodie, and dog lover. Let's explore the world together.",
+            photo: "https://randomuser.me/api/portraits/men/32.jpg",
+            verified: true,
+            premium: false,
+            online: true,
+            new: true,
+            joined: "2026-03-10",
+            interests: ["Tech", "Food", "Dogs"]
+        }, {
+            id: 3,
+            name: "Emily Rodriguez",
+            age: 26,
+            gender: "female",
+            location: "Los Angeles, USA",
+            bio: "Yoga instructor, beach lover, and hopeless romantic. Here for something real.",
+            photo: "https://randomuser.me/api/portraits/women/68.jpg",
+            verified: false,
+            premium: false,
+            online: false,
+            new: false,
+            joined: "2025-11-20",
+            interests: ["Yoga", "Beach", "Music"]
+        }, {
+            id: 4,
+            name: "James Wilson",
+            age: 35,
+            gender: "male",
+            location: "London, UK",
+            bio: "Finance professional who loves hiking and good wine. Looking for my partner in crime.",
+            photo: "https://randomuser.me/api/portraits/men/52.jpg",
+            verified: true,
+            premium: true,
+            online: true,
+            new: false,
+            joined: "2024-08-05",
+            interests: ["Hiking", "Wine", "Travel"]
+        }, {
+            id: 5,
+            name: "Aisha Patel",
+            age: 29,
+            gender: "female",
+            location: "Toronto, Canada",
+            bio: "Healthcare worker, bookworm, and foodie. Looking for someone to share stories with.",
+            photo: "https://randomuser.me/api/portraits/women/90.jpg",
+            verified: true,
+            premium: false,
+            online: false,
+            new: true,
+            joined: "2026-02-14",
+            interests: ["Books", "Food", "Healthcare"]
+        }, {
+            id: 6,
+            name: "David Kim",
+            age: 31,
+            gender: "male",
+            location: "Seoul, South Korea",
+            bio: "Graphic designer who loves photography and K-pop. Let's make beautiful memories.",
+            photo: "https://randomuser.me/api/portraits/men/22.jpg",
+            verified: true,
+            premium: true,
+            online: true,
+            new: false,
+            joined: "2025-05-30",
+            interests: ["Design", "Photography", "K-pop"]
+        }, {
+            id: 7,
+            name: "Maria Santos",
+            age: 27,
+            gender: "female",
+            location: "Manila, Philippines",
+            bio: "Teacher, dancer, and animal lover. Looking for a kind heart and a warm smile.",
+            photo: "https://randomuser.me/api/portraits/women/33.jpg",
+            verified: false,
+            premium: false,
+            online: true,
+            new: false,
+            joined: "2025-09-12",
+            interests: ["Dancing", "Animals", "Teaching"]
+        }, {
+            id: 8,
+            name: "Thomas Brown",
+            age: 40,
+            gender: "male",
+            location: "Sydney, Australia",
+            bio: "Entrepreneur, surfer, and dad. Ready for a new chapter with the right person.",
+            photo: "https://randomuser.me/api/portraits/men/75.jpg",
+            verified: true,
+            premium: true,
+            online: false,
+            new: false,
+            joined: "2024-03-18",
+            interests: ["Surfing", "Business", "Family"]
+        }, {
+            id: 9,
+            name: "Linda Park",
+            age: 24,
+            gender: "female",
+            location: "Busan, South Korea",
+            bio: "Student, artist, and dreamer. Here to find someone who inspires me.",
+            photo: "https://randomuser.me/api/portraits/women/17.jpg",
+            verified: false,
+            premium: false,
+            online: true,
+            new: true,
+            joined: "2026-04-01",
+            interests: ["Art", "Music", "Fashion"]
+        }, {
+            id: 10,
+            name: "Robert Smith",
+            age: 38,
+            gender: "male",
+            location: "Chicago, USA",
+            bio: "Engineer, musician, and outdoor enthusiast. Looking for someone to share the journey.",
+            photo: "https://randomuser.me/api/portraits/men/43.jpg",
+            verified: true,
+            premium: false,
+            online: false,
+            new: false,
+            joined: "2025-07-22",
+            interests: ["Music", "Outdoors", "Engineering"]
+        }, {
+            id: 11,
+            name: "Nina Garcia",
+            age: 30,
+            gender: "female",
+            location: "Madrid, Spain",
+            bio: "Flamenco dancer, chef, and travel blogger. Life is better with good food and good company.",
+            photo: "https://randomuser.me/api/portraits/women/55.jpg",
+            verified: true,
+            premium: true,
+            online: true,
+            new: false,
+            joined: "2024-12-03",
+            interests: ["Dance", "Cooking", "Travel"]
+        }, {
+            id: 12,
+            name: "Alex Johnson",
+            age: 33,
+            gender: "male",
+            location: "Melbourne, Australia",
+            bio: "Writer, runner, and coffee enthusiast. Looking for my muse and adventure partner.",
+            photo: "https://randomuser.me/api/portraits/men/11.jpg",
+            verified: true,
+            premium: false,
+            online: true,
+            new: true,
+            joined: "2026-03-25",
+            interests: ["Writing", "Running", "Coffee"]
+        }];
+
+        // ============================================================
+        // STATE
+        // ============================================================
+        let currentView = 'grid';
+        let currentPage = 1;
+        const perPage = 6;
+        let filteredMembers = [...membersData];
+
+        // ============================================================
+        // RENDER FUNCTIONS
+        // ============================================================
+        function renderMembers(members) {
+            const grid = document.getElementById('members-grid');
+
+            if (members.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state" style="grid-column:1/-1;">
+                        <div class="icon">🔍</div>
+                        <h3>No members found</h3>
+                        <p>Try adjusting your filters to see more results.</p>
+                    </div>
+                `;
+                document.getElementById('total-count').textContent = '0';
+                return;
+            }
+
+            document.getElementById('total-count').textContent = members.length;
+
+            grid.innerHTML = members.map(member => `
+                <div class="member-card" data-id="${member.id}">
+                    <div class="member-card__image">
+                        <img src="${member.photo}" alt="${member.name}" loading="lazy">
+                        <div class="member-card__badges">
+                            ${member.verified ? '<span class="badge badge--verified">✓ Verified</span>' : ''}
+                            ${member.premium ? '<span class="badge badge--premium">⭐ Premium</span>' : ''}
+                            ${member.new ? '<span class="badge badge--new">🆕 New</span>' : ''}
+                        </div>
+                        <div class="member-card__status">
+                            <span class="status-dot status-dot--${member.online ? 'online' : 'offline'}"></span>
+                            ${member.online ? 'Online' : 'Offline'}
+                        </div>
+                    </div>
+                    <div class="member-card__info">
+                        <div class="member-card__name">
+                            <h3>${member.name}</h3>
+                            <span class="age">${member.age}</span>
+                        </div>
+                        <div class="member-card__location">📍 ${member.location}</div>
+                        <div class="member-card__bio">${member.bio}</div>
+                        <div class="member-card__interests">
+                            ${member.interests.map(i => `<span class="interest-tag">#${i}</span>`).join('')}
+                        </div>
+                        <div class="member-card__actions">
+                            <button class="btn-view" onclick="viewProfile(${member.id})">👤 View</button>
+                            <button class="btn-message" onclick="sendMessage(${member.id})">💬 Message</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ============================================================
+        // VIEW TOGGLE
+        // ============================================================
+        function setView(view) {
+            currentView = view;
+            const grid = document.getElementById('members-grid');
+            grid.className = 'members-grid' + (view === 'list' ? ' list-view' : '');
+
+            document.getElementById('grid-view').classList.toggle('active', view === 'grid');
+            document.getElementById('list-view').classList.toggle('active', view === 'list');
+
+            renderMembers(filteredMembers);
+        }
+
+        // ============================================================
+        // FILTERS
+        // ============================================================
+        function applyFilters() {
+            const gender = document.getElementById('filter-gender').value;
+            const status = document.getElementById('filter-status').value;
+            const maxAge = parseInt(document.getElementById('filter-age').value);
+            const verified = document.getElementById('filter-verified').value;
+
+            filteredMembers = membersData.filter(member => {
+                if (gender !== 'all' && member.gender !== gender) return false;
+                if (status !== 'all' && member.online !== (status === 'online')) return false;
+                if (member.age > maxAge) return false;
+                if (verified === 'verified' && !member.verified) return false;
+                return true;
+            });
+
+            currentPage = 1;
+            renderMembers(filteredMembers);
+            updatePagination();
+        }
+
+        function resetFilters() {
+            document.getElementById('filter-gender').value = 'all';
+            document.getElementById('filter-status').value = 'all';
+            document.getElementById('filter-age').value = '50';
+            document.getElementById('age-display').textContent = '50';
+            document.getElementById('filter-verified').value = 'all';
+
+            filteredMembers = [...membersData];
+            currentPage = 1;
+            renderMembers(filteredMembers);
+            updatePagination();
+        }
+
+        // Age range display
+        document.getElementById('filter-age').addEventListener('input', function() {
+            document.getElementById('age-display').textContent = this.value;
+        });
+
+        // ============================================================
+        // PAGINATION
+        // ============================================================
+        function updatePagination() {
+            const total = filteredMembers.length;
+            const pages = Math.ceil(total / perPage);
+            const pagination = document.getElementById('pagination');
+
+            if (pages <= 1) {
+                pagination.innerHTML = '';
+                return;
+            }
+
+            let html = `<button onclick="changePage('prev')" ${currentPage === 1 ? 'disabled style="opacity:0.3;cursor:not-allowed;"' : ''}>‹ Prev</button>`;
+
+            for (let i = 1; i <= Math.min(pages, 5); i++) {
+                html += `<button class="${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
+            }
+
+            if (pages > 5) {
+                html += `<span style="color:rgba(255,255,255,0.2);">…</span>`;
+                html += `<button onclick="goToPage(${pages})">${pages}</button>`;
+            }
+
+            html += `<button onclick="changePage('next')" ${currentPage === pages ? 'disabled style="opacity:0.3;cursor:not-allowed;"' : ''}>Next ›</button>`;
+
+            pagination.innerHTML = html;
+        }
+
+        function changePage(direction) {
+            const total = filteredMembers.length;
+            const pages = Math.ceil(total / perPage);
+
+            if (direction === 'prev' && currentPage > 1) currentPage--;
+            if (direction === 'next' && currentPage < pages) currentPage++;
+
+            renderMembers(filteredMembers);
+            updatePagination();
+        }
+
+        function goToPage(page) {
+            currentPage = page;
+            renderMembers(filteredMembers);
+            updatePagination();
+        }
+
+        // ============================================================
+        // ACTIONS
+        // ============================================================
+        function viewProfile(id) {
+            const member = membersData.find(m => m.id === id);
+            alert(`👤 Viewing profile: ${member.name}\n📧 ${member.email || 'No email provided'}\n📍 ${member.location}\n💬 "${member.bio}"`);
+        }
+
+        function sendMessage(id) {
+            const member = membersData.find(m => m.id === id);
+            alert(`💬 Start a conversation with ${member.name}!\n\nThis will open the messaging feature.`);
+        }
+
+        // ============================================================
+        // INIT
+        // ============================================================
+        renderMembers(filteredMembers);
+        updatePagination();
+
+        console.log('💎 ClassyDate Members Page loaded!');
+        console.log(`📊 ${membersData.length} members loaded`);
+    </script>
+</body>
+</html>

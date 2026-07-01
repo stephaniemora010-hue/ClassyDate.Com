@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <title>Log In | ClassyDate</title>
+    <meta name="description" content="Log in to your ClassyDate account and start connecting with meaningful relationships.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+    <style>
+        /* ============================================================
+           CLASSYDATE - Login Page
+           ============================================================ */
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #0D0B1A;
+            color: #FAF8F5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ---------- HEADER ---------- */
+        .cb-shell-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(13, 11, 26, 0.92);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 45, 85, 0.08);
+        }
+
+        .cb-shell-header__inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .cb-shell-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Georgia', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #FF2D55;
+        }
+        .cb-shell-brand span {
+            color: #FAF8F5;
+            font-weight: 300;
+        }
+        .cb-shell-brand .icon {
+            font-size: 32px;
+        }
+
+        .cb-shell-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .cb-shell-button {
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+        .cb-shell-button--secondary {
+            background: rgba(255, 45, 85, 0.1);
+            color: #FF2D55;
+            border: 1px solid rgba(255, 45, 85, 0.12);
+        }
+        .cb-shell-button--secondary:hover {
+            background: rgba(255, 45, 85, 0.18);
+        }
+        .cb-shell-button--primary {
+            background: #FF2D55;
+            color: #0D0B1A;
+        }
+        .cb-shell-button--primary:hover {
+            background: #FF0040;
+            transform: translateY(-2px);
+        }
+
+        /* ---------- LOGIN CONTAINER ---------- */
+        .login-wrapper {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 20px 60px;
+            min-height: 100vh;
+            background: radial-gradient(ellipse at center top, rgba(255, 45, 85, 0.06), transparent 70%);
+        }
+
+        .login-card {
+            max-width: 440px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 24px;
+            padding: 48px 40px 40px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px);
+        }
+
+        .login-card__header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .login-card__header .icon {
+            font-size: 48px;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .login-card__header h1 {
+            font-family: 'Georgia', serif;
+            font-size: 28px;
+            color: #FAF8F5;
+            font-weight: 400;
+        }
+
+        .login-card__header p {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        /* ---------- FORM ---------- */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 6px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            color: #FAF8F5;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .form-group input:focus {
+            border-color: #FF2D55;
+            background: rgba(255, 45, 85, 0.04);
+            box-shadow: 0 0 0 4px rgba(255, 45, 85, 0.08);
+        }
+
+        .form-group input:focus-visible {
+            outline: none;
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .form-options label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .form-options label input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: #FF2D55;
+            cursor: pointer;
+        }
+
+        .form-options a {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .form-options a:hover {
+            color: #FF2D55;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #FF2D55, #FF0040);
+            color: #FAF8F5;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 45, 85, 0.35);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        /* ---------- DIVIDER ---------- */
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 24px 0;
+            color: rgba(255, 255, 255, 0.15);
+            font-size: 13px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        /* ---------- SOCIAL LOGIN ---------- */
+        .social-login {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .social-btn:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .social-btn .icon {
+            font-size: 20px;
+        }
+
+        /* ---------- FOOTER LINK ---------- */
+        .login-footer {
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        .login-footer p {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 14px;
+        }
+
+        .login-footer a {
+            color: #FF2D55;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .login-footer a:hover {
+            color: #FF0040;
+            text-decoration: underline;
+        }
+
+        /* ---------- ERROR MESSAGE ---------- */
+        .error-message {
+            display: none;
+            background: rgba(255, 45, 85, 0.12);
+            border: 1px solid rgba(255, 45, 85, 0.2);
+            border-radius: 12px;
+            padding: 12px 16px;
+            color: #FF2D55;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 32px 24px 28px;
+            }
+
+            .login-card__header h1 {
+                font-size: 24px;
+            }
+
+            .form-options {
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+            }
+
+            .social-login {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================ -->
+    <!-- HEADER                                                       -->
+    <!-- ============================================================ -->
+    <header class="cb-shell-header" role="banner">
+        <div class="cb-shell-header__inner">
+            <a class="cb-shell-brand" href="/" aria-label="ClassyDate">
+                <span class="icon">💎</span>
+                Classy<span>Date</span>
+            </a>
+
+            <div class="cb-shell-actions">
+                <a href="join.html" class="cb-shell-button cb-shell-button--secondary">Join</a>
+                <a href="login.html" class="cb-shell-button cb-shell-button--primary">Log in</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================ -->
+    <!-- LOGIN FORM                                                   -->
+    <!-- ============================================================ -->
+    <main class="login-wrapper">
+        <div class="login-card">
+            <div class="login-card__header">
+                <span class="icon">💎</span>
+                <h1>Welcome Back</h1>
+                <p>Log in to continue your journey</p>
+            </div>
+
+            <!-- Error Message -->
+            <div class="error-message" id="error-message">
+                ⚠️ Invalid email or password. Please try again.
+            </div>
+
+            <form id="login-form" onsubmit="return handleLogin(event)">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="you@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter your password" required>
+                </div>
+
+                <div class="form-options">
+                    <label>
+                        <input type="checkbox" checked> Remember me
+                    </label>
+                    <a href="#">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="btn-login">Log In</button>
+            </form>
+
+            <div class="divider">or continue with</div>
+
+            <div class="social-login">
+                <button class="social-btn" onclick="alert('Google login coming soon!')">
+                    <span class="icon">🔵</span> Google
+                </button>
+                <button class="social-btn" onclick="alert('Facebook login coming soon!')">
+                    <span class="icon">🔷</span> Facebook
+                </button>
+            </div>
+
+            <div class="login-footer">
+                <p>Don't have an account? <a href="join.html">Join free</a></p>
+            </div>
+        </div>
+    </main>
+
+    <!-- ============================================================ -->
+    <!-- SCRIPTS                                                      -->
+    <!-- ============================================================ -->
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const errorMessage = document.getElementById('error-message');
+
+            // Simple validation
+            if (!email || !password) {
+                errorMessage.textContent = '⚠️ Please fill in all fields.';
+                errorMessage.classList.add('show');
+                return false;
+            }
+
+            if (!email.includes('@')) {
+                errorMessage.textContent = '⚠️ Please enter a valid email address.';
+                errorMessage.classList.add('show');
+                return false;
+            }
+
+            if (password.length < 6) {
+                errorMessage.textContent = '⚠️ Password must be at least 6 characters.';
+                errorMessage.classList.add('show');
+                return false;
+            }
+
+            // Hide error if valid
+            errorMessage.classList.remove('show');
+
+            // Simulate login success
+            console.log('✅ Login successful for:', email);
+
+            // Show success feedback
+            const btn = document.querySelector('.btn-login');
+            const originalText = btn.textContent;
+            btn.textContent = '✅ Logging in...';
+            btn.style.opacity = '0.7';
+            btn.disabled = true;
+
+            setTimeout(function() {
+                btn.textContent = '✅ Logged In!';
+                btn.style.background = 'linear-gradient(135deg, #00C851, #007E33)';
+                btn.style.opacity = '1';
+
+                // Redirect after 1.5 seconds
+                setTimeout(function() {
+                    window.location.href = 'dashboard.html';
+                }, 1500);
+            }, 1500);
+
+            return false;
+        }
+
+        // Remove error when user starts typing
+        document.getElementById('email').addEventListener('input', function() {
+            document.getElementById('error-message').classList.remove('show');
+        });
+
+        document.getElementById('password').addEventListener('input', function() {
+            document.getElementById('error-message').classList.remove('show');
+        });
+
+        console.log('💎 ClassyDate Login Page loaded!');
+    </script>
+
+</body>
+</html>
