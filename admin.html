@@ -847,8 +847,8 @@
             <h1>Admin Access</h1>
             <p>Enter the password to manage members</p>
             <div class="login-error" id="login-error">⚠️ Incorrect password. Please try again.</div>
-            <input type="password" id="admin-password" placeholder="Enter admin password..." onkeydown="if(event.key==='Enter') loginAdmin()">
-            <button class="btn-login-admin" id="login-btn" onclick="loginAdmin()">Log In</button>
+            <input type="password" id="admin-password" placeholder="Enter admin password...">
+            <button class="btn-login-admin" id="login-btn">Log In</button>
         </div>
     </div>
 
@@ -1064,7 +1064,7 @@
         const loginBtn = document.getElementById('login-btn');
 
         // ============================================================
-        // ADMIN LOGIN / LOGOUT
+        // ADMIN LOGIN / LOGOUT (USING addEventListener)
         // ============================================================
 
         function loginAdmin() {
@@ -1094,6 +1094,13 @@
             }
         }
 
+        // Attach event listeners (no inline onclick)
+        loginBtn.addEventListener('click', loginAdmin);
+
+        passwordInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') loginAdmin();
+        });
+
         function logoutAdmin() {
             localStorage.removeItem('admin_session');
             adminWrapper.classList.remove('active');
@@ -1102,6 +1109,18 @@
             loginError.classList.remove('show');
             loginBtn.textContent = 'Log In';
         }
+
+        // Make functions globally accessible for inline onclick attributes
+        window.loginAdmin = loginAdmin;
+        window.logoutAdmin = logoutAdmin;
+        window.openAddModal = openAddModal;
+        window.openEditModal = openEditModal;
+        window.closeModal = closeModal;
+        window.deleteMember = deleteMember;
+        window.saveMember = saveMember;
+        window.applyFilters = applyFilters;
+        window.goToPage = goToPage;
+        window.exportData = exportData;
 
         // ============================================================
         // CHECK SESSION ON LOAD
@@ -1114,11 +1133,6 @@
                 fetchMembers();
             }
         })();
-
-        // Enter key support for login
-        passwordInput.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') loginAdmin();
-        });
 
         // ============================================================
         // STATE
@@ -1509,5 +1523,6 @@
         console.log('🔗 Connected to:', SUPABASE_URL);
         console.log('🔑 Default admin password: ClassyAdmin2026 (CHANGE THIS!)');
     </script>
+
 </body>
 </html>
