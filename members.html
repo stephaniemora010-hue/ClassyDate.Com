@@ -33,6 +33,13 @@
             text-decoration: none;
             color: inherit;
         }
+        img {
+            max-width: 100%;
+            display: block;
+        }
+        ul {
+            list-style: none;
+        }
 
         /* ---------- HEADER ---------- */
         .cb-shell-header {
@@ -49,8 +56,8 @@
         .cb-shell-header__inner {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
-            height: 72px;
+            padding: 0 16px;
+            height: 56px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -59,9 +66,9 @@
         .cb-shell-brand {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             font-family: 'Georgia', serif;
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 700;
             color: #FF2D55;
         }
@@ -70,20 +77,20 @@
             font-weight: 300;
         }
         .cb-shell-brand .icon {
-            font-size: 32px;
+            font-size: 28px;
         }
 
         .cb-shell-actions {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
         }
 
         .cb-shell-button {
-            padding: 8px 24px;
+            padding: 7px 16px;
             border-radius: 50px;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 13px;
             transition: all 0.3s ease;
             cursor: pointer;
             border: none;
@@ -108,7 +115,7 @@
         /* ---------- MEMBERS CONTAINER ---------- */
         .members-wrapper {
             flex: 1;
-            padding: 100px 20px 60px;
+            padding: 80px 20px 40px;
             max-width: 1200px;
             margin: 0 auto;
             width: 100%;
@@ -120,13 +127,13 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 16px;
-            margin-bottom: 30px;
+            gap: 12px;
+            margin-bottom: 24px;
         }
 
         .members-header h1 {
             font-family: 'Georgia', serif;
-            font-size: 32px;
+            font-size: 28px;
             color: #FAF8F5;
         }
 
@@ -143,19 +150,19 @@
             display: flex;
             gap: 4px;
             background: rgba(255, 255, 255, 0.04);
-            border-radius: 12px;
+            border-radius: 10px;
             padding: 4px;
             border: 1px solid rgba(255, 255, 255, 0.04);
         }
 
         .view-toggle button {
-            padding: 8px 16px;
+            padding: 6px 14px;
             background: none;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             color: rgba(255, 255, 255, 0.3);
             cursor: pointer;
-            font-size: 14px;
+            font-size: 13px;
             transition: all 0.3s ease;
             font-family: inherit;
         }
@@ -173,11 +180,11 @@
         .filters-section {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 30px;
-            padding: 20px;
+            gap: 10px;
+            margin-bottom: 24px;
+            padding: 16px 18px;
             background: rgba(255, 255, 255, 0.02);
-            border-radius: 16px;
+            border-radius: 14px;
             border: 1px solid rgba(255, 255, 255, 0.04);
             align-items: center;
         }
@@ -185,26 +192,26 @@
         .filter-group {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
 
         .filter-group label {
             color: rgba(255, 255, 255, 0.4);
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
         }
 
         .filter-group select,
         .filter-group input {
-            padding: 8px 14px;
+            padding: 7px 12px;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 8px;
             color: #FAF8F5;
-            font-size: 14px;
+            font-size: 13px;
             font-family: inherit;
             outline: none;
-            min-width: 120px;
+            min-width: 100px;
         }
 
         .filter-group select:focus,
@@ -222,7 +229,7 @@
         }
 
         .filter-group input[type="range"] {
-            width: 120px;
+            width: 100px;
             padding: 0;
             background: transparent;
             accent-color: #FF2D55;
@@ -232,9 +239,9 @@
         .filter-group .range-labels {
             display: flex;
             justify-content: space-between;
-            font-size: 12px;
+            font-size: 11px;
             color: rgba(255, 255, 255, 0.3);
-            min-width: 60px;
+            min-width: 50px;
         }
 
         .filter-actions {
@@ -244,11 +251,11 @@
         }
 
         .filter-actions button {
-            padding: 8px 20px;
+            padding: 7px 18px;
             border-radius: 8px;
             border: none;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: inherit;
@@ -273,17 +280,48 @@
             background: rgba(255, 255, 255, 0.08);
         }
 
+        /* ---------- LOADING SPINNER ---------- */
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            padding: 60px 20px;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .loading-spinner.active {
+            display: block;
+        }
+
+        .loading-spinner .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 45, 85, 0.1);
+            border-top: 3px solid #FF2D55;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 12px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
         /* ---------- MEMBERS GRID ---------- */
         .members-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
         }
 
         /* ---------- MEMBER CARD ---------- */
         .member-card {
             background: rgba(255, 255, 255, 0.02);
-            border-radius: 16px;
+            border-radius: 14px;
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.04);
             transition: all 0.3s ease;
@@ -298,7 +336,7 @@
 
         .member-card__image {
             position: relative;
-            height: 220px;
+            height: 200px;
             overflow: hidden;
             background: #1A1A2E;
         }
@@ -316,17 +354,17 @@
 
         .member-card__badges {
             position: absolute;
-            top: 12px;
-            left: 12px;
+            top: 10px;
+            left: 10px;
             display: flex;
-            gap: 6px;
+            gap: 5px;
             flex-wrap: wrap;
         }
 
         .badge {
-            padding: 4px 10px;
+            padding: 3px 10px;
             border-radius: 50px;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -352,8 +390,8 @@
 
         .member-card__status {
             position: absolute;
-            bottom: 12px;
-            right: 12px;
+            bottom: 10px;
+            right: 10px;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -361,7 +399,7 @@
             backdrop-filter: blur(8px);
             padding: 4px 12px 4px 8px;
             border-radius: 50px;
-            font-size: 12px;
+            font-size: 11px;
         }
 
         .status-dot {
@@ -381,12 +419,17 @@
         }
 
         @keyframes pulse-dot {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.3;
+            }
         }
 
         .member-card__info {
-            padding: 16px 18px 18px;
+            padding: 14px 16px 16px;
         }
 
         .member-card__name {
@@ -396,7 +439,7 @@
         }
 
         .member-card__name h3 {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 600;
             color: #FAF8F5;
         }
@@ -404,19 +447,19 @@
         .member-card__name .age {
             color: rgba(255, 255, 255, 0.4);
             font-weight: 400;
-            font-size: 15px;
+            font-size: 14px;
         }
 
         .member-card__location {
             color: rgba(255, 255, 255, 0.3);
-            font-size: 14px;
+            font-size: 13px;
             margin-top: 2px;
         }
 
         .member-card__bio {
             color: rgba(255, 255, 255, 0.5);
-            font-size: 14px;
-            margin-top: 8px;
+            font-size: 13px;
+            margin-top: 6px;
             line-height: 1.5;
             display: -webkit-box;
             -webkit-line-clamp: 2;
@@ -427,15 +470,15 @@
         .member-card__interests {
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 10px;
+            gap: 5px;
+            margin-top: 8px;
         }
 
         .interest-tag {
             padding: 2px 10px;
             background: rgba(255, 255, 255, 0.04);
             border-radius: 50px;
-            font-size: 11px;
+            font-size: 10px;
             color: rgba(255, 255, 255, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.04);
         }
@@ -443,18 +486,18 @@
         .member-card__actions {
             display: flex;
             gap: 8px;
-            margin-top: 14px;
-            padding-top: 14px;
+            margin-top: 12px;
+            padding-top: 12px;
             border-top: 1px solid rgba(255, 255, 255, 0.04);
         }
 
         .member-card__actions button {
             flex: 1;
-            padding: 8px;
+            padding: 7px;
             border: none;
             border-radius: 8px;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: inherit;
@@ -490,9 +533,9 @@
         }
 
         .members-grid.list-view .member-card__image {
-            width: 180px;
+            width: 160px;
             height: auto;
-            min-height: 180px;
+            min-height: 160px;
             flex-shrink: 0;
         }
 
@@ -512,38 +555,40 @@
         /* ---------- EMPTY STATE ---------- */
         .empty-state {
             text-align: center;
-            padding: 80px 20px;
+            padding: 60px 20px;
             color: rgba(255, 255, 255, 0.3);
+            grid-column: 1 / -1;
         }
 
         .empty-state .icon {
-            font-size: 64px;
-            margin-bottom: 16px;
+            font-size: 48px;
+            margin-bottom: 12px;
         }
 
         .empty-state h3 {
-            font-size: 24px;
+            font-size: 20px;
             color: #FAF8F5;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
 
         /* ---------- PAGINATION ---------- */
         .pagination {
             display: flex;
             justify-content: center;
-            gap: 8px;
-            margin-top: 40px;
+            gap: 6px;
+            margin-top: 30px;
         }
 
         .pagination button {
-            padding: 8px 16px;
+            padding: 6px 14px;
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: 8px;
-            color: rgba(255, 255, 255, 0.4);
+            border-radius: 6px;
+            color: rgba(255, 255, 255, 0.3);
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: inherit;
+            font-size: 13px;
         }
 
         .pagination button:hover {
@@ -558,6 +603,18 @@
 
         /* ---------- RESPONSIVE ---------- */
         @media (max-width: 768px) {
+            .cb-shell-header__inner {
+                height: 52px;
+                padding: 0 12px;
+            }
+
+            .cb-shell-brand {
+                font-size: 17px;
+            }
+            .cb-shell-brand .icon {
+                font-size: 24px;
+            }
+
             .members-header {
                 flex-direction: column;
                 align-items: flex-start;
@@ -575,6 +632,7 @@
             .filter-group select,
             .filter-group input {
                 min-width: 100%;
+                width: 100%;
             }
 
             .filter-actions {
@@ -582,7 +640,7 @@
             }
 
             .members-grid {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
             }
 
             .members-grid.list-view .member-card {
@@ -591,18 +649,48 @@
 
             .members-grid.list-view .member-card__image {
                 width: 100%;
-                height: 180px;
+                height: 160px;
             }
 
             .view-toggle button {
-                padding: 6px 12px;
+                padding: 5px 10px;
                 font-size: 12px;
             }
         }
 
         @media (max-width: 480px) {
             .members-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+
+            .member-card__image {
+                height: 150px;
+            }
+
+            .member-card__info {
+                padding: 10px 12px 12px;
+            }
+
+            .member-card__name h3 {
+                font-size: 14px;
+            }
+
+            .member-card__name .age {
+                font-size: 12px;
+            }
+
+            .member-card__location {
+                font-size: 11px;
+            }
+
+            .member-card__bio {
+                font-size: 11px;
+            }
+
+            .member-card__actions button {
+                font-size: 10px;
+                padding: 5px;
             }
         }
     </style>
@@ -614,13 +702,13 @@
     <!-- ============================================================ -->
     <header class="cb-shell-header" role="banner">
         <div class="cb-shell-header__inner">
-            <a class="cb-shell-brand" href="/" aria-label="ClassyDate">
+            <a class="cb-shell-brand" href="index.html" aria-label="ClassyDate">
                 <span class="icon">💎</span>
                 Classy<span>Date</span>
             </a>
 
             <div class="cb-shell-actions">
-                <a href="signup.html" class="cb-shell-button cb-shell-button--secondary">Join</a>
+                <a href="signup.html" class="cb-shell-button cb-shell-button--secondary">Sign Up</a>
                 <a href="login.html" class="cb-shell-button cb-shell-button--primary">Log in</a>
             </div>
         </div>
@@ -634,7 +722,7 @@
         <div class="members-header">
             <div>
                 <h1>Browse <span>Members</span></h1>
-                <span class="member-count">Showing <strong id="total-count">12</strong> members</span>
+                <span class="member-count">Showing <strong id="total-count">0</strong> members</span>
             </div>
             <div class="view-toggle">
                 <button class="active" onclick="setView('grid')" id="grid-view">▦ Grid</button>
@@ -686,6 +774,12 @@
             </div>
         </div>
 
+        <!-- Loading Spinner -->
+        <div class="loading-spinner" id="loading-spinner">
+            <div class="spinner"></div>
+            <span>Loading members...</span>
+        </div>
+
         <!-- Members Grid -->
         <div class="members-grid" id="members-grid">
             <!-- Members will be rendered here by JavaScript -->
@@ -693,253 +787,75 @@
 
         <!-- Pagination -->
         <div class="pagination" id="pagination">
-            <button onclick="changePage('prev')">‹ Prev</button>
-            <button class="active">1</button>
-            <button onclick="changePage('next')">Next ›</button>
+            <!-- Pagination rendered by JavaScript -->
         </div>
     </main>
 
     <!-- ============================================================ -->
-    <!-- SCRIPTS                                                      -->
+    <!-- SUPABASE INTEGRATION                                        -->
     <!-- ============================================================ -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+    </script>
+
     <script>
         // ============================================================
-        // MEMBER DATA (Static for now - will come from admin/backend)
+        // SUPABASE CONFIGURATION
         // ============================================================
-        const membersData = [{
-            id: 1,
-            name: "Sarah Johnson",
-            age: 28,
-            gender: "female",
-            location: "New York, USA",
-            bio: "Love traveling and coffee. Looking for someone who shares my passion for adventure.",
-            photo: "https://randomuser.me/api/portraits/women/44.jpg",
-            verified: true,
-            premium: true,
-            online: true,
-            new: false,
-            joined: "2025-01-15",
-            interests: ["Travel", "Coffee", "Photography"]
-        }, {
-            id: 2,
-            name: "Michael Chen",
-            age: 32,
-            gender: "male",
-            location: "San Francisco, USA",
-            bio: "Tech enthusiast, foodie, and dog lover. Let's explore the world together.",
-            photo: "https://randomuser.me/api/portraits/men/32.jpg",
-            verified: true,
-            premium: false,
-            online: true,
-            new: true,
-            joined: "2026-03-10",
-            interests: ["Tech", "Food", "Dogs"]
-        }, {
-            id: 3,
-            name: "Emily Rodriguez",
-            age: 26,
-            gender: "female",
-            location: "Los Angeles, USA",
-            bio: "Yoga instructor, beach lover, and hopeless romantic. Here for something real.",
-            photo: "https://randomuser.me/api/portraits/women/68.jpg",
-            verified: false,
-            premium: false,
-            online: false,
-            new: false,
-            joined: "2025-11-20",
-            interests: ["Yoga", "Beach", "Music"]
-        }, {
-            id: 4,
-            name: "James Wilson",
-            age: 35,
-            gender: "male",
-            location: "London, UK",
-            bio: "Finance professional who loves hiking and good wine. Looking for my partner in crime.",
-            photo: "https://randomuser.me/api/portraits/men/52.jpg",
-            verified: true,
-            premium: true,
-            online: true,
-            new: false,
-            joined: "2024-08-05",
-            interests: ["Hiking", "Wine", "Travel"]
-        }, {
-            id: 5,
-            name: "Aisha Patel",
-            age: 29,
-            gender: "female",
-            location: "Toronto, Canada",
-            bio: "Healthcare worker, bookworm, and foodie. Looking for someone to share stories with.",
-            photo: "https://randomuser.me/api/portraits/women/90.jpg",
-            verified: true,
-            premium: false,
-            online: false,
-            new: true,
-            joined: "2026-02-14",
-            interests: ["Books", "Food", "Healthcare"]
-        }, {
-            id: 6,
-            name: "David Kim",
-            age: 31,
-            gender: "male",
-            location: "Seoul, South Korea",
-            bio: "Graphic designer who loves photography and K-pop. Let's make beautiful memories.",
-            photo: "https://randomuser.me/api/portraits/men/22.jpg",
-            verified: true,
-            premium: true,
-            online: true,
-            new: false,
-            joined: "2025-05-30",
-            interests: ["Design", "Photography", "K-pop"]
-        }, {
-            id: 7,
-            name: "Maria Santos",
-            age: 27,
-            gender: "female",
-            location: "Manila, Philippines",
-            bio: "Teacher, dancer, and animal lover. Looking for a kind heart and a warm smile.",
-            photo: "https://randomuser.me/api/portraits/women/33.jpg",
-            verified: false,
-            premium: false,
-            online: true,
-            new: false,
-            joined: "2025-09-12",
-            interests: ["Dancing", "Animals", "Teaching"]
-        }, {
-            id: 8,
-            name: "Thomas Brown",
-            age: 40,
-            gender: "male",
-            location: "Sydney, Australia",
-            bio: "Entrepreneur, surfer, and dad. Ready for a new chapter with the right person.",
-            photo: "https://randomuser.me/api/portraits/men/75.jpg",
-            verified: true,
-            premium: true,
-            online: false,
-            new: false,
-            joined: "2024-03-18",
-            interests: ["Surfing", "Business", "Family"]
-        }, {
-            id: 9,
-            name: "Linda Park",
-            age: 24,
-            gender: "female",
-            location: "Busan, South Korea",
-            bio: "Student, artist, and dreamer. Here to find someone who inspires me.",
-            photo: "https://randomuser.me/api/portraits/women/17.jpg",
-            verified: false,
-            premium: false,
-            online: true,
-            new: true,
-            joined: "2026-04-01",
-            interests: ["Art", "Music", "Fashion"]
-        }, {
-            id: 10,
-            name: "Robert Smith",
-            age: 38,
-            gender: "male",
-            location: "Chicago, USA",
-            bio: "Engineer, musician, and outdoor enthusiast. Looking for someone to share the journey.",
-            photo: "https://randomuser.me/api/portraits/men/43.jpg",
-            verified: true,
-            premium: false,
-            online: false,
-            new: false,
-            joined: "2025-07-22",
-            interests: ["Music", "Outdoors", "Engineering"]
-        }, {
-            id: 11,
-            name: "Nina Garcia",
-            age: 30,
-            gender: "female",
-            location: "Madrid, Spain",
-            bio: "Flamenco dancer, chef, and travel blogger. Life is better with good food and good company.",
-            photo: "https://randomuser.me/api/portraits/women/55.jpg",
-            verified: true,
-            premium: true,
-            online: true,
-            new: false,
-            joined: "2024-12-03",
-            interests: ["Dance", "Cooking", "Travel"]
-        }, {
-            id: 12,
-            name: "Alex Johnson",
-            age: 33,
-            gender: "male",
-            location: "Melbourne, Australia",
-            bio: "Writer, runner, and coffee enthusiast. Looking for my muse and adventure partner.",
-            photo: "https://randomuser.me/api/portraits/men/11.jpg",
-            verified: true,
-            premium: false,
-            online: true,
-            new: true,
-            joined: "2026-03-25",
-            interests: ["Writing", "Running", "Coffee"]
-        }];
+
+        const SUPABASE_URL = 'https://soyypmuksvxyjeeemquz.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_vUvF8Ghbb1yB0yQKCCuHiA_wtkRYj1b';
+
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         // ============================================================
         // STATE
         // ============================================================
+        let members = [];
+        let filteredMembers = [];
         let currentView = 'grid';
         let currentPage = 1;
-        const perPage = 6;
-        let filteredMembers = [...membersData];
+        const perPage = 8;
 
         // ============================================================
-        // RENDER FUNCTIONS
+        // FETCH MEMBERS FROM SUPABASE
         // ============================================================
-        function renderMembers(members) {
-            const grid = document.getElementById('members-grid');
 
-            if (members.length === 0) {
-                grid.innerHTML = `
-                    <div class="empty-state" style="grid-column:1/-1;">
-                        <div class="icon">🔍</div>
-                        <h3>No members found</h3>
-                        <p>Try adjusting your filters to see more results.</p>
+        async function fetchMembers() {
+            const spinner = document.getElementById('loading-spinner');
+            spinner.classList.add('active');
+
+            try {
+                const { data, error } = await supabase
+                    .from('members')
+                    .select('*')
+                    .order('id', { ascending: false });
+
+                if (error) throw error;
+
+                members = data || [];
+                filteredMembers = [...members];
+                renderMembers(filteredMembers);
+                updatePagination();
+                document.getElementById('total-count').textContent = members.length;
+
+            } catch (error) {
+                console.error('Error fetching members:', error);
+                document.getElementById('members-grid').innerHTML = `
+                    <div class="empty-state">
+                        <div class="icon">⚠️</div>
+                        <h3>Error loading members</h3>
+                        <p>Please try again later.</p>
                     </div>
                 `;
-                document.getElementById('total-count').textContent = '0';
-                return;
+            } finally {
+                spinner.classList.remove('active');
             }
-
-            document.getElementById('total-count').textContent = members.length;
-
-            grid.innerHTML = members.map(member => `
-                <div class="member-card" data-id="${member.id}">
-                    <div class="member-card__image">
-                        <img src="${member.photo}" alt="${member.name}" loading="lazy">
-                        <div class="member-card__badges">
-                            ${member.verified ? '<span class="badge badge--verified">✓ Verified</span>' : ''}
-                            ${member.premium ? '<span class="badge badge--premium">⭐ Premium</span>' : ''}
-                            ${member.new ? '<span class="badge badge--new">🆕 New</span>' : ''}
-                        </div>
-                        <div class="member-card__status">
-                            <span class="status-dot status-dot--${member.online ? 'online' : 'offline'}"></span>
-                            ${member.online ? 'Online' : 'Offline'}
-                        </div>
-                    </div>
-                    <div class="member-card__info">
-                        <div class="member-card__name">
-                            <h3>${member.name}</h3>
-                            <span class="age">${member.age}</span>
-                        </div>
-                        <div class="member-card__location">📍 ${member.location}</div>
-                        <div class="member-card__bio">${member.bio}</div>
-                        <div class="member-card__interests">
-                            ${member.interests.map(i => `<span class="interest-tag">#${i}</span>`).join('')}
-                        </div>
-                        <div class="member-card__actions">
-                            <button class="btn-view" onclick="viewProfile(${member.id})">👤 View</button>
-                            <button class="btn-message" onclick="sendMessage(${member.id})">💬 Message</button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
         }
 
         // ============================================================
         // VIEW TOGGLE
         // ============================================================
+
         function setView(view) {
             currentView = view;
             const grid = document.getElementById('members-grid');
@@ -954,13 +870,14 @@
         // ============================================================
         // FILTERS
         // ============================================================
+
         function applyFilters() {
             const gender = document.getElementById('filter-gender').value;
             const status = document.getElementById('filter-status').value;
             const maxAge = parseInt(document.getElementById('filter-age').value);
             const verified = document.getElementById('filter-verified').value;
 
-            filteredMembers = membersData.filter(member => {
+            filteredMembers = members.filter(member => {
                 if (gender !== 'all' && member.gender !== gender) return false;
                 if (status !== 'all' && member.online !== (status === 'online')) return false;
                 if (member.age > maxAge) return false;
@@ -971,6 +888,7 @@
             currentPage = 1;
             renderMembers(filteredMembers);
             updatePagination();
+            document.getElementById('total-count').textContent = filteredMembers.length;
         }
 
         function resetFilters() {
@@ -980,10 +898,11 @@
             document.getElementById('age-display').textContent = '50';
             document.getElementById('filter-verified').value = 'all';
 
-            filteredMembers = [...membersData];
+            filteredMembers = [...members];
             currentPage = 1;
             renderMembers(filteredMembers);
             updatePagination();
+            document.getElementById('total-count').textContent = members.length;
         }
 
         // Age range display
@@ -992,40 +911,100 @@
         });
 
         // ============================================================
+        // RENDER MEMBERS
+        // ============================================================
+
+        function renderMembers(membersList) {
+            const grid = document.getElementById('members-grid');
+            const start = (currentPage - 1) * perPage;
+            const pageMembers = membersList.slice(start, start + perPage);
+
+            if (membersList.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state">
+                        <div class="icon">🔍</div>
+                        <h3>No members found</h3>
+                        <p>Try adjusting your filters to see more results.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = pageMembers.map(member => `
+                <div class="member-card" data-id="${member.id}">
+                    <div class="member-card__image">
+                        <img src="${member.photo_url || 'https://randomuser.me/api/portraits/lego/1.jpg'}" alt="${member.name}" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/lego/1.jpg'">
+                        <div class="member-card__badges">
+                            ${member.verified ? '<span class="badge badge--verified">✓ Verified</span>' : ''}
+                            ${member.premium ? '<span class="badge badge--premium">⭐ Premium</span>' : ''}
+                            ${member.is_new ? '<span class="badge badge--new">🆕 New</span>' : ''}
+                        </div>
+                        <div class="member-card__status">
+                            <span class="status-dot status-dot--${member.online ? 'online' : 'offline'}"></span>
+                            ${member.online ? 'Online' : 'Offline'}
+                        </div>
+                    </div>
+                    <div class="member-card__info">
+                        <div class="member-card__name">
+                            <h3>${member.name}</h3>
+                            <span class="age">${member.age}</span>
+                        </div>
+                        <div class="member-card__location">📍 ${member.location || 'Location not set'}</div>
+                        <div class="member-card__bio">${member.bio || 'No bio yet'}</div>
+                        <div class="member-card__interests">
+                            ${member.interests && member.interests.length > 0
+                                ? member.interests.map(i => `<span class="interest-tag">#${i}</span>`).join('')
+                                : '<span class="interest-tag">No interests listed</span>'
+                            }
+                        </div>
+                        <div class="member-card__actions">
+                            <button class="btn-view" onclick="viewProfile(${member.id})">👤 View</button>
+                            <button class="btn-message" onclick="sendMessage(${member.id})">💬 Message</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ============================================================
         // PAGINATION
         // ============================================================
+
         function updatePagination() {
             const total = filteredMembers.length;
-            const pages = Math.ceil(total / perPage);
+            const totalPages = Math.ceil(total / perPage);
             const pagination = document.getElementById('pagination');
 
-            if (pages <= 1) {
+            if (totalPages <= 1) {
                 pagination.innerHTML = '';
                 return;
             }
 
-            let html = `<button onclick="changePage('prev')" ${currentPage === 1 ? 'disabled style="opacity:0.3;cursor:not-allowed;"' : ''}>‹ Prev</button>`;
+            let html = '';
+            html +=
+                `<button onclick="changePage('prev')" ${currentPage === 1 ? 'disabled style="opacity:0.3;cursor:not-allowed;"' : ''}>‹ Prev</button>`;
 
-            for (let i = 1; i <= Math.min(pages, 5); i++) {
+            for (let i = 1; i <= Math.min(totalPages, 5); i++) {
                 html += `<button class="${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
             }
 
-            if (pages > 5) {
-                html += `<span style="color:rgba(255,255,255,0.2);">…</span>`;
-                html += `<button onclick="goToPage(${pages})">${pages}</button>`;
+            if (totalPages > 5) {
+                html += `<span style="color:rgba(255,255,255,0.15);">…</span>`;
+                html += `<button onclick="goToPage(${totalPages})">${totalPages}</button>`;
             }
 
-            html += `<button onclick="changePage('next')" ${currentPage === pages ? 'disabled style="opacity:0.3;cursor:not-allowed;"' : ''}>Next ›</button>`;
+            html +=
+                `<button onclick="changePage('next')" ${currentPage === totalPages ? 'disabled style="opacity:0.3;cursor:not-allowed;"' : ''}>Next ›</button>`;
 
             pagination.innerHTML = html;
         }
 
         function changePage(direction) {
             const total = filteredMembers.length;
-            const pages = Math.ceil(total / perPage);
+            const totalPages = Math.ceil(total / perPage);
 
             if (direction === 'prev' && currentPage > 1) currentPage--;
-            if (direction === 'next' && currentPage < pages) currentPage++;
+            if (direction === 'next' && currentPage < totalPages) currentPage++;
 
             renderMembers(filteredMembers);
             updatePagination();
@@ -1040,24 +1019,47 @@
         // ============================================================
         // ACTIONS
         // ============================================================
+
         function viewProfile(id) {
-            const member = membersData.find(m => m.id === id);
-            alert(`👤 Viewing profile: ${member.name}\n📧 ${member.email || 'No email provided'}\n📍 ${member.location}\n💬 "${member.bio}"`);
+            window.location.href = `profile.html?id=${id}`;
         }
 
         function sendMessage(id) {
-            const member = membersData.find(m => m.id === id);
-            alert(`💬 Start a conversation with ${member.name}!\n\nThis will open the messaging feature.`);
+            const member = members.find(m => m.id === id);
+            if (member) {
+                window.location.href = `subscription.html?member=${member.id}&name=${encodeURIComponent(member.name)}`;
+            } else {
+                window.location.href = 'subscription.html';
+            }
         }
+
+        // ============================================================
+        // CHECK SESSION
+        // ============================================================
+
+        (function checkSession() {
+            const user = localStorage.getItem('classydate_user');
+            if (!user) {
+                // User not logged in, show a message or redirect
+                console.log('👤 Please log in to view members');
+            } else {
+                try {
+                    const userData = JSON.parse(user);
+                    console.log('👤 Logged in as:', userData.name);
+                } catch (e) {}
+            }
+        })();
 
         // ============================================================
         // INIT
         // ============================================================
-        renderMembers(filteredMembers);
-        updatePagination();
 
-        console.log('💎 ClassyDate Members Page loaded!');
-        console.log(`📊 ${membersData.length} members loaded`);
+        // Load members on page load
+        fetchMembers();
+
+        console.log('💎 ClassyDate Members Page with Supabase loaded!');
+        console.log('🔗 Connected to:', SUPABASE_URL);
     </script>
+
 </body>
 </html>
