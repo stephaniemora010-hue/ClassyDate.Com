@@ -588,7 +588,7 @@
             gap: 10px;
         }
 
-        /* ---------- IMAGE UPLOAD ---------- */
+        /* PHOTO UPLOAD */
         .photo-upload-wrapper {
             display: flex;
             flex-direction: column;
@@ -696,7 +696,6 @@
             display: block;
         }
 
-        /* ---------- MODAL ACTIONS ---------- */
         .modal .modal-actions {
             display: flex;
             gap: 8px;
@@ -1056,22 +1055,23 @@
                     <textarea id="form-bio" placeholder="Short bio..."></textarea>
                 </div>
 
-                <!-- PHOTO UPLOAD - NEW VERSION -->
+                <!-- PHOTO UPLOAD -->
                 <div class="form-group">
                     <label>Profile Photo</label>
                     <div class="photo-upload-wrapper">
-                        <div class="photo-upload-area" id="photo-upload-area" onclick="document.getElementById('photo-input').click()">
+                        <div class="photo-upload-area" id="photo-upload-area">
                             <span class="upload-icon">📷</span>
                             <span class="upload-text">Click or drag &amp; drop to upload<br><strong>JPG, PNG, WEBP</strong> (Max 5MB)</span>
-                            <input type="file" id="photo-input" accept="image/*" onchange="handlePhotoSelect(event)">
+                            <input type="file" id="photo-input" accept="image/*">
                         </div>
                         <div class="photo-preview" id="photo-preview">
                             <img id="photo-preview-img" src="" alt="Preview">
-                            <button type="button" class="remove-photo" onclick="removePhoto()">✕</button>
+                            <button type="button" class="remove-photo" id="remove-photo-btn">✕</button>
                         </div>
                         <div class="upload-progress" id="upload-progress">
                             <div class="progress-bar" id="progress-bar"></div>
                         </div>
+                        <input type="hidden" id="form-photo" value="">
                     </div>
                 </div>
 
@@ -1158,6 +1158,8 @@
         const uploadProgress = document.getElementById('upload-progress');
         const progressBar = document.getElementById('progress-bar');
         const uploadArea = document.getElementById('photo-upload-area');
+        const removePhotoBtn = document.getElementById('remove-photo-btn');
+        const formPhoto = document.getElementById('form-photo');
 
         // ============================================================
         // STATE
@@ -1250,7 +1252,7 @@
             photoPreviewImg.src = '';
             uploadArea.style.display = 'block';
             photoInput.value = '';
-            document.getElementById('form-photo').value = '';
+            if (formPhoto) formPhoto.value = '';
         }
 
         function showPhotoPreview(url) {
@@ -1258,7 +1260,7 @@
                 photoPreviewImg.src = url;
                 photoPreview.style.display = 'block';
                 uploadArea.style.display = 'none';
-                document.getElementById('form-photo').value = url;
+                if (formPhoto) formPhoto.value = url;
             }
         }
 
@@ -1276,11 +1278,7 @@
                     .from(STORAGE_BUCKET)
                     .upload(filePath, file, {
                         cacheControl: '3600',
-                        upsert: false,
-                        onUploadProgress: (progress) => {
-                            const percent = (progress.loaded / progress.total) * 100;
-                            progressBar.style.width = `${percent}%`;
-                        }
+                        upsert: false
                     });
 
                 if (error) throw error;
@@ -1309,6 +1307,24 @@
             }
         }
 
+        // ============================================================
+        // EVENT LISTENERS
+        // ============================================================
+        loginBtn.addEventListener('click', loginAdmin);
+        passwordInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') loginAdmin();
+        });
+
+        addBtn.addEventListener('click', openAddModal);
+        logoutBtn.addEventListener('click', logoutAdmin);
+        exportBtn.addEventListener('click', exportData);
+        modalCancel.addEventListener('click', closeModal);
+        modalSave.addEventListener('click', saveMember);
+
+        // Photo upload events
+        photoInput.addEventListener('change', handlePhotoSelect);
+        removePhotoBtn.addEventListener('click', removePhoto);
+
         // Drag and drop support
         uploadArea.addEventListener('dragover', function(e) {
             e.preventDefault();
@@ -1330,19 +1346,10 @@
             }
         });
 
-        // ============================================================
-        // EVENT LISTENERS
-        // ============================================================
-        loginBtn.addEventListener('click', loginAdmin);
-        passwordInput.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') loginAdmin();
+        // Click to upload
+        uploadArea.addEventListener('click', function() {
+            photoInput.click();
         });
-
-        addBtn.addEventListener('click', openAddModal);
-        logoutBtn.addEventListener('click', logoutAdmin);
-        exportBtn.addEventListener('click', exportData);
-        modalCancel.addEventListener('click', closeModal);
-        modalSave.addEventListener('click', saveMember);
 
         modalOverlay.addEventListener('click', function(e) {
             if (e.target === this) closeModal();
@@ -1394,7 +1401,7 @@
                 gender: document.getElementById('form-gender').value,
                 location: document.getElementById('form-location').value.trim(),
                 bio: document.getElementById('form-bio').value.trim(),
-                photo_url: document.getElementById('form-photo').value.trim(),
+                photo_url: formPhoto ? formPhoto.value.trim() : '',
                 verified: document.getElementById('form-verified').value === 'true',
                 premium: document.getElementById('form-premium').value === 'true',
                 interests: document.getElementById('form-interests').value.split(',').map(s => s.trim()).filter(Boolean),
@@ -1452,12 +1459,7 @@
                 }
 
                 // Reset photo state
-                selectedFile = null;
-                uploadedPhotoUrl = '';
-                photoPreview.style.display = 'none';
-                photoPreviewImg.src = '';
-                uploadArea.style.display = 'block';
-                photoInput.value = '';
+                removePhoto();
 
                 closeModal();
                 await fetchMembers();
@@ -1662,7 +1664,6 @@
             // Show existing photo
             if (member.photo_url) {
                 showPhotoPreview(member.photo_url);
-                document.getElementById('form-photo').value = member.photo_url;
             } else {
                 removePhoto();
             }
