@@ -3,20 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-    <title>Admin Dashboard | ClassyDate</title>
-    <meta name="description" content="Admin dashboard for managing ClassyDate members.">
+    <title>Admin | ClassyDate</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
     <style>
         /* ============================================================
-           CLASSYDATE - Admin Dashboard Styles
+           CLASSYDATE - Admin Dashboard (COMPRESSED)
            ============================================================ */
 
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         body {
@@ -32,7 +29,7 @@
             color: inherit;
         }
 
-        /* ---------- HEADER ---------- */
+        /* ---------- HEADER (COMPRESSED) ---------- */
         .cb-shell-header {
             position: fixed;
             top: 0;
@@ -47,8 +44,8 @@
         .cb-shell-header__inner {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 16px;
-            height: 56px;
+            padding: 0 12px;
+            height: 48px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -57,9 +54,9 @@
         .cb-shell-brand {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             font-family: 'Georgia', serif;
-            font-size: 20px;
+            font-size: 17px;
             font-weight: 700;
             color: #FF2D55;
         }
@@ -68,20 +65,20 @@
             font-weight: 300;
         }
         .cb-shell-brand .icon {
-            font-size: 28px;
+            font-size: 22px;
         }
 
         .cb-shell-actions {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
 
         .cb-shell-button {
-            padding: 7px 16px;
+            padding: 5px 14px;
             border-radius: 50px;
-            font-weight: 700;
-            font-size: 13px;
+            font-weight: 600;
+            font-size: 12px;
             transition: all 0.3s ease;
             cursor: pointer;
             border: none;
@@ -103,25 +100,26 @@
             transform: translateY(-2px);
         }
 
-        /* ---------- ADMIN CONTAINER ---------- */
+        /* ---------- ADMIN WRAPPER (COMPRESSED) ---------- */
         .admin-wrapper {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 80px 20px 40px;
+            padding: 65px 16px 30px;
         }
 
+        /* ---------- HEADER SECTION (COMPRESSED) ---------- */
         .admin-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 24px;
+            gap: 8px;
+            margin-bottom: 16px;
         }
 
         .admin-header h1 {
             font-family: 'Georgia', serif;
-            font-size: 28px;
+            font-size: 22px;
             color: #FAF8F5;
         }
         .admin-header h1 span {
@@ -131,20 +129,20 @@
         .admin-header .badge-admin {
             background: rgba(255, 45, 85, 0.12);
             color: #FF2D55;
-            padding: 4px 14px;
+            padding: 2px 12px;
             border-radius: 50px;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
         }
 
         .admin-header .btn-logout {
-            padding: 7px 20px;
+            padding: 5px 16px;
             background: rgba(255, 45, 85, 0.08);
             color: #FF2D55;
             border: 1px solid rgba(255, 45, 85, 0.08);
             border-radius: 50px;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: inherit;
@@ -154,18 +152,24 @@
             background: rgba(255, 45, 85, 0.15);
         }
 
-        /* ---------- STATS GRID ---------- */
+        .admin-header-right {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        /* ---------- STATS GRID (COMPRESSED) ---------- */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin-bottom: 24px;
+            gap: 10px;
+            margin-bottom: 16px;
         }
 
         .stat-card-admin {
             background: rgba(255, 255, 255, 0.02);
-            border-radius: 14px;
-            padding: 18px 20px;
+            border-radius: 10px;
+            padding: 12px 14px;
             border: 1px solid rgba(255, 255, 255, 0.04);
             transition: all 0.3s ease;
         }
@@ -175,53 +179,53 @@
         }
 
         .stat-card-admin .stat-number {
-            font-size: 28px;
+            font-size: 22px;
             font-weight: 700;
             color: #FF2D55;
             font-family: 'Georgia', serif;
         }
 
         .stat-card-admin .stat-label {
-            font-size: 12px;
+            font-size: 10px;
             color: rgba(255, 255, 255, 0.3);
-            margin-top: 2px;
+            margin-top: 1px;
         }
 
         .stat-card-admin .stat-icon {
-            font-size: 20px;
+            font-size: 16px;
             float: right;
             opacity: 0.3;
         }
 
-        /* ---------- TOOLBAR ---------- */
+        /* ---------- TOOLBAR (COMPRESSED) ---------- */
         .admin-toolbar {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            padding: 14px 18px;
+            margin-bottom: 14px;
+            padding: 10px 14px;
             background: rgba(255, 255, 255, 0.02);
-            border-radius: 14px;
+            border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.04);
         }
 
         .admin-toolbar-left {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
             align-items: center;
         }
 
         .admin-toolbar-left input,
         .admin-toolbar-left select {
-            padding: 8px 14px;
+            padding: 6px 12px;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 8px;
+            border-radius: 6px;
             color: #FAF8F5;
-            font-size: 13px;
+            font-size: 12px;
             font-family: inherit;
             outline: none;
         }
@@ -242,21 +246,21 @@
 
         .admin-toolbar-right {
             display: flex;
-            gap: 8px;
+            gap: 6px;
         }
 
         .btn-admin {
-            padding: 8px 18px;
+            padding: 6px 14px;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: inherit;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
         }
 
         .btn-admin--add {
@@ -265,7 +269,7 @@
         }
         .btn-admin--add:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(255, 45, 85, 0.3);
+            box-shadow: 0 4px 20px rgba(255, 45, 85, 0.3);
         }
 
         .btn-admin--export {
@@ -281,8 +285,8 @@
             background: rgba(255, 215, 0, 0.08);
             color: #FFD700;
             border: 1px solid rgba(255, 215, 0, 0.08);
-            padding: 4px 10px;
-            font-size: 11px;
+            padding: 3px 8px;
+            font-size: 10px;
         }
         .btn-admin--edit:hover {
             background: rgba(255, 215, 0, 0.15);
@@ -292,17 +296,17 @@
             background: rgba(255, 45, 85, 0.08);
             color: #FF2D55;
             border: 1px solid rgba(255, 45, 85, 0.08);
-            padding: 4px 10px;
-            font-size: 11px;
+            padding: 3px 8px;
+            font-size: 10px;
         }
         .btn-admin--delete:hover {
             background: rgba(255, 45, 85, 0.2);
         }
 
-        /* ---------- TABLE ---------- */
+        /* ---------- TABLE (COMPRESSED) ---------- */
         .admin-table-wrapper {
             background: rgba(255, 255, 255, 0.02);
-            border-radius: 14px;
+            border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.04);
             overflow: hidden;
         }
@@ -310,12 +314,13 @@
         .admin-table {
             width: 100%;
             border-collapse: collapse;
+            font-size: 12px;
         }
 
         .admin-table th {
-            padding: 12px 14px;
+            padding: 8px 10px;
             text-align: left;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -325,9 +330,8 @@
         }
 
         .admin-table td {
-            padding: 10px 14px;
+            padding: 6px 10px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.02);
-            font-size: 13px;
             color: rgba(255, 255, 255, 0.7);
             vertical-align: middle;
         }
@@ -339,12 +343,12 @@
         .admin-table .member-cell {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .admin-table .member-cell img {
-            width: 36px;
-            height: 36px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             object-fit: cover;
             background: #1A1A2E;
@@ -353,18 +357,18 @@
         .admin-table .member-cell .name {
             color: #FAF8F5;
             font-weight: 500;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .admin-table .member-cell .email {
-            font-size: 11px;
+            font-size: 10px;
             color: rgba(255, 255, 255, 0.2);
         }
 
         .badge-small {
-            padding: 2px 10px;
+            padding: 1px 8px;
             border-radius: 50px;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 600;
         }
 
@@ -385,37 +389,37 @@
 
         .actions-cell {
             display: flex;
-            gap: 4px;
+            gap: 3px;
         }
 
         .empty-state {
             text-align: center;
-            padding: 40px 20px;
+            padding: 30px 20px;
             color: rgba(255, 255, 255, 0.3);
         }
 
         .empty-state .icon {
-            font-size: 40px;
-            margin-bottom: 10px;
+            font-size: 32px;
+            margin-bottom: 8px;
         }
 
         .empty-state h3 {
             color: #FAF8F5;
-            font-size: 18px;
-            margin-bottom: 4px;
+            font-size: 16px;
+            margin-bottom: 2px;
         }
 
-        /* ---------- MODAL ---------- */
+        /* ---------- MODAL (COMPRESSED) ---------- */
         .modal-overlay {
             display: none;
             position: fixed;
             inset: 0;
             background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(6px);
             z-index: 1000;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 16px;
         }
 
         .modal-overlay.active {
@@ -424,10 +428,10 @@
 
         .modal {
             background: #1A1A2E;
-            border-radius: 20px;
-            max-width: 520px;
+            border-radius: 14px;
+            max-width: 480px;
             width: 100%;
-            padding: 32px 28px 28px;
+            padding: 24px 24px 20px;
             border: 1px solid rgba(255, 255, 255, 0.06);
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
             max-height: 90vh;
@@ -436,39 +440,39 @@
 
         .modal h2 {
             font-family: 'Georgia', serif;
-            font-size: 22px;
+            font-size: 20px;
             color: #FAF8F5;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
         .modal .modal-subtitle {
             color: rgba(255, 255, 255, 0.3);
-            font-size: 14px;
-            margin-bottom: 20px;
+            font-size: 12px;
+            margin-bottom: 14px;
         }
 
         .modal .form-group {
-            margin-bottom: 14px;
+            margin-bottom: 10px;
         }
 
         .modal .form-group label {
             display: block;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
             color: rgba(255, 255, 255, 0.5);
-            margin-bottom: 3px;
+            margin-bottom: 2px;
         }
 
         .modal .form-group input,
         .modal .form-group select,
         .modal .form-group textarea {
             width: 100%;
-            padding: 10px 14px;
+            padding: 8px 12px;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 8px;
+            border-radius: 6px;
             color: #FAF8F5;
-            font-size: 14px;
+            font-size: 13px;
             font-family: inherit;
             outline: none;
             transition: all 0.3s ease;
@@ -483,28 +487,28 @@
 
         .modal .form-group textarea {
             resize: vertical;
-            min-height: 60px;
+            min-height: 50px;
         }
 
         .modal .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 10px;
         }
 
         .modal .modal-actions {
             display: flex;
-            gap: 10px;
-            margin-top: 20px;
+            gap: 8px;
+            margin-top: 14px;
         }
 
         .modal .modal-actions button {
             flex: 1;
-            padding: 10px;
+            padding: 8px;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: inherit;
@@ -516,7 +520,7 @@
         }
         .modal .btn-modal-save:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(255, 45, 85, 0.3);
+            box-shadow: 0 4px 20px rgba(255, 45, 85, 0.3);
         }
 
         .modal .btn-modal-cancel {
@@ -531,19 +535,19 @@
         /* ---------- TOAST ---------- */
         .toast {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            padding: 14px 24px;
-            border-radius: 12px;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 18px;
+            border-radius: 10px;
             background: #1A1A2E;
             border: 1px solid rgba(255, 255, 255, 0.06);
             box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
             z-index: 2000;
-            font-size: 14px;
-            transform: translateY(100px);
+            font-size: 13px;
+            transform: translateY(80px);
             opacity: 0;
             transition: all 0.4s ease;
-            max-width: 400px;
+            max-width: 350px;
         }
 
         .toast.show {
@@ -558,28 +562,28 @@
             border-color: rgba(255, 45, 85, 0.2);
         }
         .toast .toast-icon {
-            margin-right: 8px;
+            margin-right: 6px;
         }
 
         /* ---------- PAGINATION ---------- */
         .admin-pagination {
             display: flex;
             justify-content: center;
-            gap: 6px;
-            padding: 16px;
+            gap: 4px;
+            padding: 10px;
             border-top: 1px solid rgba(255, 255, 255, 0.04);
         }
 
         .admin-pagination button {
-            padding: 5px 12px;
+            padding: 4px 10px;
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: 6px;
+            border-radius: 4px;
             color: rgba(255, 255, 255, 0.3);
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: inherit;
-            font-size: 13px;
+            font-size: 12px;
         }
 
         .admin-pagination button:hover {
@@ -591,11 +595,11 @@
             border-color: rgba(255, 45, 85, 0.15);
         }
 
-        /* ---------- LOADING SPINNER ---------- */
+        /* ---------- LOADING ---------- */
         .loading-spinner {
             display: none;
             text-align: center;
-            padding: 30px;
+            padding: 20px;
             color: rgba(255, 255, 255, 0.3);
         }
 
@@ -604,13 +608,13 @@
         }
 
         .loading-spinner .spinner {
-            width: 36px;
-            height: 36px;
+            width: 28px;
+            height: 28px;
             border: 3px solid rgba(255, 45, 85, 0.1);
             border-top: 3px solid #FF2D55;
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin: 0 auto 10px;
+            margin: 0 auto 8px;
         }
 
         @keyframes spin {
@@ -631,14 +635,14 @@
 
         @media (max-width: 768px) {
             .cb-shell-header__inner {
-                height: 52px;
-                padding: 0 12px;
+                height: 44px;
+                padding: 0 10px;
             }
             .cb-shell-brand {
-                font-size: 17px;
+                font-size: 15px;
             }
             .cb-shell-brand .icon {
-                font-size: 24px;
+                font-size: 20px;
             }
 
             .admin-header {
@@ -677,6 +681,31 @@
             .modal .form-row {
                 grid-template-columns: 1fr;
             }
+
+            .admin-wrapper {
+                padding: 58px 10px 20px;
+            }
+
+            .admin-table {
+                font-size: 11px;
+            }
+            .admin-table th,
+            .admin-table td {
+                padding: 5px 8px;
+            }
+            .admin-table .member-cell img {
+                width: 24px;
+                height: 24px;
+            }
+            .admin-table .member-cell .name {
+                font-size: 12px;
+            }
+
+            .modal {
+                padding: 18px 16px 16px;
+                max-width: 100%;
+                margin: 10px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -686,16 +715,35 @@
 
             .actions-cell {
                 flex-direction: column;
-                gap: 3px;
+                gap: 2px;
             }
 
             .actions-cell .btn-admin {
                 width: 100%;
                 justify-content: center;
+                font-size: 10px;
+                padding: 3px 8px;
             }
 
             .modal .modal-actions {
                 flex-direction: column;
+            }
+
+            .admin-header h1 {
+                font-size: 18px;
+            }
+
+            .admin-table {
+                font-size: 10px;
+            }
+            .admin-table th,
+            .admin-table td {
+                padding: 4px 6px;
+            }
+
+            .badge-small {
+                font-size: 8px;
+                padding: 1px 6px;
             }
         }
     </style>
@@ -730,8 +778,8 @@
                 <h1>Admin <span>Dashboard</span></h1>
                 <span class="badge-admin">🔒 Admin Access</span>
             </div>
-            <div style="display:flex;gap:10px;align-items:center;">
-                <button class="btn-admin btn-admin--add" onclick="openAddModal()">➕ Add Member</button>
+            <div class="admin-header-right">
+                <button class="btn-admin btn-admin--add" onclick="openAddModal()">➕ Add</button>
                 <button class="btn-logout" onclick="logoutAdmin()">🚪 Logout</button>
             </div>
         </div>
@@ -763,7 +811,7 @@
         <!-- Toolbar -->
         <div class="admin-toolbar">
             <div class="admin-toolbar-left">
-                <input type="text" id="search-input" placeholder="🔍 Search members..." oninput="applyFilters()">
+                <input type="text" id="search-input" placeholder="🔍 Search..." oninput="applyFilters()">
                 <select id="filter-status" onchange="applyFilters()">
                     <option value="all">All Status</option>
                     <option value="online">Online</option>
@@ -783,7 +831,7 @@
         <!-- Loading Spinner -->
         <div class="loading-spinner" id="loading-spinner">
             <div class="spinner"></div>
-            <span>Loading members...</span>
+            <span>Loading...</span>
         </div>
 
         <!-- Members Table -->
@@ -803,9 +851,7 @@
                     <!-- Rows rendered by JavaScript -->
                 </tbody>
             </table>
-            <div class="admin-pagination" id="admin-pagination">
-                <!-- Pagination rendered by JavaScript -->
-            </div>
+            <div class="admin-pagination" id="admin-pagination"></div>
         </div>
     </main>
 
@@ -814,8 +860,8 @@
     <!-- ============================================================ -->
     <div class="modal-overlay" id="modal-overlay">
         <div class="modal">
-            <h2 id="modal-title">Add New Member</h2>
-            <p class="modal-subtitle" id="modal-subtitle">Fill in the details to add a new member.</p>
+            <h2 id="modal-title">Add Member</h2>
+            <p class="modal-subtitle" id="modal-subtitle">Fill in the details below.</p>
 
             <form id="member-form" onsubmit="saveMember(event)">
                 <input type="hidden" id="edit-id" value="">
@@ -826,7 +872,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="form-email">Email Address *</label>
+                    <label for="form-email">Email *</label>
                     <input type="email" id="form-email" placeholder="john@example.com" required>
                 </div>
 
@@ -838,7 +884,7 @@
                     <div class="form-group">
                         <label for="form-gender">Gender *</label>
                         <select id="form-gender" required>
-                            <option value="">Select...</option>
+                            <option value="">Select</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                         </select>
@@ -852,7 +898,7 @@
 
                 <div class="form-group">
                     <label for="form-bio">Bio</label>
-                    <textarea id="form-bio" placeholder="Write a short bio about this member..."></textarea>
+                    <textarea id="form-bio" placeholder="Short bio..."></textarea>
                 </div>
 
                 <div class="form-group">
@@ -884,18 +930,18 @@
 
                 <div class="modal-actions">
                     <button type="button" class="btn-modal-cancel" onclick="closeModal()">Cancel</button>
-                    <button type="submit" class="btn-modal-save" id="modal-save-btn">💾 Save Member</button>
+                    <button type="submit" class="btn-modal-save" id="modal-save-btn">💾 Save</button>
                 </div>
             </form>
         </div>
     </div>
 
     <!-- ============================================================ -->
-    <!-- TOAST NOTIFICATION                                          -->
+    <!-- TOAST                                                       -->
     <!-- ============================================================ -->
     <div class="toast" id="toast">
         <span class="toast-icon" id="toast-icon">✅</span>
-        <span id="toast-message">Member saved successfully!</span>
+        <span id="toast-message">Saved!</span>
     </div>
 
     <!-- ============================================================ -->
@@ -908,8 +954,6 @@
         // ============================================================
         // CHECK ADMIN SESSION
         // ============================================================
-
-        // Redirect to login if not authenticated
         (function checkSession() {
             const session = localStorage.getItem('admin_session');
             if (session !== 'true') {
@@ -921,10 +965,8 @@
         // ============================================================
         // SUPABASE CONFIGURATION
         // ============================================================
-
         const SUPABASE_URL = 'https://soyypmuksvxyjeeemquz.supabase.co';
         const SUPABASE_ANON_KEY = 'sb_publishable_vUvF8Ghbb1yB0yQKCCuHiA_wtkRYj1b';
-
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         // ============================================================
@@ -934,12 +976,10 @@
         let filteredMembers = [];
         let currentPage = 1;
         const perPage = 5;
-        let editingId = null;
 
         // ============================================================
-        // FETCH MEMBERS FROM SUPABASE
+        // FETCH MEMBERS
         // ============================================================
-
         async function fetchMembers() {
             const spinner = document.getElementById('loading-spinner');
             spinner.classList.add('active');
@@ -958,8 +998,8 @@
                 renderTable();
                 renderPagination();
             } catch (error) {
-                console.error('Error fetching members:', error);
-                showToast('⚠️ Error loading members: ' + error.message, 'error');
+                console.error('Error:', error);
+                showToast('⚠️ Error loading members', 'error');
             } finally {
                 spinner.classList.remove('active');
             }
@@ -968,7 +1008,6 @@
         // ============================================================
         // CRUD OPERATIONS
         // ============================================================
-
         async function saveMember(event) {
             event.preventDefault();
 
@@ -988,19 +1027,15 @@
                 joined: new Date().toISOString().split('T')[0]
             };
 
-            // Validation
             if (!formData.name || !formData.email || !formData.age || !formData.gender) {
-                showToast('⚠️ Please fill in all required fields.', 'error');
+                showToast('⚠️ Fill in all required fields', 'error');
                 return;
             }
 
             const editId = document.getElementById('edit-id').value;
 
             try {
-                let result;
-
                 if (editId) {
-                    // Update existing member
                     const { data, error } = await supabase
                         .from('members')
                         .update({
@@ -1020,28 +1055,22 @@
                         .select();
 
                     if (error) throw error;
-                    result = data;
-                    showToast(`✅ ${formData.name} updated successfully!`, 'success');
+                    showToast(`✅ ${formData.name} updated!`, 'success');
                 } else {
-                    // Add new member
                     const { data, error } = await supabase
                         .from('members')
                         .insert([formData])
                         .select();
 
                     if (error) throw error;
-                    result = data;
-                    showToast(`✅ ${formData.name} added successfully!`, 'success');
+                    showToast(`✅ ${formData.name} added!`, 'success');
                 }
 
                 closeModal();
                 await fetchMembers();
-                return result;
-
             } catch (error) {
-                console.error('Error saving member:', error);
+                console.error('Error:', error);
                 showToast('⚠️ Error: ' + error.message, 'error');
-                return null;
             }
         }
 
@@ -1049,7 +1078,7 @@
             const member = members.find(m => m.id === id);
             if (!member) return;
 
-            if (!confirm(`Are you sure you want to delete ${member.name}? This action cannot be undone.`)) return;
+            if (!confirm(`Delete ${member.name}?`)) return;
 
             try {
                 const { error } = await supabase
@@ -1059,18 +1088,17 @@
 
                 if (error) throw error;
 
-                showToast(`🗑️ ${member.name} was deleted.`, 'success');
+                showToast(`🗑️ ${member.name} deleted`, 'success');
                 await fetchMembers();
             } catch (error) {
-                console.error('Error deleting member:', error);
-                showToast('⚠️ Error deleting member: ' + error.message, 'error');
+                console.error('Error:', error);
+                showToast('⚠️ Error deleting member', 'error');
             }
         }
 
         // ============================================================
         // STATS
         // ============================================================
-
         function updateStats() {
             const total = members.length;
             const online = members.filter(m => m.online).length;
@@ -1093,7 +1121,6 @@
         // ============================================================
         // FILTERS
         // ============================================================
-
         function applyFilters() {
             const search = document.getElementById('search-input').value.toLowerCase().trim();
             const statusFilter = document.getElementById('filter-status').value;
@@ -1120,7 +1147,6 @@
         // ============================================================
         // RENDER TABLE
         // ============================================================
-
         function renderTable() {
             const tbody = document.getElementById('admin-table-body');
             const start = (currentPage - 1) * perPage;
@@ -1128,59 +1154,58 @@
 
             if (pageMembers.length === 0) {
                 tbody.innerHTML = `
-                            <tr>
-                                <td colspan="6">
-                                    <div class="empty-state">
-                                        <div class="icon">👤</div>
-                                        <h3>No members found</h3>
-                                        <p>Try adjusting your filters or add a new member.</p>
-                                    </div>
-                                </td>
-                            </tr>
-                        `;
+                    <tr>
+                        <td colspan="6">
+                            <div class="empty-state">
+                                <div class="icon">👤</div>
+                                <h3>No members</h3>
+                                <p>Add a new member to get started.</p>
+                            </div>
+                        </td>
+                    </tr>
+                `;
                 return;
             }
 
             tbody.innerHTML = pageMembers.map(m => `
-                        <tr>
-                            <td>
-                                <div class="member-cell">
-                                    <img src="${m.photo_url || 'https://randomuser.me/api/portraits/lego/1.jpg'}" alt="${m.name}" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/lego/1.jpg'">
-                                    <div>
-                                        <div class="name">${m.name}</div>
-                                        <div class="email">${m.email || 'No email'}</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>${m.gender === 'male' ? '👨 Male' : '👩 Female'}</td>
-                            <td>${m.location || '—'}</td>
-                            <td>
-                                <span style="display:flex;align-items:center;gap:6px;">
-                                    <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${m.online ? '#00C851' : 'rgba(255,255,255,0.2)'};"></span>
-                                    ${m.online ? 'Online' : 'Offline'}
-                                </span>
-                            </td>
-                            <td>
-                                ${m.verified
-                                    ? '<span class="badge-small badge-small--verified">✅ Verified</span>'
-                                    : '<span class="badge-small badge-small--pending">⏳ Pending</span>'
-                                }
-                                ${m.premium ? '<span class="badge-small badge-small--premium">⭐ Premium</span>' : ''}
-                            </td>
-                            <td>
-                                <div class="actions-cell">
-                                    <button class="btn-admin btn-admin--edit" onclick="openEditModal(${m.id})">✏️ Edit</button>
-                                    <button class="btn-admin btn-admin--delete" onclick="deleteMember(${m.id})">🗑️ Delete</button>
-                                </div>
-                            </td>
-                        </tr>
-                    `).join('');
+                <tr>
+                    <td>
+                        <div class="member-cell">
+                            <img src="${m.photo_url || 'https://randomuser.me/api/portraits/lego/1.jpg'}" alt="${m.name}" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/lego/1.jpg'">
+                            <div>
+                                <div class="name">${m.name}</div>
+                                <div class="email">${m.email || 'No email'}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>${m.gender === 'male' ? '👨 Male' : '👩 Female'}</td>
+                    <td>${m.location || '—'}</td>
+                    <td>
+                        <span style="display:flex;align-items:center;gap:4px;">
+                            <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:${m.online ? '#00C851' : 'rgba(255,255,255,0.2)'};"></span>
+                            ${m.online ? 'Online' : 'Offline'}
+                        </span>
+                    </td>
+                    <td>
+                        ${m.verified
+                            ? '<span class="badge-small badge-small--verified">✓ Verified</span>'
+                            : '<span class="badge-small badge-small--pending">⏳ Pending</span>'
+                        }
+                        ${m.premium ? '<span class="badge-small badge-small--premium">⭐ Premium</span>' : ''}
+                    </td>
+                    <td>
+                        <div class="actions-cell">
+                            <button class="btn-admin btn-admin--edit" onclick="openEditModal(${m.id})">✏️</button>
+                            <button class="btn-admin btn-admin--delete" onclick="deleteMember(${m.id})">🗑️</button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
         }
 
         // ============================================================
         // PAGINATION
         // ============================================================
-
         function renderPagination() {
             const container = document.getElementById('admin-pagination');
             const totalPages = Math.ceil(filteredMembers.length / perPage);
@@ -1191,8 +1216,7 @@
             }
 
             let html = '';
-            html +=
-                `<button onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled style="opacity:0.3;cursor:not-allowed;"' : ''}>‹</button>`;
+            html += `<button onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled style="opacity:0.3;cursor:not-allowed;"' : ''}>‹</button>`;
 
             for (let i = 1; i <= Math.min(totalPages, 5); i++) {
                 html += `<button class="${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
@@ -1203,9 +1227,7 @@
                 html += `<button onclick="goToPage(${totalPages})">${totalPages}</button>`;
             }
 
-            html +=
-                `<button onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled style="opacity:0.3;cursor:not-allowed;"' : ''}>›</button>`;
-
+            html += `<button onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled style="opacity:0.3;cursor:not-allowed;"' : ''}>›</button>`;
             container.innerHTML = html;
         }
 
@@ -1220,12 +1242,10 @@
         // ============================================================
         // MODAL
         // ============================================================
-
         function openAddModal() {
-            editingId = null;
-            document.getElementById('modal-title').textContent = 'Add New Member';
-            document.getElementById('modal-subtitle').textContent = 'Fill in the details to add a new member.';
-            document.getElementById('modal-save-btn').textContent = '💾 Save Member';
+            document.getElementById('modal-title').textContent = 'Add Member';
+            document.getElementById('modal-subtitle').textContent = 'Fill in the details below.';
+            document.getElementById('modal-save-btn').textContent = '💾 Save';
             document.getElementById('member-form').reset();
             document.getElementById('edit-id').value = '';
             document.getElementById('modal-overlay').classList.add('active');
@@ -1235,10 +1255,9 @@
             const member = members.find(m => m.id === id);
             if (!member) return;
 
-            editingId = id;
             document.getElementById('modal-title').textContent = 'Edit Member';
-            document.getElementById('modal-subtitle').textContent = 'Update the member details below.';
-            document.getElementById('modal-save-btn').textContent = '💾 Update Member';
+            document.getElementById('modal-subtitle').textContent = 'Update the details below.';
+            document.getElementById('modal-save-btn').textContent = '💾 Update';
 
             document.getElementById('edit-id').value = id;
             document.getElementById('form-name').value = member.name || '';
@@ -1259,7 +1278,6 @@
             document.getElementById('modal-overlay').classList.remove('active');
         }
 
-        // Close modal on overlay click
         document.getElementById('modal-overlay').addEventListener('click', function(e) {
             if (e.target === this) closeModal();
         });
@@ -1267,7 +1285,6 @@
         // ============================================================
         // LOGOUT
         // ============================================================
-
         function logoutAdmin() {
             localStorage.removeItem('admin_session');
             window.location.href = 'admin-login.html';
@@ -1276,23 +1293,21 @@
         // ============================================================
         // EXPORT
         // ============================================================
-
         function exportData() {
             const dataStr = JSON.stringify(members, null, 2);
             const blob = new Blob([dataStr], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `classydate_members_${new Date().toISOString().slice(0, 10)}.json`;
+            a.download = `members_${new Date().toISOString().slice(0, 10)}.json`;
             a.click();
             URL.revokeObjectURL(url);
-            showToast('📥 Members exported successfully!', 'success');
+            showToast('📥 Exported!', 'success');
         }
 
         // ============================================================
         // TOAST
         // ============================================================
-
         let toastTimeout;
 
         function showToast(message, type = 'success') {
@@ -1308,25 +1323,19 @@
             clearTimeout(toastTimeout);
             toastTimeout = setTimeout(() => {
                 toast.classList.remove('show');
-            }, 3500);
+            }, 3000);
         }
 
         // ============================================================
-        // AUTO-REFRESH FILTERS ON INPUT
+        // AUTO FILTER
         // ============================================================
-
         document.getElementById('search-input').addEventListener('input', applyFilters);
 
         // ============================================================
         // INIT
         // ============================================================
-
-        // Load members
         fetchMembers();
-
-        console.log('💎 ClassyDate Admin Dashboard loaded!');
-        console.log('🔗 Connected to:', SUPABASE_URL);
+        console.log('💎 Admin Dashboard loaded');
     </script>
-
 </body>
 </html>
