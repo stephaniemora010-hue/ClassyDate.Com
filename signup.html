@@ -539,7 +539,7 @@
                 <!-- Email -->
                 <div class="form-group">
                     <label for="email">Email Address <span class="required">*</span></label>
-                    <input type="email" id="email" placeholder="you@example.com" required>
+                    <input type="email" id="email" placeholder="you@example.com" autocomplete="email" required>
                 </div>
 
                 <!-- Password -->
@@ -737,7 +737,7 @@
         }
 
         // ============================================================
-        // SIGNUP HANDLER
+        // SIGNUP HANDLER - Using Supabase Auth
         // ============================================================
 
         async function handleSignup(event) {
@@ -803,64 +803,62 @@
             signupBtn.disabled = true;
 
             try {
-                // 1. Check if email already exists
-                const { data: existing, error: checkError } = await supabase
-                    .from('members')
-                    .select('email')
-                    .eq('email', email);
-
-                if (checkError) {
-                    console.error('Check Error:', checkError);
-                    throw checkError;
-                }
-
-                if (existing && existing.length > 0) {
-                    errorMessage.textContent = '⚠️ An account with this email already exists. Please log in.';
-                    errorMessage.classList.add('show');
-                    signupBtn.textContent = 'Sign Up';
-                    signupBtn.disabled = false;
-                    return false;
-                }
-
-                // 2. Calculate age from DOB
+                // Calculate age from DOB
                 const age = new Date().getFullYear() - parseInt(year);
 
-                // 3. Prepare member data
-                const memberData = {
-                    name: fullname,
+                // 1. Create user with Supabase Auth
+                const { data, error } = await supabase.auth.signUp({
                     email: email,
-                    age: age,
-                    gender: gender.value,
-                    location: location || '',
-                    bio: '',
-                    photo_urls: '[]',
-                    verified: false,
-                    premium: false,
-                    online: false,
-                    is_new: true,
-                    joined: new Date().toISOString().split('T')[0],
-                    interests: []
-                };
-
-                console.log('📝 Creating member:', memberData);
-
-                // 4. Insert into Supabase
-                const { data, error } = await supabase
-                    .from('members')
-                    .insert([memberData])
-                    .select();
+                    password: password,
+                    options: {
+                        data: {
+                            full_name: fullname,
+                            age: age,
+                            gender: gender.value,
+                            location: location || ''
+                        }
+                    }
+                });
 
                 if (error) {
-                    console.error('Supabase Insert Error:', error);
+                    console.error('Auth Signup Error:', error);
                     throw error;
                 }
 
-                if (!data || data.length === 0) {
-                    throw new Error('No data returned from insert');
+                if (!data || !data.user) {
+                    throw new Error('No user data returned');
                 }
 
                 console.log('✅ Account created for:', email);
-                console.log('👤 Member ID:', data[0].id);
+                console.log('👤 User ID:', data.user.id);
+
+                // 2. Also insert into members table for additional data
+                try {
+                    const { error: insertError } = await supabase
+                        .from('members')
+                        .insert({
+                            id: data.user.id,
+                            name: fullname,
+                            email: email,
+                            age: age,
+                            gender: gender.value,
+                            location: location || '',
+                            bio: '',
+                            photo_urls: '[]',
+                            verified: false,
+                            premium: false,
+                            online: false,
+                            is_new: true,
+                            joined: new Date().toISOString().split('T')[0],
+                            interests: []
+                        });
+
+                    if (insertError) {
+                        console.warn('Could not insert into members table:', insertError);
+                    }
+                } catch (insertErr) {
+                    console.warn('Members table insert skipped:', insertErr);
+                }
 
                 // Show success
                 successMessage.textContent = '✅ Account created successfully! Redirecting...';
@@ -871,9 +869,9 @@
 
                 // Store user info in localStorage
                 localStorage.setItem('classydate_user', JSON.stringify({
-                    id: data[0].id,
-                    name: data[0].name,
-                    email: data[0].email,
+                    id: data.user.id,
+                    email: data.user.email,
+                    name: fullname,
                     loggedIn: true
                 }));
 
@@ -886,7 +884,7 @@
 
             } catch (error) {
                 console.error('Signup error:', error);
-                errorMessage.textContent = '⚠️ Error: ' + error.message;
+                errorMessage.textContent = '⚠️ ' + error.message;
                 errorMessage.classList.add('show');
                 signupBtn.textContent = 'Sign Up';
                 signupBtn.disabled = false;
@@ -909,19 +907,20 @@
         // CHECK IF ALREADY LOGGED IN
         // ============================================================
 
-        (function checkSession() {
-            const user = localStorage.getItem('classydate_user');
-            if (user) {
-                try {
-                    const userData = JSON.parse(user);
-                    if (userData.loggedIn) {
-                        console.log('👤 Already logged in as:', userData.name);
-                    }
-                } catch (e) {}
+        (async function checkSession() {
+            try {
+                const { data, error } = await supabase.auth.getSession();
+                if (data && data.session) {
+                    console.log('👤 Already logged in as:', data.session.user.email);
+                    // Uncomment to auto-redirect:
+                    // window.location.href = 'members.html';
+                }
+            } catch (e) {
+                console.log('No active session');
             }
         })();
 
-        console.log('💎 ClassyDate Sign Up Page with Supabase loaded!');
+        console.log('💎 ClassyDate Sign Up Page with Supabase Auth loaded!');
         console.log('🔗 Connected to:', SUPABASE_URL);
     </script>
 
