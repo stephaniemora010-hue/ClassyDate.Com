@@ -8,9 +8,8 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
     <style>
         /* ============================================================
-           CLASSYDATE - Admin Page
+           CLASSYDATE - Admin Page Styles
            ============================================================ */
-
         *,
         *::before,
         *::after {
@@ -32,7 +31,7 @@
             color: inherit;
         }
 
-        /* ---------- HEADER ---------- */
+        /* Header */
         .cb-shell-header {
             position: fixed;
             top: 0;
@@ -103,7 +102,7 @@
             transform: translateY(-2px);
         }
 
-        /* ---------- ADMIN CONTAINER ---------- */
+        /* Admin Container */
         .admin-wrapper {
             max-width: 1200px;
             margin: 0 auto;
@@ -124,7 +123,6 @@
             font-size: 32px;
             color: #FAF8F5;
         }
-
         .admin-header h1 span {
             color: #FF2D55;
         }
@@ -138,7 +136,7 @@
             font-weight: 600;
         }
 
-        /* ---------- STATS CARDS ---------- */
+        /* Stats Grid */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -177,7 +175,7 @@
             opacity: 0.3;
         }
 
-        /* ---------- TOOLBAR ---------- */
+        /* Toolbar */
         .admin-toolbar {
             display: flex;
             flex-wrap: wrap;
@@ -198,26 +196,7 @@
             align-items: center;
         }
 
-        .admin-toolbar-left input {
-            padding: 10px 16px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 8px;
-            color: #FAF8F5;
-            font-size: 14px;
-            font-family: inherit;
-            outline: none;
-            min-width: 200px;
-        }
-
-        .admin-toolbar-left input:focus {
-            border-color: #FF2D55;
-        }
-
-        .admin-toolbar-left input::placeholder {
-            color: rgba(255, 255, 255, 0.2);
-        }
-
+        .admin-toolbar-left input,
         .admin-toolbar-left select {
             padding: 10px 16px;
             background: rgba(255, 255, 255, 0.04);
@@ -227,7 +206,15 @@
             font-size: 14px;
             font-family: inherit;
             outline: none;
-            cursor: pointer;
+        }
+
+        .admin-toolbar-left input:focus,
+        .admin-toolbar-left select:focus {
+            border-color: #FF2D55;
+        }
+
+        .admin-toolbar-left input::placeholder {
+            color: rgba(255, 255, 255, 0.2);
         }
 
         .admin-toolbar-left select option {
@@ -258,7 +245,6 @@
             background: linear-gradient(135deg, #FF2D55, #FF0040);
             color: #FAF8F5;
         }
-
         .btn-admin--add:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 30px rgba(255, 45, 85, 0.3);
@@ -269,19 +255,8 @@
             color: rgba(255, 255, 255, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.06);
         }
-
         .btn-admin--export:hover {
             background: rgba(255, 255, 255, 0.08);
-        }
-
-        .btn-admin--danger {
-            background: rgba(255, 45, 85, 0.1);
-            color: #FF2D55;
-            border: 1px solid rgba(255, 45, 85, 0.1);
-        }
-
-        .btn-admin--danger:hover {
-            background: rgba(255, 45, 85, 0.2);
         }
 
         .btn-admin--edit {
@@ -291,7 +266,6 @@
             padding: 4px 12px;
             font-size: 12px;
         }
-
         .btn-admin--edit:hover {
             background: rgba(255, 215, 0, 0.15);
         }
@@ -303,12 +277,11 @@
             padding: 4px 12px;
             font-size: 12px;
         }
-
         .btn-admin--delete:hover {
             background: rgba(255, 45, 85, 0.2);
         }
 
-        /* ---------- MEMBERS TABLE ---------- */
+        /* Table */
         .admin-table-wrapper {
             background: rgba(255, 255, 255, 0.02);
             border-radius: 16px;
@@ -345,10 +318,6 @@
             background: rgba(255, 255, 255, 0.02);
         }
 
-        .admin-table tr:last-child td {
-            border-bottom: none;
-        }
-
         .admin-table .member-cell {
             display: flex;
             align-items: center;
@@ -373,7 +342,7 @@
             color: rgba(255, 255, 255, 0.2);
         }
 
-        .admin-table .badge-small {
+        .badge-small {
             padding: 2px 10px;
             border-radius: 50px;
             font-size: 11px;
@@ -395,12 +364,11 @@
             color: #FFA500;
         }
 
-        .admin-table .actions-cell {
+        .actions-cell {
             display: flex;
             gap: 6px;
         }
 
-        /* ---------- EMPTY STATE ---------- */
         .empty-state {
             text-align: center;
             padding: 60px 20px;
@@ -418,7 +386,7 @@
             margin-bottom: 4px;
         }
 
-        /* ---------- MODAL ---------- */
+        /* Modal */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -527,7 +495,6 @@
             background: linear-gradient(135deg, #FF2D55, #FF0040);
             color: #FAF8F5;
         }
-
         .modal .btn-modal-save:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 30px rgba(255, 45, 85, 0.3);
@@ -538,12 +505,11 @@
             color: rgba(255, 255, 255, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.06);
         }
-
         .modal .btn-modal-cancel:hover {
             background: rgba(255, 255, 255, 0.08);
         }
 
-        /* ---------- TOAST ---------- */
+        /* Toast */
         .toast {
             position: fixed;
             bottom: 30px;
@@ -569,24 +535,14 @@
         .toast.success {
             border-color: rgba(0, 200, 81, 0.2);
         }
-
-        .toast.success .toast-icon {
-            color: #00C851;
-        }
-
         .toast.error {
             border-color: rgba(255, 45, 85, 0.2);
         }
-
-        .toast.error .toast-icon {
-            color: #FF2D55;
-        }
-
         .toast .toast-icon {
             margin-right: 8px;
         }
 
-        /* ---------- PAGINATION ---------- */
+        /* Pagination */
         .admin-pagination {
             display: flex;
             justify-content: center;
@@ -609,14 +565,44 @@
         .admin-pagination button:hover {
             background: rgba(255, 255, 255, 0.06);
         }
-
         .admin-pagination button.active {
             background: rgba(255, 45, 85, 0.12);
             color: #FF2D55;
             border-color: rgba(255, 45, 85, 0.15);
         }
 
-        /* ---------- RESPONSIVE ---------- */
+        /* Loading Spinner */
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            padding: 40px;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .loading-spinner.active {
+            display: block;
+        }
+
+        .loading-spinner .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 45, 85, 0.1);
+            border-top: 3px solid #FF2D55;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 12px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Responsive */
         @media (max-width: 1024px) {
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -642,7 +628,6 @@
             .admin-toolbar-left input,
             .admin-toolbar-left select {
                 width: 100%;
-                min-width: unset;
             }
 
             .admin-toolbar-right {
@@ -658,24 +643,6 @@
                 grid-template-columns: 1fr 1fr;
             }
 
-            .admin-table {
-                font-size: 12px;
-            }
-
-            .admin-table th,
-            .admin-table td {
-                padding: 8px 10px;
-            }
-
-            .admin-table .member-cell img {
-                width: 30px;
-                height: 30px;
-            }
-
-            .modal {
-                padding: 24px;
-            }
-
             .modal .form-row {
                 grid-template-columns: 1fr;
             }
@@ -686,12 +653,12 @@
                 grid-template-columns: 1fr;
             }
 
-            .admin-table .actions-cell {
+            .actions-cell {
                 flex-direction: column;
                 gap: 4px;
             }
 
-            .admin-table .actions-cell .btn-admin {
+            .actions-cell .btn-admin {
                 width: 100%;
                 justify-content: center;
             }
@@ -762,13 +729,13 @@
         <!-- Toolbar -->
         <div class="admin-toolbar">
             <div class="admin-toolbar-left">
-                <input type="text" id="search-input" placeholder="🔍 Search members..." oninput="filterMembers()">
-                <select id="filter-status" onchange="filterMembers()">
+                <input type="text" id="search-input" placeholder="🔍 Search members..." oninput="applyFilters()">
+                <select id="filter-status" onchange="applyFilters()">
                     <option value="all">All Status</option>
                     <option value="online">Online</option>
                     <option value="offline">Offline</option>
                 </select>
-                <select id="filter-verified" onchange="filterMembers()">
+                <select id="filter-verified" onchange="applyFilters()">
                     <option value="all">All</option>
                     <option value="verified">Verified</option>
                     <option value="unverified">Unverified</option>
@@ -777,6 +744,12 @@
             <div class="admin-toolbar-right">
                 <button class="btn-admin btn-admin--export" onclick="exportData()">📥 Export</button>
             </div>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div class="loading-spinner" id="loading-spinner">
+            <div class="spinner"></div>
+            <span>Loading members...</span>
         </div>
 
         <!-- Members Table -->
@@ -892,164 +865,163 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- SCRIPTS                                                      -->
+    <!-- SUPABASE INTEGRATION                                        -->
     <!-- ============================================================ -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+    </script>
+
     <script>
         // ============================================================
-        // MEMBER DATA (Stored in localStorage for persistence)
+        // SUPABASE CONFIGURATION
         // ============================================================
 
-        const defaultMembers = [{
-            id: 1,
-            name: "Sarah Johnson",
-            email: "sarah@example.com",
-            age: 28,
-            gender: "female",
-            location: "New York, USA",
-            bio: "Love traveling and coffee. Looking for someone who shares my passion for adventure.",
-            photo: "https://randomuser.me/api/portraits/women/44.jpg",
-            verified: true,
-            premium: true,
-            online: true,
-            new: false,
-            joined: "2025-01-15",
-            interests: ["Travel", "Coffee", "Photography"]
-        }, {
-            id: 2,
-            name: "Michael Chen",
-            email: "michael@example.com",
-            age: 32,
-            gender: "male",
-            location: "San Francisco, USA",
-            bio: "Tech enthusiast, foodie, and dog lover.",
-            photo: "https://randomuser.me/api/portraits/men/32.jpg",
-            verified: true,
-            premium: false,
-            online: true,
-            new: true,
-            joined: "2026-03-10",
-            interests: ["Tech", "Food", "Dogs"]
-        }, {
-            id: 3,
-            name: "Emily Rodriguez",
-            email: "emily@example.com",
-            age: 26,
-            gender: "female",
-            location: "Los Angeles, USA",
-            bio: "Yoga instructor, beach lover, and hopeless romantic.",
-            photo: "https://randomuser.me/api/portraits/women/68.jpg",
-            verified: false,
-            premium: false,
-            online: false,
-            new: false,
-            joined: "2025-11-20",
-            interests: ["Yoga", "Beach", "Music"]
-        }, {
-            id: 4,
-            name: "James Wilson",
-            email: "james@example.com",
-            age: 35,
-            gender: "male",
-            location: "London, UK",
-            bio: "Finance professional who loves hiking and good wine.",
-            photo: "https://randomuser.me/api/portraits/men/52.jpg",
-            verified: true,
-            premium: true,
-            online: true,
-            new: false,
-            joined: "2024-08-05",
-            interests: ["Hiking", "Wine", "Travel"]
-        }, {
-            id: 5,
-            name: "Aisha Patel",
-            email: "aisha@example.com",
-            age: 29,
-            gender: "female",
-            location: "Toronto, Canada",
-            bio: "Healthcare worker, bookworm, and foodie.",
-            photo: "https://randomuser.me/api/portraits/women/90.jpg",
-            verified: true,
-            premium: false,
-            online: false,
-            new: true,
-            joined: "2026-02-14",
-            interests: ["Books", "Food", "Healthcare"]
-        }, {
-            id: 6,
-            name: "David Kim",
-            email: "david@example.com",
-            age: 31,
-            gender: "male",
-            location: "Seoul, South Korea",
-            bio: "Graphic designer who loves photography and K-pop.",
-            photo: "https://randomuser.me/api/portraits/men/22.jpg",
-            verified: true,
-            premium: true,
-            online: true,
-            new: false,
-            joined: "2025-05-30",
-            interests: ["Design", "Photography", "K-pop"]
-        }, {
-            id: 7,
-            name: "Maria Santos",
-            email: "maria@example.com",
-            age: 27,
-            gender: "female",
-            location: "Manila, Philippines",
-            bio: "Teacher, dancer, and animal lover.",
-            photo: "https://randomuser.me/api/portraits/women/33.jpg",
-            verified: false,
-            premium: false,
-            online: true,
-            new: false,
-            joined: "2025-09-12",
-            interests: ["Dancing", "Animals", "Teaching"]
-        }, {
-            id: 8,
-            name: "Thomas Brown",
-            email: "thomas@example.com",
-            age: 40,
-            gender: "male",
-            location: "Sydney, Australia",
-            bio: "Entrepreneur, surfer, and dad.",
-            photo: "https://randomuser.me/api/portraits/men/75.jpg",
-            verified: true,
-            premium: true,
-            online: false,
-            new: false,
-            joined: "2024-03-18",
-            interests: ["Surfing", "Business", "Family"]
-        }];
+        const SUPABASE_URL = 'https://soyypmuksvxyjeeemquz.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_vUvF8Ghbb1yB0yQKCCuHiA_wtkRYj1b';
 
-        // Load members from localStorage or use defaults
-        let members = [];
-
-        function loadMembers() {
-            const stored = localStorage.getItem('classydate_members');
-            if (stored) {
-                try {
-                    members = JSON.parse(stored);
-                    return;
-                } catch (e) {}
-            }
-            members = JSON.parse(JSON.stringify(defaultMembers));
-            saveMembers();
-        }
-
-        function saveMembers() {
-            localStorage.setItem('classydate_members', JSON.stringify(members));
-        }
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         // ============================================================
         // STATE
         // ============================================================
+        let members = [];
         let filteredMembers = [];
         let currentPage = 1;
         const perPage = 5;
         let editingId = null;
 
         // ============================================================
-        // RENDER FUNCTIONS
+        // FETCH MEMBERS FROM SUPABASE
+        // ============================================================
+
+        async function fetchMembers() {
+            const spinner = document.getElementById('loading-spinner');
+            spinner.classList.add('active');
+
+            try {
+                const { data, error } = await supabase
+                    .from('members')
+                    .select('*')
+                    .order('id', { ascending: false });
+
+                if (error) throw error;
+
+                members = data || [];
+                filteredMembers = [...members];
+                updateStats();
+                renderTable();
+                renderPagination();
+            } catch (error) {
+                console.error('Error fetching members:', error);
+                showToast('⚠️ Error loading members: ' + error.message, 'error');
+            } finally {
+                spinner.classList.remove('active');
+            }
+        }
+
+        // ============================================================
+        // CRUD OPERATIONS
+        // ============================================================
+
+        async function saveMember(event) {
+            event.preventDefault();
+
+            const formData = {
+                name: document.getElementById('form-name').value.trim(),
+                email: document.getElementById('form-email').value.trim(),
+                age: parseInt(document.getElementById('form-age').value),
+                gender: document.getElementById('form-gender').value,
+                location: document.getElementById('form-location').value.trim(),
+                bio: document.getElementById('form-bio').value.trim(),
+                photo_url: document.getElementById('form-photo').value.trim(),
+                verified: document.getElementById('form-verified').value === 'true',
+                premium: document.getElementById('form-premium').value === 'true',
+                interests: document.getElementById('form-interests').value.split(',').map(s => s.trim()).filter(Boolean),
+                online: false,
+                is_new: true,
+                joined: new Date().toISOString().split('T')[0]
+            };
+
+            // Validation
+            if (!formData.name || !formData.email || !formData.age || !formData.gender) {
+                showToast('⚠️ Please fill in all required fields.', 'error');
+                return;
+            }
+
+            const editId = document.getElementById('edit-id').value;
+
+            try {
+                let result;
+
+                if (editId) {
+                    // Update existing member
+                    const { data, error } = await supabase
+                        .from('members')
+                        .update({
+                            name: formData.name,
+                            email: formData.email,
+                            age: formData.age,
+                            gender: formData.gender,
+                            location: formData.location || '',
+                            bio: formData.bio || '',
+                            photo_url: formData.photo_url || '',
+                            verified: formData.verified,
+                            premium: formData.premium,
+                            interests: formData.interests || [],
+                            updated_at: new Date().toISOString()
+                        })
+                        .eq('id', parseInt(editId))
+                        .select();
+
+                    if (error) throw error;
+                    result = data;
+                    showToast(`✅ ${formData.name} updated successfully!`, 'success');
+                } else {
+                    // Add new member
+                    const { data, error } = await supabase
+                        .from('members')
+                        .insert([formData])
+                        .select();
+
+                    if (error) throw error;
+                    result = data;
+                    showToast(`✅ ${formData.name} added successfully!`, 'success');
+                }
+
+                closeModal();
+                await fetchMembers();
+                return result;
+
+            } catch (error) {
+                console.error('Error saving member:', error);
+                showToast('⚠️ Error: ' + error.message, 'error');
+                return null;
+            }
+        }
+
+        async function deleteMember(id) {
+            const member = members.find(m => m.id === id);
+            if (!member) return;
+
+            if (!confirm(`Are you sure you want to delete ${member.name}? This action cannot be undone.`)) return;
+
+            try {
+                const { error } = await supabase
+                    .from('members')
+                    .delete()
+                    .eq('id', id);
+
+                if (error) throw error;
+
+                showToast(`🗑️ ${member.name} was deleted.`, 'success');
+                await fetchMembers();
+            } catch (error) {
+                console.error('Error deleting member:', error);
+                showToast('⚠️ Error deleting member: ' + error.message, 'error');
+            }
+        }
+
+        // ============================================================
+        // STATS
         // ============================================================
 
         function updateStats() {
@@ -1060,6 +1032,7 @@
             const thisMonth = now.getMonth();
             const thisYear = now.getFullYear();
             const newThisMonth = members.filter(m => {
+                if (!m.joined) return false;
                 const joined = new Date(m.joined);
                 return joined.getMonth() === thisMonth && joined.getFullYear() === thisYear;
             }).length;
@@ -1070,7 +1043,11 @@
             document.getElementById('new-members').textContent = newThisMonth;
         }
 
-        function filterMembers() {
+        // ============================================================
+        // FILTERS
+        // ============================================================
+
+        function applyFilters() {
             const search = document.getElementById('search-input').value.toLowerCase().trim();
             const statusFilter = document.getElementById('filter-status').value;
             const verifiedFilter = document.getElementById('filter-verified').value;
@@ -1078,7 +1055,7 @@
             filteredMembers = members.filter(m => {
                 const matchSearch = m.name.toLowerCase().includes(search) ||
                     m.email.toLowerCase().includes(search) ||
-                    m.location.toLowerCase().includes(search);
+                    (m.location || '').toLowerCase().includes(search);
                 const matchStatus = statusFilter === 'all' ||
                     (statusFilter === 'online' && m.online) ||
                     (statusFilter === 'offline' && !m.online);
@@ -1092,6 +1069,10 @@
             renderTable();
             renderPagination();
         }
+
+        // ============================================================
+        // RENDER TABLE
+        // ============================================================
 
         function renderTable() {
             const tbody = document.getElementById('admin-table-body');
@@ -1117,7 +1098,7 @@
                 <tr>
                     <td>
                         <div class="member-cell">
-                            <img src="${m.photo || 'https://randomuser.me/api/portraits/lego/1.jpg'}" alt="${m.name}" loading="lazy">
+                            <img src="${m.photo_url || 'https://randomuser.me/api/portraits/lego/1.jpg'}" alt="${m.name}" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/lego/1.jpg'">
                             <div>
                                 <div class="name">${m.name}</div>
                                 <div class="email">${m.email || 'No email'}</div>
@@ -1149,6 +1130,10 @@
             `).join('');
         }
 
+        // ============================================================
+        // PAGINATION
+        // ============================================================
+
         function renderPagination() {
             const container = document.getElementById('admin-pagination');
             const totalPages = Math.ceil(filteredMembers.length / perPage);
@@ -1159,7 +1144,8 @@
             }
 
             let html = '';
-            html += `<button onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled style="opacity:0.3;cursor:not-allowed;"' : ''}>‹</button>`;
+            html +=
+                `<button onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled style="opacity:0.3;cursor:not-allowed;"' : ''}>‹</button>`;
 
             for (let i = 1; i <= Math.min(totalPages, 5); i++) {
                 html += `<button class="${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
@@ -1170,7 +1156,8 @@
                 html += `<button onclick="goToPage(${totalPages})">${totalPages}</button>`;
             }
 
-            html += `<button onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled style="opacity:0.3;cursor:not-allowed;"' : ''}>›</button>`;
+            html +=
+                `<button onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled style="opacity:0.3;cursor:not-allowed;"' : ''}>›</button>`;
 
             container.innerHTML = html;
         }
@@ -1184,13 +1171,8 @@
         }
 
         // ============================================================
-        // CRUD OPERATIONS
+        // MODAL
         // ============================================================
-
-        function getNextId() {
-            if (members.length === 0) return 1;
-            return Math.max(...members.map(m => m.id)) + 1;
-        }
 
         function openAddModal() {
             editingId = null;
@@ -1218,7 +1200,7 @@
             document.getElementById('form-gender').value = member.gender || '';
             document.getElementById('form-location').value = member.location || '';
             document.getElementById('form-bio').value = member.bio || '';
-            document.getElementById('form-photo').value = member.photo || '';
+            document.getElementById('form-photo').value = member.photo_url || '';
             document.getElementById('form-verified').value = member.verified ? 'true' : 'false';
             document.getElementById('form-premium').value = member.premium ? 'true' : 'false';
             document.getElementById('form-interests').value = (member.interests || []).join(', ');
@@ -1230,98 +1212,10 @@
             document.getElementById('modal-overlay').classList.remove('active');
         }
 
-        function saveMember(event) {
-            event.preventDefault();
-
-            const formData = {
-                name: document.getElementById('form-name').value.trim(),
-                email: document.getElementById('form-email').value.trim(),
-                age: parseInt(document.getElementById('form-age').value),
-                gender: document.getElementById('form-gender').value,
-                location: document.getElementById('form-location').value.trim(),
-                bio: document.getElementById('form-bio').value.trim(),
-                photo: document.getElementById('form-photo').value.trim(),
-                verified: document.getElementById('form-verified').value === 'true',
-                premium: document.getElementById('form-premium').value === 'true',
-                interests: document.getElementById('form-interests').value.split(',').map(s => s.trim()).filter(Boolean),
-                online: false,
-                new: true,
-                joined: new Date().toISOString().slice(0, 10)
-            };
-
-            // Validation
-            if (!formData.name || !formData.email || !formData.age || !formData.gender) {
-                showToast('Please fill in all required fields.', 'error');
-                return;
-            }
-
-            const editId = document.getElementById('edit-id').value;
-
-            if (editId) {
-                // Edit existing
-                const index = members.findIndex(m => m.id === parseInt(editId));
-                if (index !== -1) {
-                    members[index] = { ...members[index], ...formData };
-                    showToast(`✅ ${formData.name} updated successfully!`, 'success');
-                }
-            } else {
-                // Add new
-                const newMember = {
-                    id: getNextId(),
-                    ...formData,
-                    online: false,
-                    new: true,
-                    joined: new Date().toISOString().slice(0, 10)
-                };
-                members.push(newMember);
-                showToast(`✅ ${formData.name} added successfully!`, 'success');
-            }
-
-            saveMembers();
-            closeModal();
-            filterMembers();
-            updateStats();
-        }
-
-        function deleteMember(id) {
-            const member = members.find(m => m.id === id);
-            if (!member) return;
-
-            if (confirm(`Are you sure you want to delete ${member.name}? This action cannot be undone.`)) {
-                members = members.filter(m => m.id !== id);
-                saveMembers();
-                filterMembers();
-                updateStats();
-                showToast(`🗑️ ${member.name} was deleted.`, 'success');
-            }
-        }
-
-        // ============================================================
-        // SEARCH & FILTER
-        // ============================================================
-
-        function filterMembers() {
-            const search = document.getElementById('search-input').value.toLowerCase().trim();
-            const statusFilter = document.getElementById('filter-status').value;
-            const verifiedFilter = document.getElementById('filter-verified').value;
-
-            filteredMembers = members.filter(m => {
-                const matchSearch = m.name.toLowerCase().includes(search) ||
-                    m.email.toLowerCase().includes(search) ||
-                    m.location.toLowerCase().includes(search);
-                const matchStatus = statusFilter === 'all' ||
-                    (statusFilter === 'online' && m.online) ||
-                    (statusFilter === 'offline' && !m.online);
-                const matchVerified = verifiedFilter === 'all' ||
-                    (verifiedFilter === 'verified' && m.verified) ||
-                    (verifiedFilter === 'unverified' && !m.verified);
-                return matchSearch && matchStatus && matchVerified;
-            });
-
-            currentPage = 1;
-            renderTable();
-            renderPagination();
-        }
+        // Close modal on overlay click
+        document.getElementById('modal-overlay').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
 
         // ============================================================
         // EXPORT
@@ -1358,30 +1252,24 @@
             clearTimeout(toastTimeout);
             toastTimeout = setTimeout(() => {
                 toast.classList.remove('show');
-            }, 3000);
+            }, 3500);
         }
 
         // ============================================================
-        // CLOSE MODAL ON OVERLAY CLICK
+        // AUTO-REFRESH FILTERS ON INPUT
         // ============================================================
 
-        document.getElementById('modal-overlay').addEventListener('click', function(e) {
-            if (e.target === this) closeModal();
-        });
+        document.getElementById('search-input').addEventListener('input', applyFilters);
 
         // ============================================================
         // INIT
         // ============================================================
 
-        loadMembers();
-        filteredMembers = [...members];
-        updateStats();
-        renderTable();
-        renderPagination();
+        // Load members on page load
+        fetchMembers();
 
-        console.log('💎 ClassyDate Admin Page loaded!');
-        console.log(`📊 ${members.length} members loaded`);
-        console.log('💡 Click "Add New Member" to add members');
+        console.log('💎 ClassyDate Admin Page with Supabase loaded!');
+        console.log('🔗 Connected to:', SUPABASE_URL);
     </script>
 </body>
 </html>
