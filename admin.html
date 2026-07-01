@@ -521,7 +521,7 @@
         .modal {
             background: #1A1A2E;
             border-radius: 14px;
-            max-width: 500px;
+            max-width: 540px;
             width: 100%;
             padding: 24px 24px 20px;
             border: 1px solid rgba(255, 255, 255, 0.06);
@@ -588,11 +588,13 @@
             gap: 10px;
         }
 
-        /* PHOTO UPLOAD */
+        /* ============================================================
+           MULTI PHOTO UPLOAD
+           ============================================================ */
         .photo-upload-wrapper {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
         }
 
         .photo-upload-area {
@@ -631,47 +633,73 @@
             color: #FF2D55;
         }
 
-        .photo-preview {
-            margin-top: 8px;
+        .photo-upload-area .photo-count {
+            display: inline-block;
+            margin-top: 6px;
+            padding: 2px 12px;
+            background: rgba(255, 45, 85, 0.1);
+            border-radius: 50px;
+            font-size: 11px;
+            color: #FF2D55;
+        }
+
+        .photo-upload-wrapper input[type="file"] {
             display: none;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .photo-grid-item {
             position: relative;
             border-radius: 8px;
             overflow: hidden;
-            max-width: 120px;
-        }
-
-        .photo-preview img {
-            width: 100%;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 8px;
             border: 1px solid rgba(255, 255, 255, 0.06);
+            aspect-ratio: 1;
         }
 
-        .photo-preview .remove-photo {
+        .photo-grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-grid-item .remove-photo-btn {
             position: absolute;
-            top: 4px;
-            right: 4px;
-            background: rgba(13, 11, 26, 0.8);
+            top: 2px;
+            right: 2px;
+            background: rgba(13, 11, 26, 0.85);
             border: none;
             color: #FF2D55;
-            font-size: 14px;
+            font-size: 12px;
             cursor: pointer;
             border-radius: 50%;
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             backdrop-filter: blur(4px);
         }
 
-        .photo-preview .remove-photo:hover {
-            background: rgba(255, 45, 85, 0.2);
+        .photo-grid-item .remove-photo-btn:hover {
+            background: rgba(255, 45, 85, 0.3);
         }
 
-        .photo-upload-wrapper input[type="file"] {
-            display: none;
+        .photo-grid-item .photo-order {
+            position: absolute;
+            bottom: 4px;
+            left: 4px;
+            background: rgba(13, 11, 26, 0.8);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 9px;
+            padding: 1px 6px;
+            border-radius: 50px;
+            backdrop-filter: blur(4px);
         }
 
         .upload-progress {
@@ -875,6 +903,9 @@
             .login-box {
                 padding: 32px 24px 28px;
             }
+            .photo-grid {
+                grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+            }
         }
 
         @media (max-width: 480px) {
@@ -1019,6 +1050,7 @@
 
             <form id="member-form">
                 <input type="hidden" id="edit-id" value="">
+                <input type="hidden" id="form-photos" value="">
 
                 <div class="form-group">
                     <label for="form-name">Full Name *</label>
@@ -1055,23 +1087,20 @@
                     <textarea id="form-bio" placeholder="Short bio..."></textarea>
                 </div>
 
-                <!-- PHOTO UPLOAD -->
+                <!-- MULTI PHOTO UPLOAD -->
                 <div class="form-group">
-                    <label>Profile Photo</label>
+                    <label>Profile Photos (Max 7)</label>
                     <div class="photo-upload-wrapper">
                         <div class="photo-upload-area" id="photo-upload-area">
                             <span class="upload-icon">📷</span>
-                            <span class="upload-text">Click or drag &amp; drop to upload<br><strong>JPG, PNG, WEBP</strong> (Max 5MB)</span>
-                            <input type="file" id="photo-input" accept="image/*">
+                            <span class="upload-text">Click or drag &amp; drop to upload<br><strong>JPG, PNG, WEBP</strong> (Max 5MB each)</span>
+                            <span class="photo-count" id="photo-count">0 / 7 photos</span>
+                            <input type="file" id="photo-input" accept="image/*" multiple>
                         </div>
-                        <div class="photo-preview" id="photo-preview">
-                            <img id="photo-preview-img" src="" alt="Preview">
-                            <button type="button" class="remove-photo" id="remove-photo-btn">✕</button>
-                        </div>
+                        <div class="photo-grid" id="photo-grid"></div>
                         <div class="upload-progress" id="upload-progress">
                             <div class="progress-bar" id="progress-bar"></div>
                         </div>
-                        <input type="hidden" id="form-photo" value="">
                     </div>
                 </div>
 
@@ -1131,8 +1160,9 @@
         // ============================================================
         // PHOTO UPLOAD STATE
         // ============================================================
-        let selectedFile = null;
-        let uploadedPhotoUrl = '';
+        let selectedFiles = [];
+        let uploadedPhotoUrls = [];
+        const MAX_PHOTOS = 7;
         const STORAGE_BUCKET = 'member-photos';
 
         // ============================================================
@@ -1153,13 +1183,12 @@
         const memberForm = document.getElementById('member-form');
 
         const photoInput = document.getElementById('photo-input');
-        const photoPreview = document.getElementById('photo-preview');
-        const photoPreviewImg = document.getElementById('photo-preview-img');
+        const photoGrid = document.getElementById('photo-grid');
         const uploadProgress = document.getElementById('upload-progress');
         const progressBar = document.getElementById('progress-bar');
         const uploadArea = document.getElementById('photo-upload-area');
-        const removePhotoBtn = document.getElementById('remove-photo-btn');
-        const formPhoto = document.getElementById('form-photo');
+        const photoCount = document.getElementById('photo-count');
+        const formPhotos = document.getElementById('form-photos');
 
         // ============================================================
         // STATE
@@ -1214,97 +1243,135 @@
         })();
 
         // ============================================================
-        // PHOTO UPLOAD FUNCTIONS
+        // MULTI PHOTO UPLOAD FUNCTIONS
         // ============================================================
+        function updatePhotoCount() {
+            const count = selectedFiles.length;
+            photoCount.textContent = `${count} / ${MAX_PHOTOS} photos`;
+            if (count >= MAX_PHOTOS) {
+                photoCount.style.color = '#FFD700';
+            } else {
+                photoCount.style.color = '#FF2D55';
+            }
+        }
+
+        function renderPhotoGrid() {
+            photoGrid.innerHTML = '';
+            selectedFiles.forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const div = document.createElement('div');
+                    div.className = 'photo-grid-item';
+                    div.innerHTML = `
+                        <img src="${e.target.result}" alt="Photo ${index + 1}">
+                        <button type="button" class="remove-photo-btn" data-index="${index}">✕</button>
+                        <span class="photo-order">#${index + 1}</span>
+                    `;
+                    photoGrid.appendChild(div);
+
+                    // Add remove event
+                    div.querySelector('.remove-photo-btn').addEventListener('click', function() {
+                        const idx = parseInt(this.dataset.index);
+                        removePhotoAtIndex(idx);
+                    });
+                };
+                reader.readAsDataURL(file);
+            });
+            updatePhotoCount();
+        }
+
+        function removePhotoAtIndex(index) {
+            selectedFiles.splice(index, 1);
+            // Also remove uploaded URLs if they exist for this index
+            if (uploadedPhotoUrls[index]) {
+                uploadedPhotoUrls.splice(index, 1);
+            }
+            renderPhotoGrid();
+        }
+
+        function removeAllPhotos() {
+            selectedFiles = [];
+            uploadedPhotoUrls = [];
+            photoGrid.innerHTML = '';
+            updatePhotoCount();
+            if (formPhotos) formPhotos.value = '';
+        }
+
         function handlePhotoSelect(event) {
-            const file = event.target.files[0];
-            if (!file) return;
+            const files = Array.from(event.target.files);
 
-            // Validate file type
-            const validTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
-            if (!validTypes.includes(file.type)) {
-                showToast('⚠️ Please select a JPG, PNG, or WEBP image.', 'error');
+            // Check if adding these would exceed max
+            if (selectedFiles.length + files.length > MAX_PHOTOS) {
+                showToast(`⚠️ You can only upload up to ${MAX_PHOTOS} photos. You have ${selectedFiles.length} already.`, 'error');
                 return;
             }
 
-            // Validate file size (5MB max)
-            if (file.size > 5 * 1024 * 1024) {
-                showToast('⚠️ Image must be less than 5MB.', 'error');
-                return;
+            // Validate each file
+            const validFiles = [];
+            for (const file of files) {
+                const validTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+                if (!validTypes.includes(file.type)) {
+                    showToast(`⚠️ ${file.name} is not a valid image format.`, 'error');
+                    continue;
+                }
+                if (file.size > 5 * 1024 * 1024) {
+                    showToast(`⚠️ ${file.name} exceeds 5MB limit.`, 'error');
+                    continue;
+                }
+                validFiles.push(file);
             }
 
-            selectedFile = file;
+            if (validFiles.length === 0) return;
 
-            // Show preview
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                photoPreviewImg.src = e.target.result;
-                photoPreview.style.display = 'block';
-                uploadArea.style.display = 'none';
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function removePhoto() {
-            selectedFile = null;
-            uploadedPhotoUrl = '';
-            photoPreview.style.display = 'none';
-            photoPreviewImg.src = '';
-            uploadArea.style.display = 'block';
+            selectedFiles = [...selectedFiles, ...validFiles];
+            renderPhotoGrid();
             photoInput.value = '';
-            if (formPhoto) formPhoto.value = '';
         }
 
-        function showPhotoPreview(url) {
-            if (url) {
-                photoPreviewImg.src = url;
-                photoPreview.style.display = 'block';
-                uploadArea.style.display = 'none';
-                if (formPhoto) formPhoto.value = url;
-            }
-        }
+        async function uploadAllPhotos() {
+            const urls = [];
 
-        async function uploadPhoto(file) {
-            if (!file) return null;
-
-            const fileExt = file.name.split('.').pop();
-            const fileName = `${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
-            const filePath = `public/${fileName}`;
+            if (selectedFiles.length === 0) return urls;
 
             uploadProgress.classList.add('active');
 
-            try {
-                const { data, error } = await supabaseClient.storage
-                    .from(STORAGE_BUCKET)
-                    .upload(filePath, file, {
-                        cacheControl: '3600',
-                        upsert: false
-                    });
+            for (let i = 0; i < selectedFiles.length; i++) {
+                const file = selectedFiles[i];
+                const fileExt = file.name.split('.').pop();
+                const fileName = `${Date.now()}_${Math.random().toString(36).substring(7)}_${i}.${fileExt}`;
+                const filePath = `public/${fileName}`;
 
-                if (error) throw error;
+                try {
+                    const { data, error } = await supabaseClient.storage
+                        .from(STORAGE_BUCKET)
+                        .upload(filePath, file, {
+                            cacheControl: '3600',
+                            upsert: false
+                        });
 
-                // Get public URL
-                const { data: urlData } = supabaseClient.storage
-                    .from(STORAGE_BUCKET)
-                    .getPublicUrl(filePath);
+                    if (error) throw error;
 
-                const publicUrl = urlData.publicUrl;
-                uploadedPhotoUrl = publicUrl;
+                    const { data: urlData } = supabaseClient.storage
+                        .from(STORAGE_BUCKET)
+                        .getPublicUrl(filePath);
 
-                progressBar.style.width = '100%';
-                setTimeout(() => {
+                    urls.push(urlData.publicUrl);
+
+                    // Update progress
+                    const percent = ((i + 1) / selectedFiles.length) * 100;
+                    progressBar.style.width = `${percent}%`;
+                } catch (error) {
+                    console.error('Upload error:', error);
+                    showToast(`⚠️ Error uploading ${file.name}: ${error.message}`, 'error');
                     uploadProgress.classList.remove('active');
                     progressBar.style.width = '0%';
-                }, 500);
-
-                return publicUrl;
-            } catch (error) {
-                console.error('Upload error:', error);
-                showToast('⚠️ Error uploading photo: ' + error.message, 'error');
-                uploadProgress.classList.remove('active');
-                progressBar.style.width = '0%';
-                return null;
+                    return null;
+                }
             }
+
+            uploadProgress.classList.remove('active');
+            progressBar.style.width = '0%';
+            return urls;
         }
 
         // ============================================================
@@ -1323,7 +1390,6 @@
 
         // Photo upload events
         photoInput.addEventListener('change', handlePhotoSelect);
-        removePhotoBtn.addEventListener('click', removePhoto);
 
         // Drag and drop support
         uploadArea.addEventListener('dragover', function(e) {
@@ -1391,7 +1457,7 @@
         }
 
         // ============================================================
-        // SAVE MEMBER (with photo upload)
+        // SAVE MEMBER (with multiple photo upload)
         // ============================================================
         async function saveMember() {
             const formData = {
@@ -1401,7 +1467,7 @@
                 gender: document.getElementById('form-gender').value,
                 location: document.getElementById('form-location').value.trim(),
                 bio: document.getElementById('form-bio').value.trim(),
-                photo_url: formPhoto ? formPhoto.value.trim() : '',
+                photo_urls: [],
                 verified: document.getElementById('form-verified').value === 'true',
                 premium: document.getElementById('form-premium').value === 'true',
                 interests: document.getElementById('form-interests').value.split(',').map(s => s.trim()).filter(Boolean),
@@ -1415,16 +1481,18 @@
                 return;
             }
 
-            // Upload photo if selected
-            if (selectedFile) {
-                const uploadedUrl = await uploadPhoto(selectedFile);
-                if (uploadedUrl) {
-                    formData.photo_url = uploadedUrl;
+            // Upload photos if any selected
+            if (selectedFiles.length > 0) {
+                const urls = await uploadAllPhotos();
+                if (urls) {
+                    formData.photo_urls = urls;
                 } else {
-                    showToast('⚠️ Photo upload failed. Please try again.', 'error');
                     return;
                 }
             }
+
+            // Convert photo URLs to JSON string for storage
+            const photoUrlsJson = JSON.stringify(formData.photo_urls);
 
             const editId = document.getElementById('edit-id').value;
 
@@ -1439,7 +1507,7 @@
                             gender: formData.gender,
                             location: formData.location || '',
                             bio: formData.bio || '',
-                            photo_url: formData.photo_url || '',
+                            photo_urls: photoUrlsJson,
                             verified: formData.verified,
                             premium: formData.premium,
                             interests: formData.interests || [],
@@ -1452,14 +1520,28 @@
                 } else {
                     const { error } = await supabaseClient
                         .from('members')
-                        .insert([formData]);
+                        .insert([{
+                            name: formData.name,
+                            email: formData.email,
+                            age: formData.age,
+                            gender: formData.gender,
+                            location: formData.location || '',
+                            bio: formData.bio || '',
+                            photo_urls: photoUrlsJson,
+                            verified: formData.verified,
+                            premium: formData.premium,
+                            interests: formData.interests || [],
+                            online: false,
+                            is_new: true,
+                            joined: new Date().toISOString().split('T')[0]
+                        }]);
 
                     if (error) throw error;
                     showToast(`✅ ${formData.name} added!`, 'success');
                 }
 
                 // Reset photo state
-                removePhoto();
+                removeAllPhotos();
 
                 closeModal();
                 await fetchMembers();
@@ -1538,6 +1620,17 @@
             renderPagination();
         }
 
+        function getFirstPhoto(photoUrls) {
+            if (!photoUrls) return null;
+            try {
+                const urls = JSON.parse(photoUrls);
+                if (Array.isArray(urls) && urls.length > 0) {
+                    return urls[0];
+                }
+            } catch (e) {}
+            return null;
+        }
+
         function renderTable() {
             const tbody = document.getElementById('admin-table-body');
             const start = (currentPage - 1) * perPage;
@@ -1558,11 +1651,13 @@
                 return;
             }
 
-            tbody.innerHTML = pageMembers.map(m => `
+            tbody.innerHTML = pageMembers.map(m => {
+                const firstPhoto = getFirstPhoto(m.photo_urls);
+                return `
                 <tr>
                     <td>
                         <div class="member-cell">
-                            <img src="${m.photo_url || 'https://randomuser.me/api/portraits/lego/1.jpg'}" alt="${m.name}" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/lego/1.jpg'">
+                            <img src="${firstPhoto || 'https://randomuser.me/api/portraits/lego/1.jpg'}" alt="${m.name}" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/lego/1.jpg'">
                             <div>
                                 <div class="name">${m.name}</div>
                                 <div class="email">${m.email || 'No email'}</div>
@@ -1591,7 +1686,7 @@
                         </div>
                     </td>
                 </tr>
-            `).join('');
+            `}).join('');
         }
 
         function renderPagination() {
@@ -1637,7 +1732,7 @@
             document.getElementById('modal-save').textContent = '💾 Save';
             memberForm.reset();
             document.getElementById('edit-id').value = '';
-            removePhoto();
+            removeAllPhotos();
             modalOverlay.classList.add('active');
         }
 
@@ -1661,19 +1756,47 @@
             document.getElementById('form-premium').value = member.premium ? 'true' : 'false';
             document.getElementById('form-interests').value = (member.interests || []).join(', ');
 
-            // Show existing photo
-            if (member.photo_url) {
-                showPhotoPreview(member.photo_url);
+            // Load existing photos
+            if (member.photo_urls) {
+                try {
+                    const urls = JSON.parse(member.photo_urls);
+                    if (Array.isArray(urls) && urls.length > 0) {
+                        // For edit, we just show the first photo as preview
+                        // In a full implementation, you'd load all
+                        showExistingPhotos(urls);
+                    }
+                } catch (e) {
+                    removeAllPhotos();
+                }
             } else {
-                removePhoto();
+                removeAllPhotos();
             }
 
             modalOverlay.classList.add('active');
         }
 
+        function showExistingPhotos(urls) {
+            // For edit mode, we show the existing photos as read-only preview
+            photoGrid.innerHTML = '';
+            urls.forEach((url, index) => {
+                const div = document.createElement('div');
+                div.className = 'photo-grid-item';
+                div.innerHTML = `
+                    <img src="${url}" alt="Photo ${index + 1}">
+                    <span class="photo-order">#${index + 1}</span>
+                `;
+                photoGrid.appendChild(div);
+            });
+            photoCount.textContent = `${urls.length} / ${MAX_PHOTOS} photos (existing)`;
+            photoCount.style.color = '#00C851';
+
+            // Store existing URLs for reference
+            uploadedPhotoUrls = [...urls];
+        }
+
         function closeModal() {
             modalOverlay.classList.remove('active');
-            removePhoto();
+            removeAllPhotos();
         }
 
         // ============================================================
@@ -1720,13 +1843,15 @@
         window.goToPage = goToPage;
         window.applyFilters = applyFilters;
         window.handlePhotoSelect = handlePhotoSelect;
-        window.removePhoto = removePhoto;
+        window.removePhotoAtIndex = removePhotoAtIndex;
+        window.removeAllPhotos = removeAllPhotos;
 
         // ============================================================
         // INIT
         // ============================================================
-        console.log('💎 Admin Dashboard with Photo Upload loaded');
+        console.log('💎 Admin Dashboard with Multi-Photo Upload loaded');
         console.log('🔗 Connected to Supabase');
+        console.log('📸 You can upload up to 7 photos per member');
         console.log('🔑 Password: ClassyAdmin2026 (CHANGE THIS!)');
     </script>
 </body>
