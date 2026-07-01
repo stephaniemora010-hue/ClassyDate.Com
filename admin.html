@@ -588,9 +588,7 @@
             gap: 10px;
         }
 
-        /* ============================================================
-           MULTI PHOTO UPLOAD
-           ============================================================ */
+        /* PHOTO UPLOAD */
         .photo-upload-wrapper {
             display: flex;
             flex-direction: column;
@@ -1495,6 +1493,7 @@
                 photoUrls = uploadedPhotoUrls;
             }
 
+            // If no photos at all, use empty array
             const photoUrlsJson = JSON.stringify(photoUrls);
 
             try {
@@ -1521,7 +1520,7 @@
                 } else {
                     const { error } = await supabaseClient
                         .from('members')
-                        .insert([{
+                        .insert({
                             name: formData.name,
                             email: formData.email,
                             age: formData.age,
@@ -1535,7 +1534,7 @@
                             online: false,
                             is_new: true,
                             joined: new Date().toISOString().split('T')[0]
-                        }]);
+                        });
 
                     if (error) throw error;
                     showToast(`✅ ${formData.name} added!`, 'success');
@@ -1762,7 +1761,6 @@
                     const urls = JSON.parse(member.photo_urls);
                     if (Array.isArray(urls) && urls.length > 0) {
                         uploadedPhotoUrls = [...urls];
-                        // Show existing photos in grid (read-only)
                         photoGrid.innerHTML = '';
                         urls.forEach((url, index) => {
                             const div = document.createElement('div');
