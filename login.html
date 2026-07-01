@@ -452,7 +452,7 @@
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         // ============================================================
-        // LOGIN HANDLER
+        // LOGIN HANDLER - Using Supabase Auth
         // ============================================================
 
         async function handleLogin(event) {
@@ -492,48 +492,34 @@
             loginBtn.disabled = true;
 
             try {
-                // 1. Check if user exists in members table
-                console.log('📡 Querying Supabase for email:', email);
-                
-                const { data: members, error: memberError } = await supabase
-                    .from('members')
-                    .select('*')
-                    .eq('email', email);
+                // Use Supabase Auth to sign in
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email: email,
+                    password: password
+                });
 
-                if (memberError) {
-                    console.error('Supabase Query Error:', memberError);
-                    throw memberError;
-                }
-
-                console.log('📊 Query result:', members);
-
-                // 2. If no member found with this email
-                if (!members || members.length === 0) {
-                    errorMessage.textContent = '⚠️ No account found with this email. Please Sign Up.';
+                if (error) {
+                    console.error('Auth Error:', error);
+                    errorMessage.textContent = '⚠️ ' + error.message;
                     errorMessage.classList.add('show');
                     loginBtn.textContent = 'Log In';
                     loginBtn.disabled = false;
                     return false;
                 }
 
-                const member = members[0];
-                console.log('✅ Found member:', member.name);
-
-                // 3. For demo: Check if password matches (in real app, use Supabase Auth)
-                // For demo purposes, we'll accept any password with matching email
-                // In production, use: supabase.auth.signInWithPassword()
-
-                // Show success and redirect
-                loginBtn.textContent = '✅ Logged In!';
-                loginBtn.style.background = 'linear-gradient(135deg, #00C851, #007E33)';
+                console.log('✅ Login successful for:', data.user.email);
+                console.log('👤 User ID:', data.user.id);
 
                 // Store user info in localStorage
                 localStorage.setItem('classydate_user', JSON.stringify({
-                    id: member.id,
-                    name: member.name,
-                    email: member.email,
+                    id: data.user.id,
+                    email: data.user.email,
                     loggedIn: true
                 }));
+
+                // Show success
+                loginBtn.textContent = '✅ Logged In!';
+                loginBtn.style.background = 'linear-gradient(135deg, #00C851, #007E33)';
 
                 // Redirect to members page after 1.5 seconds
                 setTimeout(function() {
@@ -544,7 +530,7 @@
 
             } catch (error) {
                 console.error('Login error:', error);
-                errorMessage.textContent = '⚠️ An error occurred: ' + error.message;
+                errorMessage.textContent = '⚠️ An error occurred. Please try again.';
                 errorMessage.classList.add('show');
                 loginBtn.textContent = 'Log In';
                 loginBtn.disabled = false;
@@ -565,26 +551,25 @@
         });
 
         // ============================================================
-        // CHECK IF ALREADY LOGGED IN
+        // CHECK IF ALREADY LOGGED IN (Supabase Session)
         // ============================================================
 
-        (function checkSession() {
-            const user = localStorage.getItem('classydate_user');
-            if (user) {
-                try {
-                    const userData = JSON.parse(user);
-                    if (userData.loggedIn) {
-                        console.log('👤 Already logged in as:', userData.name);
-                        // Optionally redirect to members page
-                        // window.location.href = 'members.html';
-                    }
-                } catch (e) {}
+        (async function checkSession() {
+            try {
+                const { data, error } = await supabase.auth.getSession();
+                
+                if (data && data.session) {
+                    console.log('👤 Already logged in as:', data.session.user.email);
+                    // Optionally redirect to members page
+                    // window.location.href = 'members.html';
+                }
+            } catch (e) {
+                console.log('No active session');
             }
         })();
 
-        console.log('💎 ClassyDate Login Page with Supabase loaded!');
+        console.log('💎 ClassyDate Login Page with Supabase Auth loaded!');
         console.log('🔗 Connected to:', SUPABASE_URL);
-        console.log('📝 Make sure the "members" table exists in Supabase!');
     </script>
 
 </body>
