@@ -6,10 +6,6 @@
     <title>Admin | ClassyDate</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
     <style>
-        /* ============================================================
-           CLASSYDATE - Admin Page (Compressed)
-           ============================================================ */
-
         * {
             margin: 0;
             padding: 0;
@@ -29,7 +25,6 @@
             color: inherit;
         }
 
-        /* ---------- HEADER ---------- */
         .cb-shell-header {
             position: fixed;
             top: 0;
@@ -100,7 +95,6 @@
             transform: translateY(-2px);
         }
 
-        /* ---------- LOGIN OVERLAY ---------- */
         .login-overlay {
             position: fixed;
             inset: 0;
@@ -199,7 +193,6 @@
             box-shadow: 0 8px 30px rgba(255, 45, 85, 0.35);
         }
 
-        /* ---------- ADMIN DASHBOARD ---------- */
         .admin-wrapper {
             max-width: 1200px;
             margin: 0 auto;
@@ -528,7 +521,7 @@
         .modal {
             background: #1A1A2E;
             border-radius: 14px;
-            max-width: 480px;
+            max-width: 500px;
             width: 100%;
             padding: 24px 24px 20px;
             border: 1px solid rgba(255, 255, 255, 0.06);
@@ -595,6 +588,115 @@
             gap: 10px;
         }
 
+        /* ---------- IMAGE UPLOAD ---------- */
+        .photo-upload-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .photo-upload-area {
+            border: 2px dashed rgba(255, 45, 85, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.02);
+            position: relative;
+        }
+
+        .photo-upload-area:hover {
+            border-color: rgba(255, 45, 85, 0.4);
+            background: rgba(255, 45, 85, 0.04);
+        }
+
+        .photo-upload-area.dragover {
+            border-color: #FF2D55;
+            background: rgba(255, 45, 85, 0.08);
+        }
+
+        .photo-upload-area .upload-icon {
+            font-size: 32px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .photo-upload-area .upload-text {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 12px;
+        }
+
+        .photo-upload-area .upload-text strong {
+            color: #FF2D55;
+        }
+
+        .photo-preview {
+            margin-top: 8px;
+            display: none;
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            max-width: 120px;
+        }
+
+        .photo-preview img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .photo-preview .remove-photo {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background: rgba(13, 11, 26, 0.8);
+            border: none;
+            color: #FF2D55;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .photo-preview .remove-photo:hover {
+            background: rgba(255, 45, 85, 0.2);
+        }
+
+        .photo-upload-wrapper input[type="file"] {
+            display: none;
+        }
+
+        .upload-progress {
+            display: none;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 6px;
+        }
+
+        .upload-progress .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #FF2D55, #FF0040);
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .upload-progress.active {
+            display: block;
+        }
+
+        /* ---------- MODAL ACTIONS ---------- */
         .modal .modal-actions {
             display: flex;
             gap: 8px;
@@ -820,9 +922,7 @@
         </div>
     </header>
 
-    <!-- ============================================================ -->
-    <!-- LOGIN OVERLAY                                                -->
-    <!-- ============================================================ -->
+    <!-- LOGIN OVERLAY -->
     <div class="login-overlay" id="login-overlay">
         <div class="login-box">
             <span class="lock-icon">🔒</span>
@@ -834,11 +934,8 @@
         </div>
     </div>
 
-    <!-- ============================================================ -->
-    <!-- ADMIN DASHBOARD                                              -->
-    <!-- ============================================================ -->
+    <!-- ADMIN DASHBOARD -->
     <main class="admin-wrapper" id="admin-wrapper">
-        <!-- Header -->
         <div class="admin-header">
             <div>
                 <h1>Admin <span>Dashboard</span></h1>
@@ -850,7 +947,6 @@
             </div>
         </div>
 
-        <!-- Stats -->
         <div class="stats-grid" id="stats-grid">
             <div class="stat-card-admin">
                 <span class="stat-icon">👥</span>
@@ -874,7 +970,6 @@
             </div>
         </div>
 
-        <!-- Toolbar -->
         <div class="admin-toolbar">
             <div class="admin-toolbar-left">
                 <input type="text" id="search-input" placeholder="🔍 Search...">
@@ -894,13 +989,11 @@
             </div>
         </div>
 
-        <!-- Loading Spinner -->
         <div class="loading-spinner" id="loading-spinner">
             <div class="spinner"></div>
             <span>Loading...</span>
         </div>
 
-        <!-- Members Table -->
         <div class="admin-table-wrapper">
             <table class="admin-table">
                 <thead>
@@ -913,17 +1006,13 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody id="admin-table-body">
-                    <!-- Rows rendered by JavaScript -->
-                </tbody>
+                <tbody id="admin-table-body"></tbody>
             </table>
             <div class="admin-pagination" id="admin-pagination"></div>
         </div>
     </main>
 
-    <!-- ============================================================ -->
-    <!-- MODAL - Add/Edit Member                                     -->
-    <!-- ============================================================ -->
+    <!-- MODAL - Add/Edit Member -->
     <div class="modal-overlay" id="modal-overlay">
         <div class="modal">
             <h2 id="modal-title">Add Member</h2>
@@ -967,9 +1056,23 @@
                     <textarea id="form-bio" placeholder="Short bio..."></textarea>
                 </div>
 
+                <!-- PHOTO UPLOAD - NEW VERSION -->
                 <div class="form-group">
-                    <label for="form-photo">Photo URL</label>
-                    <input type="text" id="form-photo" placeholder="https://randomuser.me/api/portraits/...">
+                    <label>Profile Photo</label>
+                    <div class="photo-upload-wrapper">
+                        <div class="photo-upload-area" id="photo-upload-area" onclick="document.getElementById('photo-input').click()">
+                            <span class="upload-icon">📷</span>
+                            <span class="upload-text">Click or drag &amp; drop to upload<br><strong>JPG, PNG, WEBP</strong> (Max 5MB)</span>
+                            <input type="file" id="photo-input" accept="image/*" onchange="handlePhotoSelect(event)">
+                        </div>
+                        <div class="photo-preview" id="photo-preview">
+                            <img id="photo-preview-img" src="" alt="Preview">
+                            <button type="button" class="remove-photo" onclick="removePhoto()">✕</button>
+                        </div>
+                        <div class="upload-progress" id="upload-progress">
+                            <div class="progress-bar" id="progress-bar"></div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-row">
@@ -1002,17 +1105,13 @@
         </div>
     </div>
 
-    <!-- ============================================================ -->
-    <!-- TOAST                                                       -->
-    <!-- ============================================================ -->
+    <!-- TOAST -->
     <div class="toast" id="toast">
         <span class="toast-icon" id="toast-icon">✅</span>
         <span id="toast-message">Saved!</span>
     </div>
 
-    <!-- ============================================================ -->
-    <!-- SUPABASE + SCRIPTS                                          -->
-    <!-- ============================================================ -->
+    <!-- SUPABASE + SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
     </script>
 
@@ -1030,6 +1129,13 @@
         const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         // ============================================================
+        // PHOTO UPLOAD STATE
+        // ============================================================
+        let selectedFile = null;
+        let uploadedPhotoUrl = '';
+        const STORAGE_BUCKET = 'member-photos';
+
+        // ============================================================
         // DOM REFERENCES
         // ============================================================
         const loginOverlay = document.getElementById('login-overlay');
@@ -1045,6 +1151,13 @@
         const modalCancel = document.getElementById('modal-cancel');
         const modalSave = document.getElementById('modal-save');
         const memberForm = document.getElementById('member-form');
+
+        const photoInput = document.getElementById('photo-input');
+        const photoPreview = document.getElementById('photo-preview');
+        const photoPreviewImg = document.getElementById('photo-preview-img');
+        const uploadProgress = document.getElementById('upload-progress');
+        const progressBar = document.getElementById('progress-bar');
+        const uploadArea = document.getElementById('photo-upload-area');
 
         // ============================================================
         // STATE
@@ -1097,6 +1210,125 @@
                 fetchMembers();
             }
         })();
+
+        // ============================================================
+        // PHOTO UPLOAD FUNCTIONS
+        // ============================================================
+        function handlePhotoSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            // Validate file type
+            const validTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+            if (!validTypes.includes(file.type)) {
+                showToast('⚠️ Please select a JPG, PNG, or WEBP image.', 'error');
+                return;
+            }
+
+            // Validate file size (5MB max)
+            if (file.size > 5 * 1024 * 1024) {
+                showToast('⚠️ Image must be less than 5MB.', 'error');
+                return;
+            }
+
+            selectedFile = file;
+
+            // Show preview
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                photoPreviewImg.src = e.target.result;
+                photoPreview.style.display = 'block';
+                uploadArea.style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function removePhoto() {
+            selectedFile = null;
+            uploadedPhotoUrl = '';
+            photoPreview.style.display = 'none';
+            photoPreviewImg.src = '';
+            uploadArea.style.display = 'block';
+            photoInput.value = '';
+            document.getElementById('form-photo').value = '';
+        }
+
+        function showPhotoPreview(url) {
+            if (url) {
+                photoPreviewImg.src = url;
+                photoPreview.style.display = 'block';
+                uploadArea.style.display = 'none';
+                document.getElementById('form-photo').value = url;
+            }
+        }
+
+        async function uploadPhoto(file) {
+            if (!file) return null;
+
+            const fileExt = file.name.split('.').pop();
+            const fileName = `${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
+            const filePath = `public/${fileName}`;
+
+            uploadProgress.classList.add('active');
+
+            try {
+                const { data, error } = await supabaseClient.storage
+                    .from(STORAGE_BUCKET)
+                    .upload(filePath, file, {
+                        cacheControl: '3600',
+                        upsert: false,
+                        onUploadProgress: (progress) => {
+                            const percent = (progress.loaded / progress.total) * 100;
+                            progressBar.style.width = `${percent}%`;
+                        }
+                    });
+
+                if (error) throw error;
+
+                // Get public URL
+                const { data: urlData } = supabaseClient.storage
+                    .from(STORAGE_BUCKET)
+                    .getPublicUrl(filePath);
+
+                const publicUrl = urlData.publicUrl;
+                uploadedPhotoUrl = publicUrl;
+
+                progressBar.style.width = '100%';
+                setTimeout(() => {
+                    uploadProgress.classList.remove('active');
+                    progressBar.style.width = '0%';
+                }, 500);
+
+                return publicUrl;
+            } catch (error) {
+                console.error('Upload error:', error);
+                showToast('⚠️ Error uploading photo: ' + error.message, 'error');
+                uploadProgress.classList.remove('active');
+                progressBar.style.width = '0%';
+                return null;
+            }
+        }
+
+        // Drag and drop support
+        uploadArea.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            this.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                photoInput.files = files;
+                handlePhotoSelect({ target: { files: files } });
+            }
+        });
 
         // ============================================================
         // EVENT LISTENERS
@@ -1152,7 +1384,7 @@
         }
 
         // ============================================================
-        // SAVE MEMBER
+        // SAVE MEMBER (with photo upload)
         // ============================================================
         async function saveMember() {
             const formData = {
@@ -1174,6 +1406,17 @@
             if (!formData.name || !formData.email || !formData.age || !formData.gender) {
                 showToast('⚠️ Fill in all required fields', 'error');
                 return;
+            }
+
+            // Upload photo if selected
+            if (selectedFile) {
+                const uploadedUrl = await uploadPhoto(selectedFile);
+                if (uploadedUrl) {
+                    formData.photo_url = uploadedUrl;
+                } else {
+                    showToast('⚠️ Photo upload failed. Please try again.', 'error');
+                    return;
+                }
             }
 
             const editId = document.getElementById('edit-id').value;
@@ -1207,6 +1450,14 @@
                     if (error) throw error;
                     showToast(`✅ ${formData.name} added!`, 'success');
                 }
+
+                // Reset photo state
+                selectedFile = null;
+                uploadedPhotoUrl = '';
+                photoPreview.style.display = 'none';
+                photoPreviewImg.src = '';
+                uploadArea.style.display = 'block';
+                photoInput.value = '';
 
                 closeModal();
                 await fetchMembers();
@@ -1384,6 +1635,7 @@
             document.getElementById('modal-save').textContent = '💾 Save';
             memberForm.reset();
             document.getElementById('edit-id').value = '';
+            removePhoto();
             modalOverlay.classList.add('active');
         }
 
@@ -1403,16 +1655,24 @@
             document.getElementById('form-gender').value = member.gender || '';
             document.getElementById('form-location').value = member.location || '';
             document.getElementById('form-bio').value = member.bio || '';
-            document.getElementById('form-photo').value = member.photo_url || '';
             document.getElementById('form-verified').value = member.verified ? 'true' : 'false';
             document.getElementById('form-premium').value = member.premium ? 'true' : 'false';
             document.getElementById('form-interests').value = (member.interests || []).join(', ');
+
+            // Show existing photo
+            if (member.photo_url) {
+                showPhotoPreview(member.photo_url);
+                document.getElementById('form-photo').value = member.photo_url;
+            } else {
+                removePhoto();
+            }
 
             modalOverlay.classList.add('active');
         }
 
         function closeModal() {
             modalOverlay.classList.remove('active');
+            removePhoto();
         }
 
         // ============================================================
@@ -1458,11 +1718,13 @@
         window.deleteMember = deleteMember;
         window.goToPage = goToPage;
         window.applyFilters = applyFilters;
+        window.handlePhotoSelect = handlePhotoSelect;
+        window.removePhoto = removePhoto;
 
         // ============================================================
         // INIT
         // ============================================================
-        console.log('💎 Admin Dashboard loaded');
+        console.log('💎 Admin Dashboard with Photo Upload loaded');
         console.log('🔗 Connected to Supabase');
         console.log('🔑 Password: ClassyAdmin2026 (CHANGE THIS!)');
     </script>
