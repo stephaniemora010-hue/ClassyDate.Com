@@ -127,7 +127,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 16px;
-            height: 60px;
+            height: 56px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -188,48 +188,24 @@
             transform: translateY(-2px);
         }
 
+        /* HIDE MOBILE BUTTONS & HAMBURGER */
         .cb-shell-mobile-btns {
-            display: none;
-            align-items: center;
-            gap: 6px;
+            display: none !important;
         }
-        .cb-shell-mobile-btn {
-            padding: 6px 14px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 12px;
-            transition: all 0.3s ease;
-        }
-        .cb-shell-mobile-btn--register {
-            background: rgba(255, 45, 85, 0.1);
-            color: #FF2D55;
-            border: 1px solid rgba(255, 45, 85, 0.12);
-        }
-        .cb-shell-mobile-btn--login {
-            background: #FF2D55;
-            color: #0D0B1A;
-        }
-
         .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: #FAF8F5;
-            font-size: 22px;
-            cursor: pointer;
-            padding: 4px 8px;
+            display: none !important;
         }
 
-        /* ---------- HERO - SQUEEZED ---------- */
+        /* ---------- HERO - COMPRESSED ---------- */
         .hero {
             position: relative;
-            min-height: 92vh;
+            min-height: 75vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding-top: 60px;
-            padding-bottom: 10px;
+            padding-top: 56px;
+            padding-bottom: 20px;
             overflow: hidden;
         }
 
@@ -256,18 +232,18 @@
         }
 
         .cb-hero-box {
-            max-width: 500px;
+            max-width: 480px;
             margin: 0 auto;
-            padding: 10px 16px;
+            padding: 8px 16px;
         }
 
         .cb-hero-title {
             font-family: 'Georgia', serif;
-            font-size: 34px;
+            font-size: 30px;
             font-weight: 400;
             color: #FAF8F5;
             line-height: 1.15;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
         .cb-hero-title em {
             color: #FF2D55;
@@ -278,9 +254,9 @@
         .hero-safety-menu {
             background: rgba(255, 255, 255, 0.06);
             backdrop-filter: blur(12px);
-            border-radius: 12px;
-            padding: 10px 14px;
-            margin: 10px 0 16px;
+            border-radius: 10px;
+            padding: 8px 12px;
+            margin: 8px 0 12px;
             border: 1px solid rgba(255, 255, 255, 0.06);
             text-align: left;
             cursor: pointer;
@@ -292,17 +268,17 @@
             font-weight: 600;
             color: #FAF8F5;
             list-style: none;
-            font-size: 14px;
+            font-size: 13px;
         }
         .hero-safety-menu summary::-webkit-details-marker {
             display: none;
         }
         .hero-safety-menu ul {
-            margin-top: 10px;
-            padding-top: 10px;
+            margin-top: 8px;
+            padding-top: 8px;
             border-top: 1px solid rgba(255, 255, 255, 0.06);
             display: grid;
-            gap: 6px;
+            gap: 5px;
         }
         .hero-safety-menu ul li {
             color: rgba(255, 255, 255, 0.7);
@@ -317,11 +293,11 @@
 
         .cb-btn {
             display: block;
-            padding: 12px 16px;
-            border-radius: 12px;
+            padding: 10px 14px;
+            border-radius: 10px;
             text-align: center;
             transition: all 0.3s ease;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             border: none;
             cursor: pointer;
             width: 100%;
@@ -348,29 +324,29 @@
         }
 
         .cb-line1 {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
             display: block;
         }
         .cb-line2 {
-            font-size: 12px;
+            font-size: 11px;
             opacity: 0.8;
             display: block;
             margin-top: 1px;
         }
         .cb-action {
             display: block;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-top: 4px;
+            margin-top: 3px;
             opacity: 0.9;
         }
 
         /* ---------- STACKED CARDS ---------- */
         .stacked-cards-section {
-            padding: 50px 20px;
+            padding: 40px 20px;
             background: #FAF8F5;
         }
 
@@ -428,7 +404,7 @@
         }
 
         .stacked-card {
-            width: 140px;
+            width: 130px;
             border-radius: 12px;
             overflow: hidden;
             background: #FFFFFF;
@@ -442,7 +418,7 @@
 
         .stacked-card img {
             width: 100%;
-            height: 160px;
+            height: 150px;
             object-fit: cover;
         }
 
@@ -460,7 +436,7 @@
 
         /* ---------- CTA IMAGE BOX ---------- */
         .cta-image-box {
-            padding: 50px 20px;
+            padding: 40px 20px;
             background: #FAF8F5;
         }
 
@@ -519,21 +495,21 @@
 
         .cta-image img {
             width: 100%;
-            height: 260px;
+            height: 240px;
             object-fit: cover;
         }
 
         .cta-image .stamp {
             position: absolute;
-            bottom: 24px;
-            left: 24px;
+            bottom: 20px;
+            left: 20px;
             width: 100px;
             height: auto;
         }
 
         /* ---------- STATS ---------- */
         .stats {
-            padding: 50px 20px;
+            padding: 40px 20px;
             background: rgba(255, 45, 85, 0.04);
         }
         .stats__grid {
@@ -543,7 +519,7 @@
         }
         .stat-card {
             text-align: center;
-            padding: 20px;
+            padding: 18px;
             background: rgba(255, 255, 255, 0.02);
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.04);
@@ -554,7 +530,7 @@
             transform: translateY(-4px);
         }
         .stat-card__value {
-            font-size: 32px;
+            font-size: 30px;
             font-weight: 700;
             color: #FF2D55;
             font-family: 'Georgia', serif;
@@ -571,7 +547,7 @@
 
         /* ---------- 2-UP CARDS ---------- */
         .cards-2up {
-            padding: 50px 20px;
+            padding: 40px 20px;
             background: #FAF8F5;
         }
 
@@ -599,12 +575,12 @@
 
         .card-2up img {
             width: 100%;
-            height: 180px;
+            height: 170px;
             object-fit: cover;
         }
 
         .card-2up .card-body {
-            padding: 18px 20px 20px;
+            padding: 16px 18px 18px;
         }
 
         .card-2up .card-body h3 {
@@ -636,7 +612,7 @@
 
         /* ---------- QUOTE SECTION ---------- */
         .quote-section {
-            padding: 50px 20px;
+            padding: 40px 20px;
             background: #1A1A2E;
             text-align: center;
         }
@@ -657,7 +633,7 @@
         }
 
         .quote-text blockquote {
-            font-size: 22px;
+            font-size: 20px;
             font-family: 'Georgia', 'Times New Roman', Times, serif;
             font-style: italic;
             line-height: 1.4;
@@ -697,13 +673,13 @@
 
         .quote-image img {
             width: 100%;
-            height: 220px;
+            height: 200px;
             object-fit: cover;
         }
 
         /* ---------- APP SECTION ---------- */
         .app-section {
-            padding: 50px 20px;
+            padding: 40px 20px;
             background: #FAF8F5;
             text-align: center;
         }
@@ -723,7 +699,7 @@
         .app-section p {
             color: #666;
             max-width: 500px;
-            margin: 0 auto 20px;
+            margin: 0 auto 18px;
             font-size: 14px;
         }
 
@@ -745,7 +721,7 @@
         }
 
         .app-section .qr-code {
-            margin: 20px auto;
+            margin: 18px auto;
             display: inline-block;
         }
 
@@ -753,12 +729,12 @@
             display: flex;
             justify-content: center;
             gap: 14px;
-            margin-top: 24px;
+            margin-top: 20px;
             flex-wrap: wrap;
         }
 
         .app-section .phone-images img {
-            width: 140px;
+            width: 130px;
             height: auto;
             border-radius: 14px;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
@@ -829,7 +805,7 @@
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 12px 16px;
+            padding: 10px 16px;
             background: rgba(13, 11, 26, 0.95);
             backdrop-filter: blur(12px);
             border-top: 1px solid rgba(255, 45, 85, 0.06);
@@ -907,7 +883,7 @@
 
         @media (max-width: 768px) {
             .cb-shell-header__inner {
-                height: 56px;
+                height: 52px;
                 padding: 0 12px;
             }
 
@@ -918,50 +894,40 @@
                 font-size: 24px;
             }
 
-            .cb-shell-actions {
-                display: none;
-            }
-            .cb-shell-mobile-btns {
-                display: flex;
-            }
-            .mobile-menu-btn {
-                display: block;
-            }
-
             .cb-hero-title {
-                font-size: 28px;
+                font-size: 26px;
             }
             .cb-hero-box {
-                padding: 10px 12px;
+                padding: 6px 12px;
             }
 
             .hero {
-                min-height: 85vh;
+                min-height: 70vh;
             }
 
             .hero-safety-menu {
-                padding: 10px 12px;
-                margin: 8px 0 12px;
+                padding: 8px 10px;
+                margin: 6px 0 10px;
             }
             .hero-safety-menu summary {
-                font-size: 13px;
+                font-size: 12px;
             }
             .hero-safety-menu ul li {
                 font-size: 11px;
             }
 
             .cb-btn {
-                padding: 12px 14px;
+                padding: 10px 12px;
                 border-radius: 10px;
             }
             .cb-line1 {
-                font-size: 15px;
+                font-size: 14px;
             }
             .cb-line2 {
                 font-size: 11px;
             }
             .cb-action {
-                font-size: 10px;
+                font-size: 9px;
             }
 
             .stats__grid {
@@ -972,10 +938,10 @@
                 justify-content: center;
             }
             .stacked-card {
-                width: 110px;
+                width: 100px;
             }
             .stacked-card img {
-                height: 130px;
+                height: 120px;
             }
 
             .cb-shell-footer__inner {
@@ -989,11 +955,11 @@
             }
 
             .app-section .phone-images img {
-                width: 100px;
+                width: 90px;
             }
 
             .cta-image img {
-                height: 200px;
+                height: 180px;
             }
 
             .quote-text blockquote {
@@ -1003,7 +969,7 @@
 
         @media (max-width: 480px) {
             .cb-hero-title {
-                font-size: 24px;
+                font-size: 22px;
             }
             .cb-shell-brand {
                 font-size: 15px;
@@ -1013,14 +979,14 @@
             }
 
             .hero {
-                min-height: 80vh;
+                min-height: 65vh;
             }
 
             .stacked-card {
-                width: 95px;
+                width: 85px;
             }
             .stacked-card img {
-                height: 110px;
+                height: 100px;
             }
             .stacked-card .badge {
                 font-size: 8px;
@@ -1030,11 +996,11 @@
             }
 
             .app-section .phone-images img {
-                width: 80px;
+                width: 70px;
             }
 
             .stat-card__value {
-                font-size: 26px;
+                font-size: 24px;
             }
 
             .card-2up img {
@@ -1042,11 +1008,11 @@
             }
 
             .cb-shell-footer__brand div {
-                font-size: 20px !important;
+                font-size: 18px !important;
             }
 
             .cb-hero-box {
-                padding: 6px 10px;
+                padding: 4px 8px;
             }
         }
     </style>
@@ -1054,7 +1020,7 @@
 <body>
 
     <!-- ============================================================ -->
-    <!-- HEADER                                                       -->
+    <!-- HEADER - No Hamburger Menu                                   -->
     <!-- ============================================================ -->
     <header class="cb-shell-header" role="banner">
         <div class="cb-shell-header__inner">
@@ -1069,17 +1035,11 @@
                 <a href="signup.html" class="cb-shell-button cb-shell-button--secondary">Join</a>
                 <a href="login.html" class="cb-shell-button cb-shell-button--primary">Log in</a>
             </div>
-
-            <div class="cb-shell-mobile-btns">
-                <a href="signup.html" class="cb-shell-mobile-btn cb-shell-mobile-btn--register">Join</a>
-                <a href="login.html" class="cb-shell-mobile-btn cb-shell-mobile-btn--login">Log in</a>
-                <button class="mobile-menu-btn" aria-label="Toggle menu">☰</button>
-            </div>
         </div>
     </header>
 
     <!-- ============================================================ -->
-    <!-- HERO - SQUEEZED                                              -->
+    <!-- HERO - COMPRESSED                                            -->
     <!-- ============================================================ -->
     <section class="hero">
         <div class="hero__backdrop"></div>
@@ -1347,27 +1307,6 @@
     <!-- SCRIPTS                                                      -->
     <!-- ============================================================ -->
     <script>
-        // Mobile menu toggle
-        const mobileBtn = document.querySelector('.mobile-menu-btn');
-        const nav = document.querySelector('.cb-shell-nav');
-
-        if (mobileBtn && nav) {
-            mobileBtn.addEventListener('click', function() {
-                const isOpen = nav.style.display === 'flex';
-                nav.style.display = isOpen ? 'none' : 'flex';
-                nav.style.flexDirection = 'column';
-                nav.style.position = 'absolute';
-                nav.style.top = '56px';
-                nav.style.left = '0';
-                nav.style.right = '0';
-                nav.style.background = '#0D0B1A';
-                nav.style.padding = '16px 20px';
-                nav.style.borderBottom = '1px solid rgba(255,45,85,0.06)';
-                nav.style.gap = '10px';
-                this.textContent = isOpen ? '☰' : '✕';
-            });
-        }
-
         // Cookie consent
         const cookieConsent = document.getElementById('cookie-consent');
         const cookieAccept = document.getElementById('cookie-accept');
