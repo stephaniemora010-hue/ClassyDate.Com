@@ -183,7 +183,7 @@
             display: block;
         }
 
-        .admin-login-box .btn-unlock {
+        .admin-login-box .btn-login-admin {
             width: 100%;
             padding: 14px;
             background: linear-gradient(135deg, #FF2D55, #FF0040);
@@ -197,12 +197,12 @@
             font-family: inherit;
         }
 
-        .admin-login-box .btn-unlock:hover {
+        .admin-login-box .btn-login-admin:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 30px rgba(255, 45, 85, 0.35);
         }
 
-        .admin-login-box .btn-unlock:disabled {
+        .admin-login-box .btn-login-admin:disabled {
             opacity: 0.6;
             cursor: not-allowed;
             transform: none;
@@ -847,8 +847,8 @@
             <h1>Admin Access</h1>
             <p>Enter the password to manage members</p>
             <div class="login-error" id="login-error">⚠️ Incorrect password. Please try again.</div>
-            <input type="password" id="admin-password" placeholder="Enter admin password..." onkeydown="if(event.key==='Enter') unlockAdmin()">
-            <button class="btn-unlock" id="unlock-btn" onclick="unlockAdmin()">Unlock Dashboard</button>
+            <input type="password" id="admin-password" placeholder="Enter admin password..." onkeydown="if(event.key==='Enter') loginAdmin()">
+            <button class="btn-login-admin" id="login-btn" onclick="loginAdmin()">Log In</button>
         </div>
     </div>
 
@@ -1061,13 +1061,13 @@
         const adminWrapper = document.getElementById('admin-wrapper');
         const passwordInput = document.getElementById('admin-password');
         const loginError = document.getElementById('login-error');
-        const unlockBtn = document.getElementById('unlock-btn');
+        const loginBtn = document.getElementById('login-btn');
 
         // ============================================================
         // ADMIN LOGIN / LOGOUT
         // ============================================================
 
-        function unlockAdmin() {
+        function loginAdmin() {
             const input = passwordInput.value;
 
             if (input === ADMIN_PASSWORD) {
@@ -1082,13 +1082,14 @@
                 fetchMembers();
 
                 loginError.classList.remove('show');
+                loginBtn.textContent = 'Log In';
             } else {
                 loginError.classList.add('show');
                 passwordInput.value = '';
                 passwordInput.focus();
-                unlockBtn.textContent = '⚠️ Try Again';
+                loginBtn.textContent = '⚠️ Try Again';
                 setTimeout(() => {
-                    unlockBtn.textContent = 'Unlock Dashboard';
+                    loginBtn.textContent = 'Log In';
                 }, 2000);
             }
         }
@@ -1099,7 +1100,7 @@
             loginOverlay.classList.remove('hidden');
             passwordInput.value = '';
             loginError.classList.remove('show');
-            unlockBtn.textContent = 'Unlock Dashboard';
+            loginBtn.textContent = 'Log In';
         }
 
         // ============================================================
@@ -1116,7 +1117,7 @@
 
         // Enter key support for login
         passwordInput.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') unlockAdmin();
+            if (e.key === 'Enter') loginAdmin();
         });
 
         // ============================================================
