@@ -132,12 +132,6 @@
             margin-bottom: 28px;
         }
 
-        .signup-card__header .icon {
-            font-size: 44px;
-            display: block;
-            margin-bottom: 10px;
-        }
-
         .signup-card__header h1 {
             font-family: 'Georgia', serif;
             font-size: 26px;
@@ -504,6 +498,7 @@
     <header class="cb-shell-header" role="banner">
         <div class="cb-shell-header__inner">
             <a class="cb-shell-brand" href="index.html" aria-label="ClassyDate">
+                <span class="icon">💎</span>
                 Classy<span>Date</span>
             </a>
 
@@ -640,12 +635,6 @@
                     <input type="text" id="location" placeholder="City, Country">
                 </div>
 
-                <!-- Photo URL -->
-                <div class="form-group">
-                    <label for="photo">Photo URL</label>
-                    <input type="text" id="photo" placeholder="https://example.com/photo.jpg">
-                </div>
-
                 <!-- Terms -->
                 <div class="terms-group">
                     <input type="checkbox" id="terms" required>
@@ -748,7 +737,7 @@
         }
 
         // ============================================================
-        // SIGNUP HANDLER
+        // SIGNUP HANDLER (FIXED - uses correct column names)
         // ============================================================
 
         async function handleSignup(event) {
@@ -762,7 +751,6 @@
             const day = document.getElementById('day').value;
             const year = document.getElementById('year').value;
             const location = document.getElementById('location').value.trim();
-            const photo = document.getElementById('photo').value.trim();
             const terms = document.getElementById('terms').checked;
 
             const errorMessage = document.getElementById('error-message');
@@ -831,11 +819,10 @@
                     return false;
                 }
 
-                // 2. Create date of birth string
-                const dob = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+                // 2. Calculate age from DOB
                 const age = new Date().getFullYear() - parseInt(year);
 
-                // 3. Prepare member data
+                // 3. Prepare member data - using correct column names
                 const memberData = {
                     name: fullname,
                     email: email,
@@ -843,7 +830,7 @@
                     gender: gender.value,
                     location: location || '',
                     bio: '',
-                    photo_url: photo || 'https://randomuser.me/api/portraits/lego/1.jpg',
+                    photo_urls: '[]', // Empty array as JSON string
                     verified: false,
                     premium: false,
                     online: false,
@@ -852,15 +839,25 @@
                     interests: []
                 };
 
+                console.log('📝 Creating member:', memberData);
+
                 // 4. Insert into Supabase
                 const { data, error } = await supabase
                     .from('members')
                     .insert([memberData])
                     .select();
 
-                if (error) throw error;
+                if (error) {
+                    console.error('Supabase Insert Error:', error);
+                    throw error;
+                }
+
+                if (!data || data.length === 0) {
+                    throw new Error('No data returned from insert');
+                }
 
                 console.log('✅ Account created for:', email);
+                console.log('👤 Member ID:', data[0].id);
 
                 // Show success
                 successMessage.textContent = '✅ Account created successfully! Redirecting...';
@@ -916,8 +913,6 @@
                     const userData = JSON.parse(user);
                     if (userData.loggedIn) {
                         console.log('👤 Already logged in as:', userData.name);
-                        // Optionally redirect to members page
-                        // window.location.href = 'members.html';
                     }
                 } catch (e) {}
             }
