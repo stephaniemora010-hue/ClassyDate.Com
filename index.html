@@ -15,10 +15,8 @@
     <style>
         /* ============================================================
            CLASSYDATE - Premium Dating Site
-           Based on Cherry Blossoms design
            ============================================================ */
 
-        /* ---------- RESET & BASE ---------- */
         *,
         *::before,
         *::after {
@@ -128,8 +126,8 @@
         .cb-shell-header__inner {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
-            height: 72px;
+            padding: 0 16px;
+            height: 64px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -138,15 +136,15 @@
         .cb-shell-brand-group {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 10px;
         }
 
         .cb-shell-brand {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             font-family: 'Georgia', serif;
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 700;
             color: #FF2D55;
         }
@@ -155,30 +153,20 @@
             font-weight: 300;
         }
         .cb-shell-brand .icon {
-            font-size: 32px;
-        }
-
-        /* Language picker - HIDDEN */
-        .cb-language-picker {
-            display: none;
-        }
-
-        /* Navigation - HIDDEN */
-        .cb-shell-nav {
-            display: none;
+            font-size: 28px;
         }
 
         .cb-shell-actions {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
         }
 
         .cb-shell-button {
-            padding: 8px 24px;
+            padding: 8px 18px;
             border-radius: 50px;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 13px;
             transition: all 0.3s ease;
             cursor: pointer;
             border: none;
@@ -203,13 +191,13 @@
         .cb-shell-mobile-btns {
             display: none;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
         .cb-shell-mobile-btn {
-            padding: 6px 16px;
+            padding: 6px 14px;
             border-radius: 50px;
             font-weight: 700;
-            font-size: 13px;
+            font-size: 12px;
             transition: all 0.3s ease;
         }
         .cb-shell-mobile-btn--register {
@@ -227,8 +215,9 @@
             background: none;
             border: none;
             color: #FAF8F5;
-            font-size: 24px;
+            font-size: 22px;
             cursor: pointer;
+            padding: 4px 8px;
         }
 
         /* ---------- HERO ---------- */
@@ -239,7 +228,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding-top: 72px;
+            padding-top: 64px;
             overflow: hidden;
         }
 
@@ -256,7 +245,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: rgba(13, 11, 26, 0.5);
+            background: rgba(13, 11, 26, 0.55);
         }
 
         .hero__grid {
@@ -266,18 +255,18 @@
         }
 
         .cb-hero-box {
-            max-width: 640px;
+            max-width: 560px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 20px 16px;
         }
 
         .cb-hero-title {
             font-family: 'Georgia', serif;
-            font-size: 48px;
+            font-size: 36px;
             font-weight: 400;
             color: #FAF8F5;
             line-height: 1.2;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
         .cb-hero-title em {
             color: #FF2D55;
@@ -288,9 +277,9 @@
         .hero-safety-menu {
             background: rgba(255, 255, 255, 0.06);
             backdrop-filter: blur(12px);
-            border-radius: 16px;
-            padding: 16px 20px;
-            margin: 20px 0 30px;
+            border-radius: 14px;
+            padding: 14px 18px;
+            margin: 16px 0 24px;
             border: 1px solid rgba(255, 255, 255, 0.06);
             text-align: left;
             cursor: pointer;
@@ -298,27 +287,28 @@
         .hero-safety-menu summary {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             font-weight: 600;
             color: #FAF8F5;
             list-style: none;
+            font-size: 15px;
         }
         .hero-safety-menu summary::-webkit-details-marker {
             display: none;
         }
         .hero-safety-menu ul {
-            margin-top: 16px;
-            padding-top: 16px;
+            margin-top: 14px;
+            padding-top: 14px;
             border-top: 1px solid rgba(255, 255, 255, 0.06);
             display: grid;
-            gap: 10px;
+            gap: 8px;
         }
         .hero-safety-menu ul li {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 14px;
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 13px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
         .hero-safety-menu ul li.is-verified .hero-safety-menu__check {
             color: #FFD700;
@@ -326,11 +316,11 @@
 
         .cb-btn {
             display: block;
-            padding: 18px 24px;
-            border-radius: 16px;
+            padding: 16px 20px;
+            border-radius: 14px;
             text-align: center;
             transition: all 0.3s ease;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             border: none;
             cursor: pointer;
             width: 100%;
@@ -357,86 +347,48 @@
         }
 
         .cb-line1 {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 700;
             display: block;
         }
         .cb-line2 {
-            font-size: 14px;
+            font-size: 13px;
             opacity: 0.8;
             display: block;
             margin-top: 2px;
         }
         .cb-action {
             display: block;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-top: 8px;
+            margin-top: 6px;
             opacity: 0.9;
-        }
-
-        /* ---------- SAFETY STRIP ---------- */
-        .safety-strip {
-            padding: 20px 0;
-            background: rgba(255, 45, 85, 0.04);
-            border-top: 1px solid rgba(255, 45, 85, 0.06);
-            border-bottom: 1px solid rgba(255, 45, 85, 0.06);
-            overflow: hidden;
-        }
-        .safety-strip__track {
-            display: flex;
-            gap: 40px;
-            animation: scrollStrip 30s linear infinite;
-            width: max-content;
-        }
-        .safety-strip__group {
-            display: flex;
-            gap: 40px;
-        }
-        .safety-chip {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            white-space: nowrap;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 14px;
-        }
-        .safety-chip.is-verified {
-            color: #FFD700;
-        }
-        .safety-chip__check {
-            color: #FFD700;
-        }
-
-        @keyframes scrollStrip {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
         }
 
         /* ---------- FEATURED IN ---------- */
         .featured {
-            padding: 60px 20px;
+            padding: 40px 20px;
             text-align: center;
         }
         .featured h2 {
             font-family: 'Georgia', serif;
-            font-size: 28px;
+            font-size: 24px;
             color: #FAF8F5;
-            margin-bottom: 30px;
+            margin-bottom: 24px;
         }
         .featured__logos {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 40px;
+            gap: 24px;
             flex-wrap: wrap;
         }
         .featured__logo {
-            opacity: 0.5;
+            opacity: 0.4;
             transition: opacity 0.3s ease;
-            font-size: 24px;
+            font-size: 18px;
             font-weight: 700;
             color: rgba(255, 255, 255, 0.3);
         }
@@ -446,13 +398,13 @@
 
         /* ---------- VIDEO SECTION ---------- */
         .video-section {
-            padding: 40px 20px 60px;
+            padding: 30px 20px 50px;
         }
         .video-section iframe {
             width: 100%;
             max-width: 900px;
-            height: 500px;
-            border-radius: 20px;
+            height: 350px;
+            border-radius: 16px;
             border: none;
             margin: 0 auto;
             display: block;
@@ -461,7 +413,7 @@
 
         /* ---------- STACKED CARDS ---------- */
         .stacked-cards-section {
-            padding: 80px 20px;
+            padding: 60px 20px;
             background: #FAF8F5;
         }
 
@@ -469,33 +421,33 @@
             max-width: 1100px;
             margin: 0 auto;
             display: flex;
-            gap: 60px;
+            gap: 40px;
             align-items: center;
             flex-wrap: wrap;
         }
 
         .stacked-cards-copy {
             flex: 1;
-            min-width: 280px;
+            min-width: 260px;
         }
 
         .stacked-cards-copy h2 {
-            font-size: 36px;
+            font-size: 28px;
             font-family: 'Georgia', 'Times New Roman', Times, serif;
             color: #1A1A2E;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .stacked-cards-copy p {
-            font-size: 16px;
+            font-size: 15px;
             color: #666;
             line-height: 1.6;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .stacked-cards-copy .btn-stacked {
             display: inline-block;
-            padding: 14px 36px;
+            padding: 12px 32px;
             background: linear-gradient(135deg, #FF2D55, #FF0040);
             color: #FAF8F5;
             border-radius: 50px;
@@ -503,6 +455,7 @@
             transition: all 0.3s ease;
             border: none;
             cursor: pointer;
+            font-size: 15px;
         }
         .stacked-cards-copy .btn-stacked:hover {
             transform: translateY(-2px);
@@ -511,15 +464,15 @@
 
         .stacked-cards-grid {
             display: flex;
-            gap: 20px;
+            gap: 16px;
             flex: 1;
-            min-width: 280px;
+            min-width: 260px;
             justify-content: center;
         }
 
         .stacked-card {
-            width: 180px;
-            border-radius: 16px;
+            width: 150px;
+            border-radius: 14px;
             overflow: hidden;
             background: #FFFFFF;
             box-shadow: 0 4px 20px rgba(26, 26, 46, 0.08);
@@ -532,25 +485,25 @@
 
         .stacked-card img {
             width: 100%;
-            height: 220px;
+            height: 180px;
             object-fit: cover;
         }
 
         .stacked-card .badge {
             position: absolute;
-            bottom: 12px;
-            left: 12px;
+            bottom: 10px;
+            left: 10px;
             background: rgba(255, 45, 85, 0.95);
             color: #FAF8F5;
-            padding: 4px 12px;
+            padding: 3px 10px;
             border-radius: 50px;
-            font-size: 12px;
+            font-size: 10px;
             font-weight: 700;
         }
 
         /* ---------- CTA IMAGE BOX ---------- */
         .cta-image-box {
-            padding: 80px 20px;
+            padding: 60px 20px;
             background: #FAF8F5;
         }
 
@@ -558,33 +511,33 @@
             max-width: 1100px;
             margin: 0 auto;
             display: flex;
-            gap: 60px;
+            gap: 40px;
             align-items: center;
             flex-wrap: wrap;
         }
 
         .cta-content {
             flex: 1;
-            min-width: 280px;
+            min-width: 260px;
         }
 
         .cta-content h2 {
-            font-size: 36px;
+            font-size: 28px;
             font-family: 'Georgia', 'Times New Roman', Times, serif;
             color: #1A1A2E;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .cta-content p {
-            font-size: 16px;
+            font-size: 15px;
             color: #666;
             line-height: 1.7;
-            margin-bottom: 24px;
+            margin-bottom: 18px;
         }
 
         .cta-content .btn-cta {
             display: inline-block;
-            padding: 14px 36px;
+            padding: 12px 32px;
             background: linear-gradient(135deg, #FF2D55, #FF0040);
             color: #FAF8F5;
             border-radius: 50px;
@@ -592,6 +545,7 @@
             transition: all 0.3s ease;
             border: none;
             cursor: pointer;
+            font-size: 15px;
         }
         .cta-content .btn-cta:hover {
             transform: translateY(-2px);
@@ -600,41 +554,41 @@
 
         .cta-image {
             flex: 1;
-            min-width: 280px;
-            border-radius: 16px;
+            min-width: 260px;
+            border-radius: 14px;
             overflow: hidden;
             position: relative;
         }
 
         .cta-image img {
             width: 100%;
-            height: 400px;
+            height: 300px;
             object-fit: cover;
         }
 
         .cta-image .stamp {
             position: absolute;
-            bottom: 40px;
-            left: 40px;
-            width: 160px;
+            bottom: 30px;
+            left: 30px;
+            width: 120px;
             height: auto;
         }
 
         /* ---------- STATS ---------- */
         .stats {
-            padding: 80px 20px;
+            padding: 60px 20px;
             background: rgba(255, 45, 85, 0.04);
         }
         .stats__grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
+            gap: 20px;
         }
         .stat-card {
             text-align: center;
-            padding: 30px;
+            padding: 24px;
             background: rgba(255, 255, 255, 0.02);
-            border-radius: 16px;
+            border-radius: 14px;
             border: 1px solid rgba(255, 255, 255, 0.04);
             transition: all 0.3s ease;
         }
@@ -643,24 +597,24 @@
             transform: translateY(-4px);
         }
         .stat-card__value {
-            font-size: 48px;
+            font-size: 36px;
             font-weight: 700;
             color: #FF2D55;
             font-family: 'Georgia', serif;
         }
         .stat-card h3 {
-            font-size: 18px;
+            font-size: 16px;
             color: #FAF8F5;
-            margin: 8px 0;
+            margin: 6px 0;
         }
         .stat-card p {
-            font-size: 14px;
+            font-size: 13px;
             color: rgba(255, 255, 255, 0.5);
         }
 
         /* ---------- 2-UP CARDS ---------- */
         .cards-2up {
-            padding: 80px 20px;
+            padding: 60px 20px;
             background: #FAF8F5;
         }
 
@@ -669,11 +623,11 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            gap: 24px;
         }
 
         .card-2up {
-            border-radius: 20px;
+            border-radius: 16px;
             overflow: hidden;
             background: #FFFFFF;
             box-shadow: 0 4px 20px rgba(26, 26, 46, 0.06);
@@ -688,26 +642,26 @@
 
         .card-2up img {
             width: 100%;
-            height: 250px;
+            height: 200px;
             object-fit: cover;
         }
 
         .card-2up .card-body {
-            padding: 24px 28px 28px;
+            padding: 20px 22px 22px;
         }
 
         .card-2up .card-body h3 {
-            font-size: 22px;
+            font-size: 20px;
             color: #1A1A2E;
             font-family: 'Georgia', 'Times New Roman', Times, serif;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .card-2up .card-body p {
             color: #666;
-            font-size: 15px;
+            font-size: 14px;
             line-height: 1.6;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
         .card-2up .card-body .card-link {
@@ -717,6 +671,7 @@
             align-items: center;
             gap: 6px;
             transition: gap 0.3s ease;
+            font-size: 14px;
         }
         .card-2up .card-body .card-link:hover {
             gap: 10px;
@@ -724,7 +679,7 @@
 
         /* ---------- QUOTE SECTION ---------- */
         .quote-section {
-            padding: 80px 20px;
+            padding: 60px 20px;
             background: #1A1A2E;
             text-align: center;
         }
@@ -733,19 +688,19 @@
             max-width: 900px;
             margin: 0 auto;
             display: flex;
-            gap: 60px;
+            gap: 40px;
             align-items: center;
             flex-wrap: wrap;
         }
 
         .quote-text {
             flex: 1;
-            min-width: 280px;
+            min-width: 260px;
             text-align: left;
         }
 
         .quote-text blockquote {
-            font-size: 28px;
+            font-size: 24px;
             font-family: 'Georgia', 'Times New Roman', Times, serif;
             font-style: italic;
             line-height: 1.4;
@@ -755,20 +710,21 @@
         .quote-text .author {
             color: #FF2D55;
             font-weight: 600;
-            font-size: 18px;
-            margin-top: 16px;
+            font-size: 16px;
+            margin-top: 12px;
         }
 
         .quote-text .btn-quote {
             display: inline-block;
-            margin-top: 24px;
-            padding: 14px 36px;
+            margin-top: 20px;
+            padding: 12px 32px;
             background: transparent;
             color: #FF2D55;
             border: 2px solid #FF2D55;
             border-radius: 50px;
             font-weight: 700;
             transition: all 0.3s ease;
+            font-size: 14px;
         }
         .quote-text .btn-quote:hover {
             background: #FF2D55;
@@ -777,20 +733,20 @@
 
         .quote-image {
             flex: 1;
-            min-width: 280px;
-            border-radius: 16px;
+            min-width: 260px;
+            border-radius: 14px;
             overflow: hidden;
         }
 
         .quote-image img {
             width: 100%;
-            height: 300px;
+            height: 250px;
             object-fit: cover;
         }
 
         /* ---------- APP SECTION ---------- */
         .app-section {
-            padding: 80px 20px;
+            padding: 60px 20px;
             background: #FAF8F5;
             text-align: center;
         }
@@ -801,27 +757,27 @@
         }
 
         .app-section h2 {
-            font-size: 36px;
+            font-size: 28px;
             font-family: 'Georgia', 'Times New Roman', Times, serif;
             color: #1A1A2E;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .app-section p {
             color: #666;
             max-width: 500px;
-            margin: 0 auto 30px;
-            font-size: 16px;
+            margin: 0 auto 24px;
+            font-size: 15px;
         }
 
         .app-section .btn-app {
             display: inline-block;
-            padding: 16px 48px;
+            padding: 14px 40px;
             background: #1A1A2E;
             color: #FAF8F5;
             border-radius: 50px;
             font-weight: 700;
-            font-size: 16px;
+            font-size: 15px;
             transition: all 0.3s ease;
             border: none;
             cursor: pointer;
@@ -832,22 +788,22 @@
         }
 
         .app-section .qr-code {
-            margin: 30px auto;
+            margin: 24px auto;
             display: inline-block;
         }
 
         .app-section .phone-images {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin-top: 40px;
+            gap: 16px;
+            margin-top: 30px;
             flex-wrap: wrap;
         }
 
         .app-section .phone-images img {
-            width: 200px;
+            width: 160px;
             height: auto;
-            border-radius: 20px;
+            border-radius: 16px;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
         }
 
@@ -855,35 +811,35 @@
         .cb-shell-footer {
             background: #0D0B1A;
             border-top: 1px solid rgba(255, 45, 85, 0.06);
-            padding: 60px 20px 30px;
+            padding: 40px 20px 24px;
         }
         .cb-shell-footer__inner {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 40px;
+            gap: 30px;
         }
         .cb-shell-footer__brand p {
             color: rgba(255, 255, 255, 0.4);
             font-size: 14px;
             line-height: 1.7;
-            max-width: 300px;
+            max-width: 280px;
         }
 
         .cb-shell-footer__group h2 {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             color: #FF2D55;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
         .cb-shell-footer__group a {
             display: block;
             color: rgba(255, 255, 255, 0.3);
-            font-size: 14px;
-            padding: 4px 0;
+            font-size: 13px;
+            padding: 3px 0;
             transition: color 0.3s ease;
         }
         .cb-shell-footer__group a:hover {
@@ -891,19 +847,19 @@
         }
         .cb-shell-footer__meta {
             color: rgba(255, 255, 255, 0.15);
-            font-size: 13px;
-            margin-top: 20px;
+            font-size: 12px;
+            margin-top: 16px;
         }
 
         .cb-shell-socials {
             display: flex;
-            gap: 12px;
-            margin-top: 16px;
+            gap: 10px;
+            margin-top: 12px;
             flex-wrap: wrap;
         }
         .cb-shell-socials a {
             color: rgba(255, 255, 255, 0.2);
-            font-size: 20px;
+            font-size: 18px;
             transition: color 0.3s ease;
         }
         .cb-shell-socials a:hover {
@@ -916,7 +872,7 @@
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 16px 20px;
+            padding: 14px 16px;
             background: rgba(13, 11, 26, 0.95);
             backdrop-filter: blur(12px);
             border-top: 1px solid rgba(255, 45, 85, 0.06);
@@ -933,29 +889,29 @@
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 16px;
+            gap: 12px;
         }
         .cookie-consent__content p {
             color: rgba(255, 255, 255, 0.6);
-            font-size: 14px;
+            font-size: 13px;
             flex: 1;
-            min-width: 200px;
+            min-width: 180px;
         }
         .cookie-consent__buttons {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             align-items: center;
         }
         .cookie-consent__link {
             color: rgba(255, 255, 255, 0.3);
-            font-size: 14px;
+            font-size: 13px;
             transition: color 0.3s ease;
         }
         .cookie-consent__link:hover {
             color: #FF2D55;
         }
         .cookie-consent__accept {
-            padding: 8px 28px;
+            padding: 8px 24px;
             background: #FF2D55;
             color: #0D0B1A;
             border: none;
@@ -963,6 +919,7 @@
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-size: 13px;
         }
         .cookie-consent__accept:hover {
             background: #FF0040;
@@ -973,15 +930,18 @@
         @media (max-width: 1024px) {
             .stacked-cards-inner {
                 flex-direction: column;
+                text-align: center;
             }
             .cta-image-box-inner {
                 flex-direction: column;
+                text-align: center;
             }
             .cards-2up-grid {
                 grid-template-columns: 1fr;
             }
             .quote-section-inner {
                 flex-direction: column;
+                text-align: center;
             }
             .quote-text {
                 text-align: center;
@@ -989,9 +949,18 @@
         }
 
         @media (max-width: 768px) {
-            .cb-shell-nav {
-                display: none;
+            .cb-shell-header__inner {
+                height: 60px;
+                padding: 0 12px;
             }
+
+            .cb-shell-brand {
+                font-size: 17px;
+            }
+            .cb-shell-brand .icon {
+                font-size: 24px;
+            }
+
             .cb-shell-actions {
                 display: none;
             }
@@ -1003,10 +972,35 @@
             }
 
             .cb-hero-title {
-                font-size: 32px;
+                font-size: 28px;
             }
             .cb-hero-box {
-                padding: 20px;
+                padding: 16px 12px;
+            }
+
+            .hero-safety-menu {
+                padding: 12px 14px;
+                margin: 12px 0 18px;
+            }
+            .hero-safety-menu summary {
+                font-size: 14px;
+            }
+            .hero-safety-menu ul li {
+                font-size: 12px;
+            }
+
+            .cb-btn {
+                padding: 14px 16px;
+                border-radius: 12px;
+            }
+            .cb-line1 {
+                font-size: 15px;
+            }
+            .cb-line2 {
+                font-size: 12px;
+            }
+            .cb-action {
+                font-size: 10px;
             }
 
             .stats__grid {
@@ -1014,21 +1008,22 @@
             }
             .stacked-cards-grid {
                 flex-wrap: wrap;
+                justify-content: center;
             }
             .stacked-card {
-                width: 140px;
+                width: 120px;
             }
             .stacked-card img {
-                height: 170px;
+                height: 150px;
             }
 
             .cb-shell-footer__inner {
                 grid-template-columns: 1fr;
-                gap: 30px;
+                gap: 24px;
             }
 
             .video-section iframe {
-                height: 250px;
+                height: 200px;
             }
 
             .cookie-consent__content {
@@ -1037,28 +1032,63 @@
             }
 
             .app-section .phone-images img {
-                width: 140px;
+                width: 110px;
+            }
+
+            .cta-image img {
+                height: 220px;
+            }
+
+            .featured h2 {
+                font-size: 20px;
+            }
+            .featured__logo {
+                font-size: 14px;
+            }
+
+            .quote-text blockquote {
+                font-size: 20px;
             }
         }
 
         @media (max-width: 480px) {
             .cb-hero-title {
-                font-size: 26px;
-            }
-            .cb-shell-brand {
-                font-size: 18px;
-            }
-            .cb-shell-brand .icon {
                 font-size: 24px;
             }
+            .cb-shell-brand {
+                font-size: 15px;
+            }
+            .cb-shell-brand .icon {
+                font-size: 20px;
+            }
+
             .stacked-card {
-                width: 110px;
+                width: 100px;
             }
             .stacked-card img {
-                height: 140px;
+                height: 120px;
             }
+            .stacked-card .badge {
+                font-size: 8px;
+                padding: 2px 8px;
+                bottom: 6px;
+                left: 6px;
+            }
+
             .app-section .phone-images img {
-                width: 100px;
+                width: 90px;
+            }
+
+            .stat-card__value {
+                font-size: 28px;
+            }
+
+            .card-2up img {
+                height: 160px;
+            }
+
+            .cb-shell-footer__brand div {
+                font-size: 22px !important;
             }
         }
     </style>
@@ -1075,19 +1105,16 @@
                     <span class="icon">💎</span>
                     Classy<span>Date</span>
                 </a>
-                <!-- Language picker REMOVED -->
             </div>
 
-            <!-- Navigation REMOVED -->
-
             <div class="cb-shell-actions">
-                <a href="#" class="cb-shell-button cb-shell-button--secondary">Join</a>
-                <a href="#" class="cb-shell-button cb-shell-button--primary">Log in</a>
+                <a href="signup.html" class="cb-shell-button cb-shell-button--secondary">Join</a>
+                <a href="login.html" class="cb-shell-button cb-shell-button--primary">Log in</a>
             </div>
 
             <div class="cb-shell-mobile-btns">
-                <a href="#" class="cb-shell-mobile-btn cb-shell-mobile-btn--register">Join</a>
-                <a href="#" class="cb-shell-mobile-btn cb-shell-mobile-btn--login">Log in</a>
+                <a href="signup.html" class="cb-shell-mobile-btn cb-shell-mobile-btn--register">Join</a>
+                <a href="login.html" class="cb-shell-mobile-btn cb-shell-mobile-btn--login">Log in</a>
                 <button class="mobile-menu-btn" aria-label="Toggle menu">☰</button>
             </div>
         </div>
@@ -1112,8 +1139,7 @@
                         <span>▾</span>
                     </summary>
                     <ul>
-                        <li>Trusted Matchmaking Since 2020</li>
-                        <li class="is-verified">Verified Member Accounts <span class="hero-safety-menu__check">✅</span></li>
+                        <li>Verified Member Accounts <span class="hero-safety-menu__check">✅</span></li>
                         <li>AI Photo Verification</li>
                         <li>Profile Screening</li>
                         <li>Private Communication Tools</li>
@@ -1121,39 +1147,17 @@
                     </ul>
                 </details>
 
-                <a class="cb-btn cb-btn-male" href="#">
+                <a class="cb-btn cb-btn-male" href="signup.html">
                     <span class="cb-line1">I am a Man</span>
                     <span class="cb-line2">Here to Meet Real Women</span>
                     <span class="cb-action">JOIN FREE &amp; SEE WHO'S HERE</span>
                 </a>
 
-                <a class="cb-btn cb-btn-female" href="#">
+                <a class="cb-btn cb-btn-female" href="signup.html">
                     <span class="cb-line1">I am a Woman</span>
                     <span class="cb-line2">Looking for Love &amp; Marriage</span>
                     <span class="cb-action">JOIN FREE &amp; ALWAYS FREE</span>
                 </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================================ -->
-    <!-- SAFETY STRIP                                                 -->
-    <!-- ============================================================ -->
-    <section class="safety-strip" aria-label="Safety features">
-        <div class="safety-strip__track">
-            <div class="safety-strip__group">
-                <span class="safety-chip">✨ Trusted Matchmaking Since 2020</span>
-                <span class="safety-chip is-verified">✅ Verified Member Accounts</span>
-                <span class="safety-chip">🤖 AI Photo Verification</span>
-                <span class="safety-chip">🔍 Profile Screening</span>
-                <span class="safety-chip">🔒 Private Communication Tools</span>
-            </div>
-            <div class="safety-strip__group">
-                <span class="safety-chip">✨ Trusted Matchmaking Since 2020</span>
-                <span class="safety-chip is-verified">✅ Verified Member Accounts</span>
-                <span class="safety-chip">🤖 AI Photo Verification</span>
-                <span class="safety-chip">🔍 Profile Screening</span>
-                <span class="safety-chip">🔒 Private Communication Tools</span>
             </div>
         </div>
     </section>
@@ -1167,19 +1171,19 @@
                 <p class="section-kicker">About Us</p>
                 <h2>We exist to bring people closer to love.</h2>
                 <p>We want our members to find meaningful and authentic relationships that ignite confidence and joy.</p>
-                <a href="#" class="btn-stacked">Get Started</a>
+                <a href="signup.html" class="btn-stacked">Get Started</a>
             </div>
             <div class="stacked-cards-grid">
                 <div class="stacked-card">
-                    <img src="https://bumble.com/bumble-brand-assets/project-love/assets/card1.jpg" alt="Outdoors">
+                    <img src="https://bumble.com/bumble-brand-assets/project-love/assets/card1.jpg" alt="Outdoors" loading="lazy">
                     <span class="badge">Outdoors</span>
                 </div>
                 <div class="stacked-card">
-                    <img src="https://bumble.com/bumble-brand-assets/project-love/assets/card2.jpg" alt="Running">
+                    <img src="https://bumble.com/bumble-brand-assets/project-love/assets/card2.jpg" alt="Running" loading="lazy">
                     <span class="badge">Running</span>
                 </div>
                 <div class="stacked-card">
-                    <img src="https://bumble.com/bumble-brand-assets/project-love/assets/card3.jpg" alt="Dog parent">
+                    <img src="https://bumble.com/bumble-brand-assets/project-love/assets/card3.jpg" alt="Dog parent" loading="lazy">
                     <span class="badge">Dog parent</span>
                 </div>
             </div>
@@ -1196,11 +1200,11 @@
                 <h2>Share your ideas</h2>
                 <p>Help shape the future of ClassyDate by joining our Member Circle. This select community of Members shares ideas directly with our team through chats, discussions, and product tests.</p>
                 <p>Participants get early access to new features, sneak peeks at upcoming campaigns, and the chance to help make ClassyDate even better for everyone.</p>
-                <a href="#" class="btn-cta">Sign up</a>
+                <a href="signup.html" class="btn-cta">Sign up</a>
             </div>
             <div class="cta-image">
-                <img src="https://bumble.com/bumble-brand-assets/project-love/assets/subscribe-image-desktop-new.jpg" alt="People enjoying connections on ClassyDate">
-                <img class="stamp" src="https://bumble.com/bumble-brand-assets/project-love/assets/member-circle.svg" alt="Member circle stamp">
+                <img src="https://bumble.com/bumble-brand-assets/project-love/assets/subscribe-image-desktop-new.jpg" alt="People enjoying connections on ClassyDate" loading="lazy">
+                <img class="stamp" src="https://bumble.com/bumble-brand-assets/project-love/assets/member-circle.svg" alt="Member circle stamp" loading="lazy">
             </div>
         </div>
     </section>
@@ -1234,19 +1238,19 @@
     <section class="cards-2up">
         <div class="cards-2up-grid">
             <div class="card-2up">
-                <img src="https://bumble.com/bumble-brand-assets/project-love/assets/bumble-date.jpg" alt="ClassyDate Date">
+                <img src="https://bumble.com/bumble-brand-assets/project-love/assets/bumble-date.jpg" alt="ClassyDate Date" loading="lazy">
                 <div class="card-body">
                     <h3>ClassyDate Date</h3>
                     <p>Whether you're new to dating or ready to try again, ClassyDate Date is built to bring you closer to love safely and meaningfully.</p>
-                    <a href="#" class="card-link">Find your person →</a>
+                    <a href="members.html" class="card-link">Find your person →</a>
                 </div>
             </div>
             <div class="card-2up">
-                <img src="https://bumble.com/bumble-brand-assets/project-love/assets/bff.jpg" alt="ClassyDate BFF">
+                <img src="https://bumble.com/bumble-brand-assets/project-love/assets/bff.jpg" alt="ClassyDate BFF" loading="lazy">
                 <div class="card-body">
                     <h3>ClassyDate BFF</h3>
                     <p>Whether you've moved to a new city or just want to expand your circle, ClassyDate BFF makes it easy to meet like-minded people who match your vibe.</p>
-                    <a href="#" class="card-link">Find your people →</a>
+                    <a href="members.html" class="card-link">Find your people →</a>
                 </div>
             </div>
         </div>
@@ -1264,7 +1268,7 @@
                 <a href="#" class="btn-quote">Read more stories</a>
             </div>
             <div class="quote-image">
-                <img src="https://bumble.com/bumble-brand-assets/project-love/assets/love-stories-1.jpg" alt="Love story couple">
+                <img src="https://bumble.com/bumble-brand-assets/project-love/assets/love-stories-1.jpg" alt="Love story couple" loading="lazy">
             </div>
         </div>
     </section>
@@ -1314,9 +1318,9 @@
             </div>
 
             <div class="phone-images">
-                <img src="https://bumble.com/bumble-brand-assets/assets/get-the-app-mobile.png" alt="ClassyDate app on phone">
-                <img src="https://bumble.com/bumble-brand-assets/assets/get-the-app-tablet.png" alt="ClassyDate app on tablet">
-                <img src="https://bumble.com/bumble-brand-assets/assets/get-the-app-desktop.png" alt="ClassyDate app on desktop">
+                <img src="https://bumble.com/bumble-brand-assets/assets/get-the-app-mobile.png" alt="ClassyDate app on phone" loading="lazy">
+                <img src="https://bumble.com/bumble-brand-assets/assets/get-the-app-tablet.png" alt="ClassyDate app on tablet" loading="lazy">
+                <img src="https://bumble.com/bumble-brand-assets/assets/get-the-app-desktop.png" alt="ClassyDate app on desktop" loading="lazy">
             </div>
         </div>
     </section>
@@ -1327,10 +1331,10 @@
     <footer class="cb-shell-footer" role="contentinfo">
         <div class="cb-shell-footer__inner">
             <div class="cb-shell-footer__brand">
-                <div style="display:flex;align-items:center;gap:10px;font-family:'Georgia',serif;font-size:28px;font-weight:700;color:#FF2D55;margin-bottom:12px;">
+                <div style="display:flex;align-items:center;gap:10px;font-family:'Georgia',serif;font-size:24px;font-weight:700;color:#FF2D55;margin-bottom:10px;">
                     💎 Classy<span style="color:#FAF8F5;font-weight:300;">Date</span>
                 </div>
-                <p>Long-term relationship focused dating since 2020. Built around trust, culture, and genuine connection.</p>
+                <p>Built around trust, culture, and genuine connection.</p>
                 <div class="cb-shell-socials">
                     <a href="#" aria-label="Facebook">📘</a>
                     <a href="#" aria-label="Instagram">📸</a>
@@ -1343,11 +1347,11 @@
 
             <div class="cb-shell-footer__group">
                 <h2>Explore</h2>
-                <a href="#">Home</a>
+                <a href="index.html">Home</a>
+                <a href="members.html">Members</a>
                 <a href="#">Testimonials</a>
-                <a href="#">Blog</a>
                 <a href="#">Locations</a>
-                <a href="#">Join ClassyDate</a>
+                <a href="signup.html">Join ClassyDate</a>
             </div>
 
             <div class="cb-shell-footer__group">
@@ -1363,7 +1367,7 @@
                 <a href="#">Terms of Use</a>
                 <a href="#">Privacy Policy</a>
                 <a href="#">Child Safety</a>
-                <p class="cb-shell-footer__meta">© 2020-2026 ClassyDate®</p>
+                <p class="cb-shell-footer__meta">© 2026 ClassyDate®</p>
             </div>
         </div>
     </footer>
@@ -1385,7 +1389,7 @@
     <!-- SCRIPTS                                                      -->
     <!-- ============================================================ -->
     <script>
-        // Mobile menu
+        // Mobile menu toggle
         const mobileBtn = document.querySelector('.mobile-menu-btn');
         const nav = document.querySelector('.cb-shell-nav');
 
@@ -1395,7 +1399,7 @@
                 nav.style.display = isOpen ? 'none' : 'flex';
                 nav.style.flexDirection = 'column';
                 nav.style.position = 'absolute';
-                nav.style.top = '72px';
+                nav.style.top = '60px';
                 nav.style.left = '0';
                 nav.style.right = '0';
                 nav.style.background = '#0D0B1A';
