@@ -1050,7 +1050,6 @@
 
             <form id="member-form">
                 <input type="hidden" id="edit-id" value="">
-                <input type="hidden" id="form-photos" value="">
 
                 <div class="form-group">
                     <label for="form-name">Full Name *</label>
@@ -1162,6 +1161,7 @@
         // ============================================================
         let selectedFiles = [];
         let uploadedPhotoUrls = [];
+        let isUploading = false;
         const MAX_PHOTOS = 7;
         const STORAGE_BUCKET = 'member-photos';
 
@@ -1188,7 +1188,6 @@
         const progressBar = document.getElementById('progress-bar');
         const uploadArea = document.getElementById('photo-upload-area');
         const photoCount = document.getElementById('photo-count');
-        const formPhotos = document.getElementById('form-photos');
 
         // ============================================================
         // STATE
@@ -1269,7 +1268,6 @@
                     `;
                     photoGrid.appendChild(div);
 
-                    // Add remove event
                     div.querySelector('.remove-photo-btn').addEventListener('click', function() {
                         const idx = parseInt(this.dataset.index);
                         removePhotoAtIndex(idx);
@@ -1282,7 +1280,6 @@
 
         function removePhotoAtIndex(index) {
             selectedFiles.splice(index, 1);
-            // Also remove uploaded URLs if they exist for this index
             if (uploadedPhotoUrls[index]) {
                 uploadedPhotoUrls.splice(index, 1);
             }
@@ -1294,19 +1291,16 @@
             uploadedPhotoUrls = [];
             photoGrid.innerHTML = '';
             updatePhotoCount();
-            if (formPhotos) formPhotos.value = '';
         }
 
         function handlePhotoSelect(event) {
             const files = Array.from(event.target.files);
 
-            // Check if adding these would exceed max
             if (selectedFiles.length + files.length > MAX_PHOTOS) {
                 showToast(`⚠️ You can only upload up to ${MAX_PHOTOS} photos. You have ${selectedFiles.length} already.`, 'error');
                 return;
             }
 
-            // Validate each file
             const validFiles = [];
             for (const file of files) {
                 const validTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
@@ -1329,11 +1323,11 @@
         }
 
         async function uploadAllPhotos() {
-            const urls = [];
+            if (selectedFiles.length === 0) return [];
 
-            if (selectedFiles.length === 0) return urls;
-
+            isUploading = true;
             uploadProgress.classList.add('active');
+            const urls = [];
 
             for (let i = 0; i < selectedFiles.length; i++) {
                 const file = selectedFiles[i];
@@ -1357,18 +1351,20 @@
 
                     urls.push(urlData.publicUrl);
 
-                    // Update progress
                     const percent = ((i + 1) / selectedFiles.length) * 100;
                     progressBar.style.width = `${percent}%`;
                 } catch (error) {
                     console.error('Upload error:', error);
-                    showToast(`⚠️ Error uploading ${file.name}: ${error.message}`, 'error');
+                    showToast(`⚠️ Error uploading ${file.name}`, 'error');
+                    isUploading = false;
                     uploadProgress.classList.remove('active');
                     progressBar.style.width = '0%';
                     return null;
                 }
             }
 
+            uploadedPhotoUrls = urls;
+            isUploading = false;
             uploadProgress.classList.remove('active');
             progressBar.style.width = '0%';
             return urls;
@@ -1388,10 +1384,8 @@
         modalCancel.addEventListener('click', closeModal);
         modalSave.addEventListener('click', saveMember);
 
-        // Photo upload events
         photoInput.addEventListener('change', handlePhotoSelect);
 
-        // Drag and drop support
         uploadArea.addEventListener('dragover', function(e) {
             e.preventDefault();
             this.classList.add('dragover');
@@ -1412,7 +1406,6 @@
             }
         });
 
-        // Click to upload
         uploadArea.addEventListener('click', function() {
             photoInput.click();
         });
@@ -1460,6 +1453,11 @@
         // SAVE MEMBER (with multiple photo upload)
         // ============================================================
         async function saveMember() {
+            if (isUploading) {
+                showToast('⏳ Please wait for photos to finish uploading.', 'error');
+                return;
+            }
+
             const formData = {
                 name: document.getElementById('form-name').value.trim(),
                 email: document.getElementById('form-email').value.trim(),
@@ -1467,7 +1465,6 @@
                 gender: document.getElementById('form-gender').value,
                 location: document.getElementById('form-location').value.trim(),
                 bio: document.getElementById('form-bio').value.trim(),
-                photo_urls: [],
                 verified: document.getElementById('form-verified').value === 'true',
                 premium: document.getElementById('form-premium').value === 'true',
                 interests: document.getElementById('form-interests').value.split(',').map(s => s.trim()).filter(Boolean),
@@ -1482,19 +1479,23 @@
             }
 
             // Upload photos if any selected
+            let photoUrls = [];
             if (selectedFiles.length > 0) {
                 const urls = await uploadAllPhotos();
                 if (urls) {
-                    formData.photo_urls = urls;
+                    photoUrls = urls;
                 } else {
                     return;
                 }
             }
 
-            // Convert photo URLs to JSON string for storage
-            const photoUrlsJson = JSON.stringify(formData.photo_urls);
-
+            // If editing and no new photos, keep existing
             const editId = document.getElementById('edit-id').value;
+            if (editId && photoUrls.length === 0 && uploadedPhotoUrls.length > 0) {
+                photoUrls = uploadedPhotoUrls;
+            }
+
+            const photoUrlsJson = JSON.stringify(photoUrls);
 
             try {
                 if (editId) {
@@ -1540,9 +1541,7 @@
                     showToast(`✅ ${formData.name} added!`, 'success');
                 }
 
-                // Reset photo state
                 removeAllPhotos();
-
                 closeModal();
                 await fetchMembers();
             } catch (error) {
@@ -1757,41 +1756,30 @@
             document.getElementById('form-interests').value = (member.interests || []).join(', ');
 
             // Load existing photos
+            removeAllPhotos();
             if (member.photo_urls) {
                 try {
                     const urls = JSON.parse(member.photo_urls);
                     if (Array.isArray(urls) && urls.length > 0) {
-                        // For edit, we just show the first photo as preview
-                        // In a full implementation, you'd load all
-                        showExistingPhotos(urls);
+                        uploadedPhotoUrls = [...urls];
+                        // Show existing photos in grid (read-only)
+                        photoGrid.innerHTML = '';
+                        urls.forEach((url, index) => {
+                            const div = document.createElement('div');
+                            div.className = 'photo-grid-item';
+                            div.innerHTML = `
+                                <img src="${url}" alt="Photo ${index + 1}">
+                                <span class="photo-order">#${index + 1}</span>
+                            `;
+                            photoGrid.appendChild(div);
+                        });
+                        photoCount.textContent = `${urls.length} / ${MAX_PHOTOS} photos (existing)`;
+                        photoCount.style.color = '#00C851';
                     }
-                } catch (e) {
-                    removeAllPhotos();
-                }
-            } else {
-                removeAllPhotos();
+                } catch (e) {}
             }
 
             modalOverlay.classList.add('active');
-        }
-
-        function showExistingPhotos(urls) {
-            // For edit mode, we show the existing photos as read-only preview
-            photoGrid.innerHTML = '';
-            urls.forEach((url, index) => {
-                const div = document.createElement('div');
-                div.className = 'photo-grid-item';
-                div.innerHTML = `
-                    <img src="${url}" alt="Photo ${index + 1}">
-                    <span class="photo-order">#${index + 1}</span>
-                `;
-                photoGrid.appendChild(div);
-            });
-            photoCount.textContent = `${urls.length} / ${MAX_PHOTOS} photos (existing)`;
-            photoCount.style.color = '#00C851';
-
-            // Store existing URLs for reference
-            uploadedPhotoUrls = [...urls];
         }
 
         function closeModal() {
@@ -1843,8 +1831,6 @@
         window.goToPage = goToPage;
         window.applyFilters = applyFilters;
         window.handlePhotoSelect = handlePhotoSelect;
-        window.removePhotoAtIndex = removePhotoAtIndex;
-        window.removeAllPhotos = removeAllPhotos;
 
         // ============================================================
         // INIT
