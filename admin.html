@@ -117,7 +117,7 @@
         }
 
         .admin-login-overlay.hidden {
-            display: none;
+            display: none !important;
         }
 
         .admin-login-box {
@@ -1054,18 +1054,26 @@
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         // ============================================================
+        // DOM ELEMENTS
+        // ============================================================
+
+        const loginOverlay = document.getElementById('admin-login-overlay');
+        const adminWrapper = document.getElementById('admin-wrapper');
+        const passwordInput = document.getElementById('admin-password');
+        const loginError = document.getElementById('login-error');
+        const unlockBtn = document.getElementById('unlock-btn');
+
+        // ============================================================
         // ADMIN LOGIN / LOGOUT
         // ============================================================
 
         function unlockAdmin() {
-            const input = document.getElementById('admin-password');
-            const error = document.getElementById('login-error');
-            const btn = document.getElementById('unlock-btn');
+            const input = passwordInput.value;
 
-            if (input.value === ADMIN_PASSWORD) {
+            if (input === ADMIN_PASSWORD) {
                 // Correct password - show admin dashboard
-                document.getElementById('admin-login-overlay').classList.add('hidden');
-                document.getElementById('admin-wrapper').classList.add('active');
+                loginOverlay.classList.add('hidden');
+                adminWrapper.classList.add('active');
 
                 // Store session
                 localStorage.setItem('admin_session', 'true');
@@ -1073,24 +1081,25 @@
                 // Load data
                 fetchMembers();
 
-                error.classList.remove('show');
+                loginError.classList.remove('show');
             } else {
-                error.classList.add('show');
-                input.value = '';
-                input.focus();
-                btn.textContent = '⚠️ Try Again';
+                loginError.classList.add('show');
+                passwordInput.value = '';
+                passwordInput.focus();
+                unlockBtn.textContent = '⚠️ Try Again';
                 setTimeout(() => {
-                    btn.textContent = 'Unlock Dashboard';
+                    unlockBtn.textContent = 'Unlock Dashboard';
                 }, 2000);
             }
         }
 
         function logoutAdmin() {
             localStorage.removeItem('admin_session');
-            document.getElementById('admin-wrapper').classList.remove('active');
-            document.getElementById('admin-login-overlay').classList.remove('hidden');
-            document.getElementById('admin-password').value = '';
-            document.getElementById('login-error').classList.remove('show');
+            adminWrapper.classList.remove('active');
+            loginOverlay.classList.remove('hidden');
+            passwordInput.value = '';
+            loginError.classList.remove('show');
+            unlockBtn.textContent = 'Unlock Dashboard';
         }
 
         // ============================================================
@@ -1099,14 +1108,14 @@
 
         (function checkSession() {
             if (localStorage.getItem('admin_session') === 'true') {
-                document.getElementById('admin-login-overlay').classList.add('hidden');
-                document.getElementById('admin-wrapper').classList.add('active');
+                loginOverlay.classList.add('hidden');
+                adminWrapper.classList.add('active');
                 fetchMembers();
             }
         })();
 
         // Enter key support for login
-        document.getElementById('admin-password').addEventListener('keydown', function(e) {
+        passwordInput.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') unlockAdmin();
         });
 
