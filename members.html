@@ -121,7 +121,6 @@
             width: 100%;
         }
 
-        /* ---------- HEADER SECTION ---------- */
         .members-header {
             display: flex;
             justify-content: space-between;
@@ -570,6 +569,195 @@
             border-color: rgba(255, 45, 85, 0.15);
         }
 
+        /* ============================================================
+           MESSAGE POPUP MODAL
+           ============================================================ */
+        .message-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(12px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .message-modal-overlay.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .message-modal {
+            max-width: 520px;
+            width: 100%;
+            background: linear-gradient(145deg, #1A1A2E, #2A1A2E);
+            border-radius: 24px;
+            padding: 40px 36px 32px;
+            border: 1px solid rgba(255, 45, 85, 0.15);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .message-modal::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at center, rgba(255, 45, 85, 0.05), transparent 70%);
+            pointer-events: none;
+        }
+
+        .message-modal .close-modal {
+            position: absolute;
+            top: 14px;
+            right: 18px;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 22px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            font-family: inherit;
+        }
+
+        .message-modal .close-modal:hover {
+            color: #FF2D55;
+        }
+
+        .message-modal .icon-container {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, rgba(255, 45, 85, 0.15), rgba(255, 45, 85, 0.05));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            border: 1px solid rgba(255, 45, 85, 0.1);
+        }
+
+        .message-modal .icon-container .icon {
+            font-size: 36px;
+        }
+
+        .message-modal h2 {
+            font-family: 'Georgia', serif;
+            font-size: 24px;
+            color: #FAF8F5;
+            margin-bottom: 6px;
+            position: relative;
+        }
+
+        .message-modal h2 span {
+            color: #FF2D55;
+        }
+
+        .message-modal .member-name {
+            color: #FF2D55;
+            font-weight: 700;
+        }
+
+        .message-modal .subtitle {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .message-modal .message-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 24px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .message-modal .message-card .quote-mark {
+            font-size: 28px;
+            color: rgba(255, 45, 85, 0.2);
+            font-family: 'Georgia', serif;
+            line-height: 0.8;
+            display: block;
+        }
+
+        .message-modal .message-card .message-text {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 15px;
+            line-height: 1.8;
+            font-style: italic;
+            margin: 6px 0 4px;
+        }
+
+        .message-modal .message-card .message-text strong {
+            color: #FFD700;
+            font-style: normal;
+        }
+
+        .message-modal .message-card .signature {
+            color: rgba(255, 255, 255, 0.15);
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        .message-modal .action-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 4px;
+        }
+
+        .message-modal .action-buttons button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-proceed {
+            background: linear-gradient(135deg, #FF2D55, #FF0040);
+            color: #FAF8F5;
+        }
+
+        .btn-proceed:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 45, 85, 0.35);
+        }
+
+        .btn-later {
+            background: rgba(255, 255, 255, 0.04);
+            color: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .btn-later:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
         /* ---------- RESPONSIVE ---------- */
         @media (max-width: 768px) {
             .cb-shell-header__inner {
@@ -625,6 +813,18 @@
                 padding: 5px 10px;
                 font-size: 12px;
             }
+
+            .message-modal {
+                padding: 32px 24px 28px;
+            }
+
+            .message-modal h2 {
+                font-size: 20px;
+            }
+
+            .message-modal .action-buttons {
+                flex-direction: column;
+            }
         }
 
         @media (max-width: 480px) {
@@ -660,6 +860,10 @@
             .member-card__actions button {
                 font-size: 10px;
                 padding: 5px;
+            }
+
+            .message-modal {
+                padding: 24px 16px 20px;
             }
         }
     </style>
@@ -744,15 +948,44 @@
         </div>
 
         <!-- Members Grid -->
-        <div class="members-grid" id="members-grid">
-            <!-- Members will be rendered here by JavaScript -->
-        </div>
+        <div class="members-grid" id="members-grid"></div>
 
         <!-- Pagination -->
-        <div class="pagination" id="pagination">
-            <!-- Pagination rendered by JavaScript -->
-        </div>
+        <div class="pagination" id="pagination"></div>
     </main>
+
+    <!-- ============================================================ -->
+    <!-- MESSAGE MODAL                                                -->
+    <!-- ============================================================ -->
+    <div class="message-modal-overlay" id="message-modal">
+        <div class="message-modal">
+            <button class="close-modal" onclick="closeMessageModal()">✕</button>
+
+            <div class="icon-container">
+                <span class="icon">💌</span>
+            </div>
+
+            <h2>Ready to <span>Connect</span>?</h2>
+            <p class="subtitle">You're about to start something beautiful</p>
+
+            <div class="message-card">
+                <span class="quote-mark">"</span>
+                <p class="message-text">
+                    The best love stories begin with a single message.
+                    <strong>Don't let this moment pass.</strong>
+                    Your next chapter is just one click away.
+                </p>
+                <div class="signature">— ClassyDate Team ❤️</div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn-later" onclick="closeMessageModal()">Maybe Later</button>
+                <button class="btn-proceed" onclick="proceedToMessage()">
+                    💬 Send Message
+                </button>
+            </div>
+        </div>
+    </div>
 
     <script>
         // ============================================================
@@ -1132,6 +1365,7 @@
         let currentView = 'grid';
         let currentPage = 1;
         const perPage = 8;
+        let selectedMemberId = null;
 
         // ============================================================
         // VIEW TOGGLE
@@ -1240,7 +1474,7 @@
                         </div>
                         <div class="member-card__actions">
                             <button class="btn-view" onclick="viewProfile(${member.id})">👤 View</button>
-                            <button class="btn-message" onclick="sendMessage(${member.id})">💬 Message</button>
+                            <button class="btn-message" onclick="openMessageModal(${member.id})">💬 Message</button>
                         </div>
                     </div>
                 </div>
@@ -1298,18 +1532,55 @@
         }
 
         // ============================================================
+        // MESSAGE MODAL
+        // ============================================================
+
+        function openMessageModal(id) {
+            selectedMemberId = id;
+            const member = members.find(m => m.id === id);
+            if (member) {
+                document.getElementById('message-modal').classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeMessageModal() {
+            document.getElementById('message-modal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function proceedToMessage() {
+            const member = members.find(m => m.id === selectedMemberId);
+            if (member) {
+                closeMessageModal();
+                // Show success toast or redirect
+                alert(`💬 Starting conversation with ${member.name}!\n\nThis will open the messaging feature.`);
+                // window.location.href = `subscription.html?member=${member.id}&name=${encodeURIComponent(member.name)}`;
+            }
+        }
+
+        // Close modal on overlay click
+        document.getElementById('message-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeMessageModal();
+            }
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeMessageModal();
+            }
+        });
+
+        // ============================================================
         // ACTIONS
         // ============================================================
 
         function viewProfile(id) {
-            alert('👤 Viewing profile of ' + members.find(m => m.id === id).name);
-            // window.location.href = `profile.html?id=${id}`;
-        }
-
-        function sendMessage(id) {
             const member = members.find(m => m.id === id);
-            alert('💬 Send message to ' + member.name);
-            // window.location.href = `subscription.html?member=${member.id}&name=${encodeURIComponent(member.name)}`;
+            alert('👤 Viewing profile of ' + member.name);
+            // window.location.href = `profile.html?id=${id}`;
         }
 
         // ============================================================
@@ -1338,7 +1609,6 @@
 
         console.log('💎 ClassyDate Members Page loaded!');
         console.log('📊 Showing 24 hardcoded members (17 men, 7 women)');
-        console.log('👤 All members are African professionals based in USA');
     </script>
 
 </body>
