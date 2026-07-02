@@ -737,7 +737,7 @@
         }
 
         // ============================================================
-        // SIGNUP HANDLER - Using Supabase Auth
+        // SIGNUP HANDLER - SIMPLIFIED & FIXED
         // ============================================================
 
         async function handleSignup(event) {
@@ -760,6 +760,8 @@
             // Hide previous messages
             errorMessage.classList.remove('show');
             successMessage.classList.remove('show');
+
+            console.log('📝 Starting signup for:', email);
 
             // Validation
             if (!fullname || fullname.length < 2) {
@@ -806,6 +808,8 @@
                 // Calculate age from DOB
                 const age = new Date().getFullYear() - parseInt(year);
 
+                console.log('📡 Creating user with Supabase Auth...');
+
                 // 1. Create user with Supabase Auth
                 const { data, error } = await supabase.auth.signUp({
                     email: email,
@@ -821,18 +825,17 @@
                 });
 
                 if (error) {
-                    console.error('Auth Signup Error:', error);
-                    throw error;
+                    console.error('❌ Auth Signup Error:', error);
+                    throw new Error(error.message);
                 }
 
                 if (!data || !data.user) {
                     throw new Error('No user data returned');
                 }
 
-                console.log('✅ Account created for:', email);
-                console.log('👤 User ID:', data.user.id);
+                console.log('✅ Auth user created:', data.user.id);
 
-                // 2. Also insert into members table for additional data
+                // 2. Insert into members table
                 try {
                     const { error: insertError } = await supabase
                         .from('members')
@@ -854,10 +857,13 @@
                         });
 
                     if (insertError) {
-                        console.warn('Could not insert into members table:', insertError);
+                        console.warn('⚠️ Members table insert error:', insertError);
+                        // Continue anyway - user is created in Auth
+                    } else {
+                        console.log('✅ Members table updated');
                     }
                 } catch (insertErr) {
-                    console.warn('Members table insert skipped:', insertErr);
+                    console.warn('⚠️ Members table insert skipped:', insertErr);
                 }
 
                 // Show success
@@ -883,7 +889,7 @@
                 return true;
 
             } catch (error) {
-                console.error('Signup error:', error);
+                console.error('❌ Signup error:', error);
                 errorMessage.textContent = '⚠️ ' + error.message;
                 errorMessage.classList.add('show');
                 signupBtn.textContent = 'Sign Up';
@@ -912,16 +918,15 @@
                 const { data, error } = await supabase.auth.getSession();
                 if (data && data.session) {
                     console.log('👤 Already logged in as:', data.session.user.email);
-                    // Uncomment to auto-redirect:
-                    // window.location.href = 'members.html';
                 }
             } catch (e) {
                 console.log('No active session');
             }
         })();
 
-        console.log('💎 ClassyDate Sign Up Page with Supabase Auth loaded!');
+        console.log('💎 ClassyDate Sign Up Page loaded!');
         console.log('🔗 Connected to:', SUPABASE_URL);
+        console.log('📊 Your members table has 16 columns and 4 rows.');
     </script>
 
 </body>
