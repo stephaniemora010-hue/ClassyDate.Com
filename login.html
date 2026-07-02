@@ -4,19 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
     <title>Log In | ClassyDate</title>
-    <meta name="description" content="Log in to your ClassyDate account and start connecting with meaningful relationships.">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
     <style>
-        /* ============================================================
-           CLASSYDATE - Login Page
-           ============================================================ */
-
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         body {
@@ -34,7 +27,6 @@
             color: inherit;
         }
 
-        /* ---------- HEADER ---------- */
         .cb-shell-header {
             position: fixed;
             top: 0;
@@ -105,7 +97,6 @@
             transform: translateY(-2px);
         }
 
-        /* ---------- LOGIN CONTAINER ---------- */
         .login-wrapper {
             flex: 1;
             display: flex;
@@ -145,7 +136,6 @@
             margin-top: 4px;
         }
 
-        /* ---------- FORM ---------- */
         .form-group {
             margin-bottom: 18px;
         }
@@ -239,7 +229,6 @@
             transform: none;
         }
 
-        /* ---------- DIVIDER ---------- */
         .divider {
             display: flex;
             align-items: center;
@@ -257,7 +246,6 @@
             background: rgba(255, 255, 255, 0.06);
         }
 
-        /* ---------- SOCIAL LOGIN ---------- */
         .social-login {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -291,7 +279,6 @@
             font-size: 20px;
         }
 
-        /* ---------- FOOTER LINK ---------- */
         .login-footer {
             text-align: center;
             margin-top: 6px;
@@ -313,7 +300,6 @@
             text-decoration: underline;
         }
 
-        /* ---------- ERROR MESSAGE ---------- */
         .error-message {
             display: none;
             background: rgba(255, 45, 85, 0.12);
@@ -329,31 +315,25 @@
             display: block;
         }
 
-        /* ---------- RESPONSIVE ---------- */
         @media (max-width: 480px) {
             .login-card {
                 padding: 28px 20px 24px;
             }
-
             .login-card__header h1 {
                 font-size: 22px;
             }
-
             .form-options {
                 flex-direction: column;
                 gap: 10px;
                 align-items: flex-start;
             }
-
             .social-login {
                 grid-template-columns: 1fr;
             }
-
             .cb-shell-header__inner {
                 height: 52px;
                 padding: 0 12px;
             }
-
             .cb-shell-brand {
                 font-size: 17px;
             }
@@ -365,9 +345,7 @@
 </head>
 <body>
 
-    <!-- ============================================================ -->
-    <!-- HEADER                                                       -->
-    <!-- ============================================================ -->
+    <!-- HEADER -->
     <header class="cb-shell-header" role="banner">
         <div class="cb-shell-header__inner">
             <a class="cb-shell-brand" href="index.html" aria-label="ClassyDate">
@@ -382,9 +360,7 @@
         </div>
     </header>
 
-    <!-- ============================================================ -->
-    <!-- LOGIN FORM                                                   -->
-    <!-- ============================================================ -->
+    <!-- LOGIN FORM -->
     <main class="login-wrapper">
         <div class="login-card">
             <div class="login-card__header">
@@ -392,10 +368,7 @@
                 <p>Log in to continue your journey</p>
             </div>
 
-            <!-- Error Message -->
-            <div class="error-message" id="error-message">
-                ⚠️ Invalid email or password. Please try again.
-            </div>
+            <div class="error-message" id="error-message">⚠️ Invalid email or password. Please try again.</div>
 
             <form id="login-form" onsubmit="return handleLogin(event)">
                 <div class="form-group">
@@ -435,24 +408,9 @@
         </div>
     </main>
 
-    <!-- ============================================================ -->
-    <!-- SUPABASE INTEGRATION                                        -->
-    <!-- ============================================================ -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
-    </script>
-
     <script>
         // ============================================================
-        // SUPABASE CONFIGURATION
-        // ============================================================
-
-        const SUPABASE_URL = 'https://soyypmuksvxyjeeemquz.supabase.co';
-        const SUPABASE_ANON_KEY = 'sb_publishable_vUvF8Ghbb1yB0yQKCCuHiA_wtkRYj1b';
-
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-        // ============================================================
-        // LOGIN HANDLER - Using Supabase Auth
+        // LOGIN HANDLER - localStorage (No Supabase!)
         // ============================================================
 
         async function handleLogin(event) {
@@ -463,7 +421,6 @@
             const errorMessage = document.getElementById('error-message');
             const loginBtn = document.getElementById('login-btn');
 
-            // Hide previous error
             errorMessage.classList.remove('show');
 
             console.log('🔐 Attempting login for:', email);
@@ -487,41 +444,47 @@
                 return false;
             }
 
-            // Show loading state
             loginBtn.textContent = '⏳ Logging in...';
             loginBtn.disabled = true;
 
             try {
-                // Use Supabase Auth to sign in
-                const { data, error } = await supabase.auth.signInWithPassword({
-                    email: email,
-                    password: password
-                });
+                // Get users from localStorage
+                const users = JSON.parse(localStorage.getItem('classydate_users') || '[]');
 
-                if (error) {
-                    console.error('Auth Error:', error);
-                    errorMessage.textContent = '⚠️ ' + error.message;
+                // Find user by email
+                const user = users.find(u => u.email === email);
+
+                if (!user) {
+                    errorMessage.textContent = '⚠️ No account found with this email. Please Sign Up.';
                     errorMessage.classList.add('show');
                     loginBtn.textContent = 'Log In';
                     loginBtn.disabled = false;
                     return false;
                 }
 
-                console.log('✅ Login successful for:', data.user.email);
-                console.log('👤 User ID:', data.user.id);
+                // Check password (simple check - in production, use hashed passwords!)
+                if (user.password !== password) {
+                    errorMessage.textContent = '⚠️ Incorrect password. Please try again.';
+                    errorMessage.classList.add('show');
+                    loginBtn.textContent = 'Log In';
+                    loginBtn.disabled = false;
+                    return false;
+                }
 
-                // Store user info in localStorage
-                localStorage.setItem('classydate_user', JSON.stringify({
-                    id: data.user.id,
-                    email: data.user.email,
-                    loggedIn: true
-                }));
+                console.log('✅ Login successful for:', user.name);
 
-                // Show success
                 loginBtn.textContent = '✅ Logged In!';
                 loginBtn.style.background = 'linear-gradient(135deg, #00C851, #007E33)';
 
-                // Redirect to members page after 1.5 seconds
+                // Store current user session
+                localStorage.setItem('classydate_user', JSON.stringify({
+                    id: user.id,
+                    email: user.email,
+                    name: user.name,
+                    loggedIn: true
+                }));
+
+                // Redirect after 1.5 seconds
                 setTimeout(function() {
                     window.location.href = 'members.html';
                 }, 1500);
@@ -529,7 +492,7 @@
                 return true;
 
             } catch (error) {
-                console.error('Login error:', error);
+                console.error('❌ Login error:', error);
                 errorMessage.textContent = '⚠️ An error occurred. Please try again.';
                 errorMessage.classList.add('show');
                 loginBtn.textContent = 'Log In';
@@ -538,10 +501,7 @@
             }
         }
 
-        // ============================================================
-        // REAL-TIME VALIDATION CLEARING
-        // ============================================================
-
+        // Clear errors on input
         document.getElementById('email').addEventListener('input', function() {
             document.getElementById('error-message').classList.remove('show');
         });
@@ -550,26 +510,23 @@
             document.getElementById('error-message').classList.remove('show');
         });
 
-        // ============================================================
-        // CHECK IF ALREADY LOGGED IN (Supabase Session)
-        // ============================================================
-
-        (async function checkSession() {
-            try {
-                const { data, error } = await supabase.auth.getSession();
-                
-                if (data && data.session) {
-                    console.log('👤 Already logged in as:', data.session.user.email);
-                    // Optionally redirect to members page
-                    // window.location.href = 'members.html';
-                }
-            } catch (e) {
-                console.log('No active session');
+        // Check if already logged in
+        (function checkSession() {
+            const user = localStorage.getItem('classydate_user');
+            if (user) {
+                try {
+                    const userData = JSON.parse(user);
+                    if (userData.loggedIn) {
+                        console.log('👤 Already logged in as:', userData.name);
+                        // Uncomment to auto-redirect:
+                        // window.location.href = 'members.html';
+                    }
+                } catch (e) {}
             }
         })();
 
-        console.log('💎 ClassyDate Login Page with Supabase Auth loaded!');
-        console.log('🔗 Connected to:', SUPABASE_URL);
+        console.log('💎 ClassyDate Login Page loaded!');
+        console.log('📝 Using localStorage - no database needed!');
     </script>
 
 </body>
