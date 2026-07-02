@@ -8,7 +8,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
     <style>
         /* ============================================================
-           CLASSYDATE - Members Page
+           CLASSYDATE - Members Page (HARDCODED)
            ============================================================ */
 
         *,
@@ -278,37 +278,6 @@
 
         .btn-reset:hover {
             background: rgba(255, 255, 255, 0.08);
-        }
-
-        /* ---------- LOADING SPINNER ---------- */
-        .loading-spinner {
-            display: none;
-            text-align: center;
-            padding: 60px 20px;
-            color: rgba(255, 255, 255, 0.3);
-        }
-
-        .loading-spinner.active {
-            display: block;
-        }
-
-        .loading-spinner .spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid rgba(255, 45, 85, 0.1);
-            border-top: 3px solid #FF2D55;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 12px;
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
         }
 
         /* ---------- MEMBERS GRID ---------- */
@@ -722,7 +691,7 @@
         <div class="members-header">
             <div>
                 <h1>Browse <span>Members</span></h1>
-                <span class="member-count">Showing <strong id="total-count">0</strong> members</span>
+                <span class="member-count">Showing <strong id="total-count">24</strong> members</span>
             </div>
             <div class="view-toggle">
                 <button class="active" onclick="setView('grid')" id="grid-view">▦ Grid</button>
@@ -734,7 +703,7 @@
         <div class="filters-section">
             <div class="filter-group">
                 <label>Gender</label>
-                <select id="filter-gender">
+                <select id="filter-gender" onchange="applyFilters()">
                     <option value="all">All</option>
                     <option value="male">Men</option>
                     <option value="female">Women</option>
@@ -743,7 +712,7 @@
 
             <div class="filter-group">
                 <label>Status</label>
-                <select id="filter-status">
+                <select id="filter-status" onchange="applyFilters()">
                     <option value="all">All</option>
                     <option value="online">Online</option>
                     <option value="offline">Offline</option>
@@ -752,7 +721,7 @@
 
             <div class="filter-group">
                 <label>Age</label>
-                <input type="range" id="filter-age" min="18" max="80" value="50">
+                <input type="range" id="filter-age" min="18" max="80" value="50" oninput="updateAgeDisplay()">
                 <span class="range-labels">
                     <span>18</span>
                     <span id="age-display">50</span>
@@ -762,7 +731,7 @@
 
             <div class="filter-group">
                 <label>Verified</label>
-                <select id="filter-verified">
+                <select id="filter-verified" onchange="applyFilters()">
                     <option value="all">All</option>
                     <option value="verified">Verified Only</option>
                 </select>
@@ -772,12 +741,6 @@
                 <button class="btn-apply" onclick="applyFilters()">Apply</button>
                 <button class="btn-reset" onclick="resetFilters()">Reset</button>
             </div>
-        </div>
-
-        <!-- Loading Spinner -->
-        <div class="loading-spinner" id="loading-spinner">
-            <div class="spinner"></div>
-            <span>Loading members...</span>
         </div>
 
         <!-- Members Grid -->
@@ -791,66 +754,384 @@
         </div>
     </main>
 
-    <!-- ============================================================ -->
-    <!-- SUPABASE INTEGRATION                                        -->
-    <!-- ============================================================ -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
-    </script>
-
     <script>
         // ============================================================
-        // SUPABASE CONFIGURATION
+        // HARDCODED MEMBERS DATA - 17 Men + 7 Women = 24 Members
         // ============================================================
 
-        const SUPABASE_URL = 'https://soyypmuksvxyjeeemquz.supabase.co';
-        const SUPABASE_ANON_KEY = 'sb_publishable_vUvF8Ghbb1yB0yQKCCuHiA_wtkRYj1b';
-
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        const membersData = [
+            // ===== MEN (17) =====
+            {
+                id: 1,
+                name: "David Okafor",
+                age: 34,
+                gender: "male",
+                location: "New York, USA",
+                bio: "Nigerian-American entrepreneur. Love building businesses and traveling.",
+                photo_url: "https://randomuser.me/api/portraits/men/1.jpg",
+                verified: true,
+                premium: true,
+                online: true,
+                is_new: false,
+                joined: "2025-01-15",
+                interests: ["Business", "Travel", "Fitness"]
+            },
+            {
+                id: 2,
+                name: "Kwame Mensah",
+                age: 29,
+                gender: "male",
+                location: "Atlanta, USA",
+                bio: "Ghanaian software engineer. Passionate about tech and community building.",
+                photo_url: "https://randomuser.me/api/portraits/men/2.jpg",
+                verified: true,
+                premium: false,
+                online: true,
+                is_new: true,
+                joined: "2026-03-10",
+                interests: ["Tech", "Community", "Music"]
+            },
+            {
+                id: 3,
+                name: "Chidi Eze",
+                age: 31,
+                gender: "male",
+                location: "Houston, USA",
+                bio: "Nigerian doctor. Saving lives and enjoying life.",
+                photo_url: "https://randomuser.me/api/portraits/men/3.jpg",
+                verified: true,
+                premium: true,
+                online: false,
+                is_new: false,
+                joined: "2025-07-22",
+                interests: ["Medicine", "Travel", "Fitness"]
+            },
+            {
+                id: 4,
+                name: "Sipho Ndlovu",
+                age: 36,
+                gender: "male",
+                location: "Chicago, USA",
+                bio: "South African finance professional. Love hiking and good wine.",
+                photo_url: "https://randomuser.me/api/portraits/men/4.jpg",
+                verified: true,
+                premium: true,
+                online: true,
+                is_new: false,
+                joined: "2024-08-05",
+                interests: ["Hiking", "Finance", "Wine"]
+            },
+            {
+                id: 5,
+                name: "Tunde Balogun",
+                age: 27,
+                gender: "male",
+                location: "Los Angeles, USA",
+                bio: "Nigerian creative director. Art, fashion, and design.",
+                photo_url: "https://randomuser.me/api/portraits/men/5.jpg",
+                verified: false,
+                premium: false,
+                online: true,
+                is_new: true,
+                joined: "2026-04-01",
+                interests: ["Art", "Fashion", "Design"]
+            },
+            {
+                id: 6,
+                name: "Kofi Adomako",
+                age: 33,
+                gender: "male",
+                location: "Boston, USA",
+                bio: "Ghanaian engineer. Building the future one line of code at a time.",
+                photo_url: "https://randomuser.me/api/portraits/men/6.jpg",
+                verified: true,
+                premium: false,
+                online: false,
+                is_new: false,
+                joined: "2025-09-12",
+                interests: ["Engineering", "Robotics", "Gaming"]
+            },
+            {
+                id: 7,
+                name: "Emeka Okonkwo",
+                age: 38,
+                gender: "male",
+                location: "Dallas, USA",
+                bio: "Nigerian entrepreneur. Real estate and investment.",
+                photo_url: "https://randomuser.me/api/portraits/men/7.jpg",
+                verified: true,
+                premium: true,
+                online: true,
+                is_new: false,
+                joined: "2024-03-18",
+                interests: ["Real Estate", "Investing", "Golf"]
+            },
+            {
+                id: 8,
+                name: "Thabo Mbeki",
+                age: 30,
+                gender: "male",
+                location: "Washington DC, USA",
+                bio: "South African diplomat. Passionate about policy and global affairs.",
+                photo_url: "https://randomuser.me/api/portraits/men/8.jpg",
+                verified: true,
+                premium: false,
+                online: true,
+                is_new: true,
+                joined: "2026-02-14",
+                interests: ["Politics", "Books", "Travel"]
+            },
+            {
+                id: 9,
+                name: "Nnamdi Okafor",
+                age: 35,
+                gender: "male",
+                location: "Phoenix, USA",
+                bio: "Nigerian-born architect. Designing beautiful spaces.",
+                photo_url: "https://randomuser.me/api/portraits/men/9.jpg",
+                verified: true,
+                premium: true,
+                online: false,
+                is_new: false,
+                joined: "2025-05-30",
+                interests: ["Architecture", "Photography", "Design"]
+            },
+            {
+                id: 10,
+                name: "Zanele Khumalo",
+                age: 28,
+                gender: "male",
+                location: "Seattle, USA",
+                bio: "South African data scientist. AI and machine learning enthusiast.",
+                photo_url: "https://randomuser.me/api/portraits/men/10.jpg",
+                verified: false,
+                premium: false,
+                online: true,
+                is_new: true,
+                joined: "2026-03-25",
+                interests: ["Data", "AI", "Music"]
+            },
+            {
+                id: 11,
+                name: "Yaw Acheampong",
+                age: 40,
+                gender: "male",
+                location: "Denver, USA",
+                bio: "Ghanaian professor. Teaching economics and finance.",
+                photo_url: "https://randomuser.me/api/portraits/men/11.jpg",
+                verified: true,
+                premium: true,
+                online: false,
+                is_new: false,
+                joined: "2024-01-10",
+                interests: ["Teaching", "Research", "Writing"]
+            },
+            {
+                id: 12,
+                name: "Ikenna Ogbonna",
+                age: 26,
+                gender: "male",
+                location: "Miami, USA",
+                bio: "Nigerian fitness trainer. Helping people achieve their best selves.",
+                photo_url: "https://randomuser.me/api/portraits/men/12.jpg",
+                verified: false,
+                premium: false,
+                online: true,
+                is_new: true,
+                joined: "2026-05-01",
+                interests: ["Fitness", "Nutrition", "Health"]
+            },
+            {
+                id: 13,
+                name: "Mandla Nkosi",
+                age: 32,
+                gender: "male",
+                location: "Portland, USA",
+                bio: "South African chef. Bringing African flavors to the world.",
+                photo_url: "https://randomuser.me/api/portraits/men/13.jpg",
+                verified: true,
+                premium: true,
+                online: true,
+                is_new: false,
+                joined: "2025-11-20",
+                interests: ["Cooking", "Food", "Travel"]
+            },
+            {
+                id: 14,
+                name: "Chibuzo Okeke",
+                age: 37,
+                gender: "male",
+                location: "San Diego, USA",
+                bio: "Nigerian engineer. Renewable energy and sustainability.",
+                photo_url: "https://randomuser.me/api/portraits/men/14.jpg",
+                verified: true,
+                premium: false,
+                online: false,
+                is_new: false,
+                joined: "2025-08-15",
+                interests: ["Energy", "Environment", "Innovation"]
+            },
+            {
+                id: 15,
+                name: "Lesedi Moloi",
+                age: 29,
+                gender: "male",
+                location: "Austin, USA",
+                bio: "South African musician. Creating beats and vibes.",
+                photo_url: "https://randomuser.me/api/portraits/men/15.jpg",
+                verified: false,
+                premium: false,
+                online: true,
+                is_new: true,
+                joined: "2026-01-20",
+                interests: ["Music", "Production", "Sound"]
+            },
+            {
+                id: 16,
+                name: "Obinna Nwosu",
+                age: 33,
+                gender: "male",
+                location: "Philadelphia, USA",
+                bio: "Nigerian pharmacist. Health and wellness advocate.",
+                photo_url: "https://randomuser.me/api/portraits/men/16.jpg",
+                verified: true,
+                premium: true,
+                online: true,
+                is_new: false,
+                joined: "2025-06-10",
+                interests: ["Health", "Wellness", "Running"]
+            },
+            {
+                id: 17,
+                name: "Biko Ngwenya",
+                age: 31,
+                gender: "male",
+                location: "Minneapolis, USA",
+                bio: "Zimbabwean filmmaker. Telling African stories through film.",
+                photo_url: "https://randomuser.me/api/portraits/men/17.jpg",
+                verified: true,
+                premium: false,
+                online: false,
+                is_new: true,
+                joined: "2026-04-15",
+                interests: ["Film", "Directing", "Writing"]
+            },
+            // ===== WOMEN (7) =====
+            {
+                id: 18,
+                name: "Amina Ibrahim",
+                age: 28,
+                gender: "female",
+                location: "New York, USA",
+                bio: "Nigerian lawyer. Fighting for justice and equality.",
+                photo_url: "https://randomuser.me/api/portraits/women/1.jpg",
+                verified: true,
+                premium: true,
+                online: true,
+                is_new: false,
+                joined: "2025-02-20",
+                interests: ["Law", "Justice", "Reading"]
+            },
+            {
+                id: 19,
+                name: "Nomsa Mthembu",
+                age: 32,
+                gender: "female",
+                location: "Atlanta, USA",
+                bio: "South African nurse. Caring for others with love.",
+                photo_url: "https://randomuser.me/api/portraits/women/2.jpg",
+                verified: true,
+                premium: false,
+                online: true,
+                is_new: true,
+                joined: "2026-03-01",
+                interests: ["Healthcare", "Travel", "Music"]
+            },
+            {
+                id: 20,
+                name: "Chimamanda Odili",
+                age: 30,
+                gender: "female",
+                location: "Houston, USA",
+                bio: "Nigerian writer. Telling stories that matter.",
+                photo_url: "https://randomuser.me/api/portraits/women/3.jpg",
+                verified: true,
+                premium: true,
+                online: false,
+                is_new: false,
+                joined: "2025-09-15",
+                interests: ["Writing", "Reading", "Culture"]
+            },
+            {
+                id: 21,
+                name: "Lerato Mokoena",
+                age: 26,
+                gender: "female",
+                location: "Los Angeles, USA",
+                bio: "South African dancer. Expressing through movement.",
+                photo_url: "https://randomuser.me/api/portraits/women/4.jpg",
+                verified: false,
+                premium: false,
+                online: true,
+                is_new: true,
+                joined: "2026-04-10",
+                interests: ["Dance", "Fitness", "Fashion"]
+            },
+            {
+                id: 22,
+                name: "Nneka Eze",
+                age: 34,
+                gender: "female",
+                location: "Chicago, USA",
+                bio: "Nigerian architect. Building dreams.",
+                photo_url: "https://randomuser.me/api/portraits/women/5.jpg",
+                verified: true,
+                premium: true,
+                online: true,
+                is_new: false,
+                joined: "2025-07-01",
+                interests: ["Architecture", "Design", "Travel"]
+            },
+            {
+                id: 23,
+                name: "Thandiwe Ndlovu",
+                age: 29,
+                gender: "female",
+                location: "Dallas, USA",
+                bio: "South African entrepreneur. Building empires.",
+                photo_url: "https://randomuser.me/api/portraits/women/6.jpg",
+                verified: true,
+                premium: false,
+                online: false,
+                is_new: false,
+                joined: "2025-11-25",
+                interests: ["Business", "Startups", "Leadership"]
+            },
+            {
+                id: 24,
+                name: "Amara Okafor",
+                age: 27,
+                gender: "female",
+                location: "Boston, USA",
+                bio: "Nigerian graphic designer. Creating beautiful visual stories.",
+                photo_url: "https://randomuser.me/api/portraits/women/7.jpg",
+                verified: false,
+                premium: false,
+                online: true,
+                is_new: true,
+                joined: "2026-05-15",
+                interests: ["Design", "Art", "Creativity"]
+            }
+        ];
 
         // ============================================================
         // STATE
         // ============================================================
-        let members = [];
-        let filteredMembers = [];
+        let members = [...membersData];
+        let filteredMembers = [...members];
         let currentView = 'grid';
         let currentPage = 1;
         const perPage = 8;
-
-        // ============================================================
-        // FETCH MEMBERS FROM SUPABASE
-        // ============================================================
-
-        async function fetchMembers() {
-            const spinner = document.getElementById('loading-spinner');
-            spinner.classList.add('active');
-
-            try {
-                const { data, error } = await supabase
-                    .from('members')
-                    .select('*')
-                    .order('id', { ascending: false });
-
-                if (error) throw error;
-
-                members = data || [];
-                filteredMembers = [...members];
-                renderMembers(filteredMembers);
-                updatePagination();
-                document.getElementById('total-count').textContent = members.length;
-
-            } catch (error) {
-                console.error('Error fetching members:', error);
-                document.getElementById('members-grid').innerHTML = `
-                    <div class="empty-state">
-                        <div class="icon">⚠️</div>
-                        <h3>Error loading members</h3>
-                        <p>Please try again later.</p>
-                    </div>
-                `;
-            } finally {
-                spinner.classList.remove('active');
-            }
-        }
 
         // ============================================================
         // VIEW TOGGLE
@@ -870,6 +1151,11 @@
         // ============================================================
         // FILTERS
         // ============================================================
+
+        function updateAgeDisplay() {
+            document.getElementById('age-display').textContent = document.getElementById('filter-age').value;
+            applyFilters();
+        }
 
         function applyFilters() {
             const gender = document.getElementById('filter-gender').value;
@@ -905,11 +1191,6 @@
             document.getElementById('total-count').textContent = members.length;
         }
 
-        // Age range display
-        document.getElementById('filter-age').addEventListener('input', function() {
-            document.getElementById('age-display').textContent = this.value;
-        });
-
         // ============================================================
         // RENDER MEMBERS
         // ============================================================
@@ -933,7 +1214,7 @@
             grid.innerHTML = pageMembers.map(member => `
                 <div class="member-card" data-id="${member.id}">
                     <div class="member-card__image">
-                        <img src="${member.photo_url || 'https://randomuser.me/api/portraits/lego/1.jpg'}" alt="${member.name}" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/lego/1.jpg'">
+                        <img src="${member.photo_url}" alt="${member.name}" loading="lazy" onerror="this.src='https://randomuser.me/api/portraits/lego/1.jpg'">
                         <div class="member-card__badges">
                             ${member.verified ? '<span class="badge badge--verified">✓ Verified</span>' : ''}
                             ${member.premium ? '<span class="badge badge--premium">⭐ Premium</span>' : ''}
@@ -1021,16 +1302,14 @@
         // ============================================================
 
         function viewProfile(id) {
-            window.location.href = `profile.html?id=${id}`;
+            alert('👤 Viewing profile of ' + members.find(m => m.id === id).name);
+            // window.location.href = `profile.html?id=${id}`;
         }
 
         function sendMessage(id) {
             const member = members.find(m => m.id === id);
-            if (member) {
-                window.location.href = `subscription.html?member=${member.id}&name=${encodeURIComponent(member.name)}`;
-            } else {
-                window.location.href = 'subscription.html';
-            }
+            alert('💬 Send message to ' + member.name);
+            // window.location.href = `subscription.html?member=${member.id}&name=${encodeURIComponent(member.name)}`;
         }
 
         // ============================================================
@@ -1040,7 +1319,6 @@
         (function checkSession() {
             const user = localStorage.getItem('classydate_user');
             if (!user) {
-                // User not logged in, show a message or redirect
                 console.log('👤 Please log in to view members');
             } else {
                 try {
@@ -1054,11 +1332,13 @@
         // INIT
         // ============================================================
 
-        // Load members on page load
-        fetchMembers();
+        renderMembers(filteredMembers);
+        updatePagination();
+        document.getElementById('total-count').textContent = members.length;
 
-        console.log('💎 ClassyDate Members Page with Supabase loaded!');
-        console.log('🔗 Connected to:', SUPABASE_URL);
+        console.log('💎 ClassyDate Members Page loaded!');
+        console.log('📊 Showing 24 hardcoded members (17 men, 7 women)');
+        console.log('👤 All members are African professionals based in USA');
     </script>
 
 </body>
