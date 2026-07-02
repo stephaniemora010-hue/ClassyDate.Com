@@ -4,19 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
     <title>Sign Up | ClassyDate</title>
-    <meta name="description" content="Join ClassyDate for free and start connecting with meaningful relationships. Sign up today!">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
     <style>
-        /* ============================================================
-           CLASSYDATE - Sign Up Page
-           ============================================================ */
-
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         body {
@@ -145,7 +138,6 @@
             margin-top: 4px;
         }
 
-        /* ---------- FORM ---------- */
         .form-group {
             margin-bottom: 16px;
         }
@@ -206,7 +198,6 @@
             gap: 14px;
         }
 
-        /* ---------- GENDER BUTTONS ---------- */
         .gender-group {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -251,7 +242,6 @@
             gap: 8px;
         }
 
-        /* ---------- TERMS ---------- */
         .terms-group {
             display: flex;
             align-items: flex-start;
@@ -286,7 +276,6 @@
             text-decoration: underline;
         }
 
-        /* ---------- BUTTONS ---------- */
         .btn-signup {
             width: 100%;
             padding: 14px;
@@ -312,7 +301,6 @@
             transform: none;
         }
 
-        /* ---------- DIVIDER ---------- */
         .divider {
             display: flex;
             align-items: center;
@@ -330,7 +318,6 @@
             background: rgba(255, 255, 255, 0.06);
         }
 
-        /* ---------- SOCIAL SIGNUP ---------- */
         .social-signup {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -364,7 +351,6 @@
             font-size: 20px;
         }
 
-        /* ---------- FOOTER LINK ---------- */
         .signup-footer {
             text-align: center;
             margin-top: 6px;
@@ -386,7 +372,6 @@
             text-decoration: underline;
         }
 
-        /* ---------- ERROR MESSAGE ---------- */
         .error-message {
             display: none;
             background: rgba(255, 45, 85, 0.12);
@@ -417,7 +402,6 @@
             display: block;
         }
 
-        /* ---------- PASSWORD STRENGTH ---------- */
         .password-strength {
             display: flex;
             gap: 6px;
@@ -450,37 +434,29 @@
             margin-top: 4px;
         }
 
-        /* ---------- RESPONSIVE ---------- */
         @media (max-width: 480px) {
             .signup-card {
                 padding: 28px 20px 24px;
             }
-
             .signup-card__header h1 {
                 font-size: 22px;
             }
-
             .form-row {
                 grid-template-columns: 1fr;
             }
-
             .gender-group {
                 grid-template-columns: 1fr 1fr;
             }
-
             .social-signup {
                 grid-template-columns: 1fr;
             }
-
             .terms-group {
                 align-items: flex-start;
             }
-
             .cb-shell-header__inner {
                 height: 52px;
                 padding: 0 12px;
             }
-
             .cb-shell-brand {
                 font-size: 17px;
             }
@@ -492,9 +468,7 @@
 </head>
 <body>
 
-    <!-- ============================================================ -->
-    <!-- HEADER                                                       -->
-    <!-- ============================================================ -->
+    <!-- HEADER -->
     <header class="cb-shell-header" role="banner">
         <div class="cb-shell-header__inner">
             <a class="cb-shell-brand" href="index.html" aria-label="ClassyDate">
@@ -509,9 +483,7 @@
         </div>
     </header>
 
-    <!-- ============================================================ -->
-    <!-- SIGNUP FORM                                                  -->
-    <!-- ============================================================ -->
+    <!-- SIGNUP FORM -->
     <main class="signup-wrapper">
         <div class="signup-card">
             <div class="signup-card__header">
@@ -519,30 +491,20 @@
                 <p>Join ClassyDate and start connecting</p>
             </div>
 
-            <!-- Error Message -->
-            <div class="error-message" id="error-message">
-                ⚠️ Please fix the errors below.
-            </div>
-
-            <!-- Success Message -->
-            <div class="success-message" id="success-message">
-                ✅ Account created successfully! Redirecting...
-            </div>
+            <div class="error-message" id="error-message">⚠️ Please fix the errors below.</div>
+            <div class="success-message" id="success-message">✅ Account created successfully! Redirecting...</div>
 
             <form id="signup-form" onsubmit="return handleSignup(event)">
-                <!-- Full Name -->
                 <div class="form-group">
                     <label for="fullname">Full Name <span class="required">*</span></label>
                     <input type="text" id="fullname" placeholder="John Doe" required>
                 </div>
 
-                <!-- Email -->
                 <div class="form-group">
                     <label for="email">Email Address <span class="required">*</span></label>
                     <input type="email" id="email" placeholder="you@example.com" autocomplete="email" required>
                 </div>
 
-                <!-- Password -->
                 <div class="form-group">
                     <label for="password">Password <span class="required">*</span></label>
                     <input type="password" id="password" placeholder="Min. 8 characters" autocomplete="new-password" required oninput="checkPasswordStrength(this.value)">
@@ -555,7 +517,6 @@
                     <div class="password-hint" id="password-hint">Use 8+ characters with a mix of letters, numbers &amp; symbols</div>
                 </div>
 
-                <!-- Gender -->
                 <div class="form-group">
                     <label>I am a <span class="required">*</span></label>
                     <div class="gender-group">
@@ -570,7 +531,6 @@
                     </div>
                 </div>
 
-                <!-- Date of Birth -->
                 <div class="form-row">
                     <div class="form-group">
                         <label>Date of Birth <span class="required">*</span></label>
@@ -629,18 +589,14 @@
                     </div>
                 </div>
 
-                <!-- Location -->
                 <div class="form-group">
                     <label for="location">Location</label>
                     <input type="text" id="location" placeholder="City, Country">
                 </div>
 
-                <!-- Terms -->
                 <div class="terms-group">
                     <input type="checkbox" id="terms" required>
-                    <label for="terms">
-                        I agree to the <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>
-                    </label>
+                    <label for="terms">I agree to the <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a></label>
                 </div>
 
                 <button type="submit" class="btn-signup" id="signup-btn">Sign Up</button>
@@ -663,22 +619,7 @@
         </div>
     </main>
 
-    <!-- ============================================================ -->
-    <!-- SUPABASE INTEGRATION                                        -->
-    <!-- ============================================================ -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
-    </script>
-
     <script>
-        // ============================================================
-        // SUPABASE CONFIGURATION
-        // ============================================================
-
-        const SUPABASE_URL = 'https://soyypmuksvxyjeeemquz.supabase.co';
-        const SUPABASE_ANON_KEY = 'sb_publishable_vUvF8Ghbb1yB0yQKCCuHiA_wtkRYj1b';
-
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
         // ============================================================
         // GENDER SELECTION
         // ============================================================
@@ -737,7 +678,7 @@
         }
 
         // ============================================================
-        // SIGNUP HANDLER - SIMPLIFIED & FIXED
+        // SIGNUP HANDLER - localStorage (No Supabase!)
         // ============================================================
 
         async function handleSignup(event) {
@@ -757,11 +698,8 @@
             const successMessage = document.getElementById('success-message');
             const signupBtn = document.getElementById('signup-btn');
 
-            // Hide previous messages
             errorMessage.classList.remove('show');
             successMessage.classList.remove('show');
-
-            console.log('📝 Starting signup for:', email);
 
             // Validation
             if (!fullname || fullname.length < 2) {
@@ -800,84 +738,56 @@
                 return false;
             }
 
-            // Show loading state
             signupBtn.textContent = '⏳ Creating account...';
             signupBtn.disabled = true;
 
             try {
-                // Calculate age from DOB
+                // Calculate age
                 const age = new Date().getFullYear() - parseInt(year);
 
-                console.log('📡 Creating user with Supabase Auth...');
+                // Get existing users from localStorage
+                const users = JSON.parse(localStorage.getItem('classydate_users') || '[]');
 
-                // 1. Create user with Supabase Auth
-                const { data, error } = await supabase.auth.signUp({
+                // Check if email already exists
+                if (users.some(u => u.email === email)) {
+                    errorMessage.textContent = '⚠️ An account with this email already exists. Please log in.';
+                    errorMessage.classList.add('show');
+                    signupBtn.textContent = 'Sign Up';
+                    signupBtn.disabled = false;
+                    return false;
+                }
+
+                // Create new user
+                const newUser = {
+                    id: Date.now(),
+                    name: fullname,
                     email: email,
-                    password: password,
-                    options: {
-                        data: {
-                            full_name: fullname,
-                            age: age,
-                            gender: gender.value,
-                            location: location || ''
-                        }
-                    }
-                });
+                    password: password, // In production, hash this!
+                    age: age,
+                    gender: gender.value,
+                    location: location || '',
+                    joined: new Date().toISOString().split('T')[0],
+                    created_at: new Date().toISOString()
+                };
 
-                if (error) {
-                    console.error('❌ Auth Signup Error:', error);
-                    throw new Error(error.message);
-                }
+                // Save to localStorage
+                users.push(newUser);
+                localStorage.setItem('classydate_users', JSON.stringify(users));
 
-                if (!data || !data.user) {
-                    throw new Error('No user data returned');
-                }
+                console.log('✅ Account created for:', email);
+                console.log('👤 User ID:', newUser.id);
 
-                console.log('✅ Auth user created:', data.user.id);
-
-                // 2. Insert into members table
-                try {
-                    const { error: insertError } = await supabase
-                        .from('members')
-                        .insert({
-                            id: data.user.id,
-                            name: fullname,
-                            email: email,
-                            age: age,
-                            gender: gender.value,
-                            location: location || '',
-                            bio: '',
-                            photo_urls: '[]',
-                            verified: false,
-                            premium: false,
-                            online: false,
-                            is_new: true,
-                            joined: new Date().toISOString().split('T')[0],
-                            interests: []
-                        });
-
-                    if (insertError) {
-                        console.warn('⚠️ Members table insert error:', insertError);
-                        // Continue anyway - user is created in Auth
-                    } else {
-                        console.log('✅ Members table updated');
-                    }
-                } catch (insertErr) {
-                    console.warn('⚠️ Members table insert skipped:', insertErr);
-                }
-
-                // Show success
                 successMessage.textContent = '✅ Account created successfully! Redirecting...';
                 successMessage.classList.add('show');
 
                 signupBtn.textContent = '✅ Welcome!';
                 signupBtn.style.background = 'linear-gradient(135deg, #00C851, #007E33)';
 
-                // Store user info in localStorage
+                // Store current user session
                 localStorage.setItem('classydate_user', JSON.stringify({
-                    id: data.user.id,
-                    email: data.user.email,
-                    name: fullname,
+                    id: newUser.id,
+                    email: newUser.email,
+                    name: newUser.name,
                     loggedIn: true
                 }));
 
@@ -898,10 +808,7 @@
             }
         }
 
-        // ============================================================
-        // REAL-TIME VALIDATION CLEARING
-        // ============================================================
-
+        // Clear errors on input
         document.querySelectorAll('input, select').forEach(function(input) {
             input.addEventListener('input', function() {
                 document.getElementById('error-message').classList.remove('show');
@@ -909,24 +816,8 @@
             });
         });
 
-        // ============================================================
-        // CHECK IF ALREADY LOGGED IN
-        // ============================================================
-
-        (async function checkSession() {
-            try {
-                const { data, error } = await supabase.auth.getSession();
-                if (data && data.session) {
-                    console.log('👤 Already logged in as:', data.session.user.email);
-                }
-            } catch (e) {
-                console.log('No active session');
-            }
-        })();
-
         console.log('💎 ClassyDate Sign Up Page loaded!');
-        console.log('🔗 Connected to:', SUPABASE_URL);
-        console.log('📊 Your members table has 16 columns and 4 rows.');
+        console.log('📝 Using localStorage - no database needed!');
     </script>
 
 </body>
